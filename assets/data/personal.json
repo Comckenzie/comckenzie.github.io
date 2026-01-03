@@ -1,0 +1,106 @@
+[
+  {
+    "id": "tabula-rasa",
+    "name": "Tabula Rasa",
+    "description": "A concept album exploring themes of rebirth and transformation.",
+    "creator": null,
+    "image": "Ressources/Image/Tabula Rasa album cover.png",
+    "logo": "Ressources/Image/Tabula Rasa album cover.png",
+    "tracks": [
+      { "title": "Overture", "path": "assets/music/tabula-rasa/overture.mp3" },
+      { "title": "New Beginnings", "path": "assets/music/tabula-rasa/new-beginnings.mp3" },
+      { "title": "Blank Slate", "path": "assets/music/tabula-rasa/blank-slate.mp3" },
+      { "title": "Memories Fade", "path": "assets/music/tabula-rasa/memories-fade.mp3" },
+      { "title": "Restart", "path": "assets/music/tabula-rasa/restart.mp3" }
+    ]
+  },
+  {
+    "id": "sin-prince",
+    "name": "The Sin Prince",
+    "description": "Dark orchestral score for a fantasy narrative.",
+    "creator": null,
+    "image": "Ressources/Image/The sin prince.png",
+    "logo": "Ressources/Image/The sin prince.png",
+    "tracks": [
+      { "title": "Coronation", "path": "assets/music/sin-prince/coronation.mp3" },
+      { "title": "Fall from Grace", "path": "assets/music/sin-prince/fall-from-grace.mp3" },
+      { "title": "Redemption Arc", "path": "assets/music/sin-prince/redemption-arc.mp3" },
+      { "title": "Final Battle", "path": "assets/music/sin-prince/final-battle.mp3" }
+    ]
+  },
+  {
+    "id": "personal-3",
+    "name": "Midnight Drive",
+    "description": "Synthwave EP inspired by neon-lit cityscapes.",
+    "creator": null,
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Neon Lights", "path": "assets/music/personal-3/neon-lights.mp3" },
+      { "title": "Highway Dreams", "path": "assets/music/personal-3/highway-dreams.mp3" },
+      { "title": "City Pulse", "path": "assets/music/personal-3/city-pulse.mp3" }
+    ]
+  },
+  {
+    "id": "personal-4",
+    "name": "Ambient Forest",
+    "description": "Nature-inspired ambient soundscapes.",
+    "creator": null,
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Dawn Chorus", "path": "assets/music/personal-4/dawn-chorus.mp3" },
+      { "title": "Whispers", "path": "assets/music/personal-4/whispers.mp3" },
+      { "title": "Rainfall", "path": "assets/music/personal-4/rainfall.mp3" }
+    ]
+  },
+  {
+    "id": "personal-5",
+    "name": "8-Bit Adventures",
+    "description": "Retro chiptune game music collection.",
+    "creator": null,
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Level 1", "path": "assets/music/personal-5/level-1.mp3" },
+      { "title": "Boss Theme", "path": "assets/music/personal-5/boss-theme.mp3" },
+      { "title": "Game Over", "path": "assets/music/personal-5/game-over.mp3" }
+    ]
+  },
+  {
+    "id": "personal-6",
+    "name": "Jazz Fusion",
+    "description": "Experimental jazz with electronic elements.",
+    "creator": null,
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Smooth Operator", "path": "assets/music/personal-6/smooth-operator.mp3" },
+      { "title": "Blue Note", "path": "assets/music/personal-6/blue-note.mp3" }
+    ]
+  },
+  {
+    "id": "personal-7",
+    "name": "Epic Trailer Pack",
+    "description": "Cinematic orchestral tracks for trailers.",
+    "creator": null,
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Rise", "path": "assets/music/personal-7/rise.mp3" },
+      { "title": "Destiny", "path": "assets/music/personal-7/destiny.mp3" }
+    ]
+  },
+  {
+    "id": "personal-8",
+    "name": "Lo-Fi Beats",
+    "description": "Chill lo-fi hip hop for studying.",
+    "creator": null,
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Study Session", "path": "assets/music/personal-8/study-session.mp3" },
+      { "title": "Rainy Day", "path": "assets/music/personal-8/rainy-day.mp3" }
+    ]
+  }
+]

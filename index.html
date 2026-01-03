@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div class="crt-vignette" aria-hidden="true"></div>
+  <header id="site-header"></header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero__squares" aria-hidden="true">
+      </div>
+
+      <div class="container">
+        <h1 class="hero__name" style="white-space: nowrap;">Charlie McKenzie</h1>
+        <p class="hero__title">Composer / Producer / Sound Designer</p>
+      </div>
+
+    </section>
+
+    <section class="section" aria-labelledby="notable">
+      <div class="container">
+        <div class="section__head">
+          <h2 id="notable">My most notable work</h2>
+        </div>
+        <div class="notable">
+          <!-- notable__copy removed as requested -->
+          <div class="notable__trailer">
+            <div class="trailer">
+              <iframe
+                class="trailer__frame"
+                title="Trailer"
+                src="https://www.youtube.com/embed/_eBBxY5oniE"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="section__more">
+              <a class="btn" href="project.html">See more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="service">
+      <div class="container">
+        <div class="section__head">
+          <h2 id="service">Service</h2>
+        </div>
+        <div class="strengths">
+          <div class="strength">
+            <i class="fa-solid fa-music strength__icon" aria-hidden="true"></i>
+            <h3 class="strength__label">Music that fits</h3>
+            <p class="strength__desc">Tailored compositions that match your project's vision and emotional tone</p>
+          </div>
+          <div class="strength">
+            <i class="fa-solid fa-sliders strength__icon" aria-hidden="true"></i>
+            <h3 class="strength__label">Clean mixes</h3>
+            <p class="strength__desc">Professional audio engineering with balanced, polished final deliveries</p>
+          </div>
+          <div class="strength">
+            <i class="fa-solid fa-bolt strength__icon" aria-hidden="true"></i>
+            <h3 class="strength__label">Fast delivery</h3>
+            <p class="strength__desc">Reliable turnaround times without compromising on quality or creativity</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="personal">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <h2 id="personal">My personal projects</h2>
+        </div>
+
+        <div class="grid" id="personal-grid" data-source="personal" data-limit="8" aria-label="Personal projects"></div>
+
+        <div class="section__more">
+          <a class="btn" href="projects.html?source=personal">See more Personal projects</a>
+        </div> 
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="commissions">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <h2 id="commissions">Commissions</h2>
+        </div>
+
+        <div class="grid" id="commissions-grid" data-source="commissions" data-limit="8" aria-label="Commissions"></div>
+
+        <div class="section__more">
+          <a class="btn" href="projects.html?source=commissions">See more Commissions</a>
+        </div> 
+      </div>
+    </section>
+
+    <div class="cta-banner">
+      <div class="container">
+        <h2>Interested? Come get in touch with me!</h2>
+        <a class="btn btn--cta" href="contact.html">Contact Me!</a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/hero.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

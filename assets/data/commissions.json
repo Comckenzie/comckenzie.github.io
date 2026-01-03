@@ -1,0 +1,108 @@
+[
+  {
+    "id": "game-ost-1",
+    "name": "Mystic Realm OST",
+    "description": "Full original soundtrack for indie RPG Mystic Realm.",
+    "creator": "Lunar Games Studio",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Main Theme", "path": "assets/music/game-ost-1/main-theme.mp3" },
+      { "title": "Village", "path": "assets/music/game-ost-1/village.mp3" },
+      { "title": "Battle 1", "path": "assets/music/game-ost-1/battle-1.mp3" },
+      { "title": "Boss Theme", "path": "assets/music/game-ost-1/boss-theme.mp3" },
+      { "title": "Victory", "path": "assets/music/game-ost-1/victory.mp3" },
+      { "title": "Credits", "path": "assets/music/game-ost-1/credits.mp3" }
+    ]
+  },
+  {
+    "id": "film-score-1",
+    "name": "Echoes of Tomorrow",
+    "description": "Sci-fi film score with emotional orchestral pieces.",
+    "creator": "Visionary Films",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Opening", "path": "assets/music/film-score-1/opening.mp3" },
+      { "title": "Discovery", "path": "assets/music/film-score-1/discovery.mp3" },
+      { "title": "The Chase", "path": "assets/music/film-score-1/the-chase.mp3" },
+      { "title": "Sacrifice", "path": "assets/music/film-score-1/sacrifice.mp3" }
+    ]
+  },
+  {
+    "id": "podcast-intro",
+    "name": "Tech Talk Intro",
+    "description": "Upbeat intro music for technology podcast.",
+    "creator": "Tech Talk Media",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Main Intro", "path": "assets/music/podcast-intro/main-intro.mp3" },
+      { "title": "Extended Version", "path": "assets/music/podcast-intro/extended-version.mp3" }
+    ]
+  },
+  {
+    "id": "commercial-jingle",
+    "name": "Brand Identity Suite",
+    "description": "Complete audio branding package for startup.",
+    "creator": "NextGen Brands",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Main Jingle", "path": "assets/music/commercial-jingle/main-jingle.mp3" },
+      { "title": "Extended Theme", "path": "assets/music/commercial-jingle/extended-theme.mp3" },
+      { "title": "Ambient Version", "path": "assets/music/commercial-jingle/ambient-version.mp3" }
+    ]
+  },
+  {
+    "id": "youtube-bgm",
+    "name": "Creator Background Pack",
+    "description": "Royalty-free background music for content creators.",
+    "creator": "ContentHub",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Upbeat Vlog", "path": "assets/music/youtube-bgm/upbeat-vlog.mp3" },
+      { "title": "Chill Intro", "path": "assets/music/youtube-bgm/chill-intro.mp3" },
+      { "title": "Epic Outro", "path": "assets/music/youtube-bgm/epic-outro.mp3" }
+    ]
+  },
+  {
+    "id": "vr-experience",
+    "name": "VR Meditation",
+    "description": "Immersive soundscape for VR meditation app.",
+    "creator": "MindSpace VR",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Ocean Waves", "path": "assets/music/vr-experience/ocean-waves.mp3" },
+      { "title": "Mountain Breeze", "path": "assets/music/vr-experience/mountain-breeze.mp3" }
+    ]
+  },
+  {
+    "id": "mobile-game",
+    "name": "Puzzle Quest Audio",
+    "description": "Sound effects and music for mobile puzzle game.",
+    "creator": "Pixel Play Studios",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Menu Theme", "path": "assets/music/mobile-game/menu-theme.mp3" },
+      { "title": "Level Music", "path": "assets/music/mobile-game/level-music.mp3" },
+      { "title": "Success Jingle", "path": "assets/music/mobile-game/success-jingle.mp3" }
+    ]
+  },
+  {
+    "id": "event-score",
+    "name": "Corporate Event Theme",
+    "description": "Professional event music for tech conference.",
+    "creator": "Summit Events",
+    "image": "Ressources/Image/Profile-Picture.png",
+    "logo": "Ressources/Image/Profile-Picture.png",
+    "tracks": [
+      { "title": "Welcome", "path": "assets/music/event-score/welcome.mp3" },
+      { "title": "Keynote Intro", "path": "assets/music/event-score/keynote-intro.mp3" },
+      { "title": "Networking", "path": "assets/music/event-score/networking.mp3" }
+    ]
+  }
+]

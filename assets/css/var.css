@@ -1,0 +1,59 @@
+:root {
+  --bg: #f5f5f5;
+  --text: #0a0a0a;
+  --muted: #606060;
+  --line: #0a0a0a;
+  --surface: #f5f5f5;
+  --overlay: rgba(0, 0, 0, 0.65);
+  --focus: #0a0a0a;
+
+  --accent-gradient: linear-gradient(90deg, #7ab6ff 0%, #b894ff 45%, #ff8ccf 100%);
+
+  --container: 1100px;
+  --gap: 16px;
+  --nav-h: 64px;
+
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'VT323', monospace;
+
+  --border-thick: 3px solid var(--text);
+  --shadow-flat: 4px 4px 0 var(--text);
+}
+
+/* Call-to-action (CTA) colors */
+:root {
+  --cta-bg: #0a0a0a;
+  --cta-text: #ffffff;
+  --cta-accent: var(--accent-gradient);
+  --cta-btn-text: transparent;
+  --cta-btn-bg: #ffffff;
+  --cta-btn-border-image: var(--accent-gradient);
+}
+
+/* Dark theme overrides — apply by adding `data-theme="dark"` to <html> or <body> */
+:root[data-theme="dark"] {
+  /* deeper dark-gray background (still not pure black) */
+  --bg: #0d0f10;
+  --text: #f6f9fb;
+  --muted: #7e8486;
+  --line: #98a1a6;
+  --surface: #0b0c0d;
+  --overlay: rgba(0, 0, 0, 0.72);
+  --focus: #9bd9ff;
+
+  --accent-gradient: linear-gradient(90deg, #4f8efb 0%, #9c79f6 45%, #ff6ba8 100%);
+
+  /* CTA dark overrides — make the Interested banner white with black text */
+  --cta-bg: #ffffff;
+  --cta-text: #000000;
+  --cta-accent: var(--accent-gradient);
+  --cta-btn-bg: #000000;
+  --cta-btn-text: #ffffff;
+  --cta-btn-border-image: var(--accent-gradient);
+
+  /* keep container/gap the same */
+  --border-thick: 3px solid var(--text);
+  --shadow-flat: 4px 4px 0 var(--text);
+}
+
+/* Removed automatic prefers-color-scheme adjustments to avoid unexpected theme flips */

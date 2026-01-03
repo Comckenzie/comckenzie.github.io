@@ -1,0 +1,154 @@
+/* Components: buttons, icons, cards, CRT overlay, contact elements */
+.iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-flat);
+  background: var(--surface);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+}
+.iconbtn:not(.contact-social-btn) { width: 44px; height: 44px; padding: 0; }
+
+.iconbtn:hover { background: var(--surface); text-decoration: none; transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--text); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 28px; font-family: var(--font-pixel); font-size: 1.1rem; border: var(--border-thick); box-shadow: var(--shadow-flat); background: transparent; }
+
+.btn:hover { background: var(--surface); text-decoration: none; transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--text); }
+
+/* Adjusted "Hire me" button sizing */
+.btn--primary[href="about.html"] {
+  height: 44px;
+  padding: 0 20px;
+  font-size: 1rem;
+  min-width: 96px;
+  margin-left: 24px;
+}
+
+.btn--primary { background: var(--text); border-color: var(--text); color: var(--bg); font-weight: 400; }
+.btn--primary:hover { background-color: var(--text); transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--text); }
+
+.cta-banner { background: var(--cta-bg); padding: 72px 0; text-align: center; }
+.cta-banner .container { text-align: center; margin-top: 2rem; }
+.cta-banner h2 { color: var(--cta-text); margin-bottom: 16px; font-size: 1.1rem; font-weight: 400; }
+
+.cta-banner .btn--cta {
+  background: var(--cta-bg);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: var(--cta-accent);
+  border: 2px solid;
+  border-image: var(--cta-btn-border-image) 1;
+  box-shadow: none;
+  transition: transform 0.2s;
+  margin-top: 1rem;
+}
+.cta-banner .btn--cta:hover {
+  transform: scale(1.08);
+}
+
+
+html[data-theme="dark"] .cta-banner { background: var(--cta-bg); }
+html[data-theme="dark"] .cta-banner h2 { color: var(--cta-text); }
+/* No override for .btn--cta: keep gradient outline/text and bg as section bg */
+
+.contact-social { display:flex; align-items:center; gap:18px; }
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95em;
+  padding: 4px 8px;
+  min-width: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+  background: var(--bg) !important;
+}
+.contact-social-btn i { font-size: 18px; display: inline-block; }
+.contact-social-label { font-family: var(--font-body); font-size: 1em; color: var(--text); letter-spacing: 0.01em; margin-left: 2px; display: inline-block; }
+
+.contact-info-row { display: flex; gap: 32px; flex-wrap: wrap; margin: 32px 0 0 0; }
+.contact-info-row > div { min-width: 44px; min-height: 44px; padding: 0 12px; transition: background 0.15s, box-shadow 0.15s, transform 0.15s; color: var(--text); line-height: 1.5; }
+.contact-info-row strong { color: var(--muted); font-size: 0.98em; }
+.contact-info-row a { color: inherit; text-decoration: none; word-break: break-all; background-image: var(--accent-gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; padding-bottom: 4px; }
+/* Avoid gradient underline for mailto links used on the contact page */
+.contact-info-row a:not([href^="mailto:"])::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent-gradient); pointer-events: none; }
+
+/* Mailto — plain gradient text without underline */
+a[href^="mailto:"] { color: inherit; text-decoration: none; background-image: var(--accent-gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; padding-bottom: 0; }
+/* removed underline pseudo-element to avoid the thick gradient bar */
+
+/* Card / grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+/* Project list tweaks: remove card outlines and tighten gaps */
+#personal-grid, #commissions-grid, #projects-grid { gap: 6px; }
+#personal-grid .card, #commissions-grid .card, #projects-grid .card { border: none; box-shadow: none; }
+.card { position: relative; display: block; border: 2px solid rgba(255,255,255,0.85); background: var(--surface); aspect-ratio: 1 / 1; overflow: hidden; }
+.card__img { width: 100%; height: 100%; object-fit: cover; }
+.card__overlay { position: absolute; inset: 0; background: transparent; display: flex; align-items: flex-end; justify-content: flex-start; padding: 10px; transition: background 300ms ease; }
+.card__meta { width: 100%; opacity: 0; transition: opacity 200ms ease; }
+.card__title { margin: 0; font-size: 1.3rem; font-weight: 600; line-height: 1.2; overflow: hidden; }
+
+/* Slightly smaller project names for tighter grids */
+#personal-grid .card__title,
+#commissions-grid .card__title,
+#projects-grid .card__title { font-size: 1.05rem; }
+.card__title .letter { display: inline-block; opacity: 0; transform: translateY(20px); transition: opacity 280ms ease, transform 380ms cubic-bezier(0.68,-0.55,0.265,1.55); }
+.card__creator { margin: 4px 0 0 0; font-size: 1rem; color: #ffffff; opacity: 0.9; }
+.card:hover .card__overlay { background: var(--overlay); }
+.card:hover .card__meta { opacity: 1; color: #ffffff; }
+.card:hover .card__title .letter { opacity: 1; transform: translateY(0); }
+
+/* CRT overlay */
+.crt-overlay { position: fixed; inset: 0; z-index: 11000; pointer-events: none; font-family: inherit; }
+.crt-overlay > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.crt-scanlines { background-image: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.08) 2px 4px); background-size: 100% 4px; opacity: 0.6; animation: scan 1.2s linear infinite; mix-blend-mode: multiply; }
+@keyframes scan { 0% { background-position: 0 0; } 100% { background-position: 0 4px; } }
+.crt-flicker { background: radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.02), transparent 10%), radial-gradient(ellipse at 90% 90%, rgba(255,255,255,0.02), transparent 10%); opacity: 0.06; animation: flicker 3s infinite; }
+@keyframes flicker { 0% { opacity: 0.04; } 5% { opacity: 0.09; } 10% { opacity: 0.03; } 20% { opacity: 0.06; } 100% { opacity: 0.04; } }
+.crt-chroma { mix-blend-mode: screen; opacity: 0.12; }
+.crt-chroma::before, .crt-chroma::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; }
+.crt-chroma::before { transform: translateX(-1px) translateY(0); background: rgba(255,0,0,0.03); animation: chroma 4s ease-in-out infinite; }
+.crt-chroma::after { transform: translateX(1px) translateY(0); background: rgba(0,150,255,0.03); animation: chroma 4s ease-in-out infinite reverse; }
+@keyframes chroma { 0% { transform: translateX(-1px) translateY(0); } 50% { transform: translateX(-2px) translateY(0.5px); } 100% { transform: translateX(-1px) translateY(0); } }
+.crt-vignette {
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.75) 100%);
+  opacity: 0.95;
+  position: fixed;
+  inset: 0;
+  z-index: 9000; /* behind #site-header (10000) */
+  pointer-events: none;
+}
+.crt-noise { background-image: linear-gradient(0deg, rgba(255,255,255,0.01) 0%, rgba(0,0,0,0.01) 100%); opacity: 0.03; animation: noise 0.2s steps(2) infinite; mix-blend-mode: overlay; }
+@keyframes noise { 0% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+.crt-wipe { position: absolute; left: 0; width: 100%; height: 18%; top: -25%; pointer-events: none; mix-blend-mode: screen; opacity: 0.9; background: linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.18) 30%, rgba(255,255,255,0.36) 50%, rgba(255,255,255,0.12) 70%, rgba(255,255,255,0.0) 100%); transform: translateY(-150%); }
+.crt-wipe.active { animation: crt-wipe 1.4s linear forwards; }
+@keyframes crt-wipe { 0% { transform: translateY(-150%); opacity: 0; } 10% { opacity: 0.85; } 100% { transform: translateY(100vh); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .crt-wipe { display: none !important; } }
+.crt-overlay--reduced { opacity: 0.6; }
+@media (max-width: 600px) { .crt-scanlines { background-size: 100% 6px; opacity: 0.45; } .crt-chroma { opacity: 0.06; } .crt-vignette { opacity: 0.45; } }
+.crt-disabled { display: none !important; }
+
+.strength__desc { margin: 0; font-size: 18px; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 700px) {
+  .contact-info-row { gap: 16px; }
+  .contact-info-row > div { min-width: 120px; font-size: 1em; }
+}
+
+@media (max-width: 1000px) {
+  .contact-card { padding: 48px 32px; }
+  .contact-layout { grid-template-columns: 1fr 280px; gap: 24px; }
+}
+
+@media (max-width: 700px) {
+  .contact-card { padding: 24px; width: calc(100% - 32px); margin-left: 0; }
+  .contact-right { padding-top: 16px; }
+  .contact-grid { display: block; }
+  .contact-panel { margin-top: 24px; }
+}
