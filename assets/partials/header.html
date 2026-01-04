@@ -2,6 +2,13 @@
 
 <div class="nav" id="nav">
   <div class="nav__inner">
+    <button class="nav__toggle" id="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu" type="button">
+      <span class="nav__toggle-box">
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+      </span>
+    </button>
     <nav id="primary-nav" class="nav__links" aria-label="Primary">
       <a href="index.html#home">Home</a>
 
@@ -37,11 +44,12 @@
       <a class="iconbtn" href="#" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a class="btn btn--primary" href="contact.html">Hire me!</a>
 
-      <!-- Fixed theme toggle (label only) -->
-      <button id="theme-toggle" class="theme-toggle-fixed" type="button" aria-label="Changer le thème" aria-pressed="false">
-        <span id="theme-toggle-label">Thème Sombre</span>
-      </button>
     </div>
+
+    <!-- Fixed theme toggle (label only) -->
+    <button id="theme-toggle" class="theme-toggle-fixed" type="button" aria-label="Changer le thème" aria-pressed="false">
+      <span id="theme-toggle-label">Thème Sombre</span>
+    </button>
   </div>
 </div>
 
