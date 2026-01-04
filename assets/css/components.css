@@ -160,8 +160,9 @@ html[data-theme="dark"] .cta-banner h2 {
   min-height: 32px;
   white-space: nowrap;
   background: var(--bg) !important;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-flat);
   outline: none !important;
-  box-shadow: none !important;
 }
 
 .contact-social-btn:focus,
