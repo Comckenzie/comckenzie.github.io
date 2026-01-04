@@ -196,7 +196,6 @@ html[data-theme="dark"] .cta-banner h2 {
 .contact-info-row > div {
   min-width: 44px;
   min-height: 44px;
-  padding: 0 12px;
   transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
   color: var(--text);
   line-height: 1.5;

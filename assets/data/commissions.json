@@ -3,6 +3,11 @@
     "id": "others",
     "name": "Other Commissions",
     "description": "Miscellaneous commissioned works and soundtracks.",
-    "creator": "Various"
+    "creator": null,
+    "tracks": [
+      { "title": "Battle! Paradox Pokemon Remix", "path": "assets/projects/commissions/others/Battle!ParadoxPokemonRemix.mp3" },
+      { "title": "NIGHT", "path": "assets/projects/commissions/others/NIGHT.wav" },
+      { "title": "Town Theme", "path": "assets/projects/commissions/others/TownTheme.mp3" }
+    ]
   }
 ]
