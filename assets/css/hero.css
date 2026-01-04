@@ -49,11 +49,18 @@
 }
 
 @media (max-width: 900px) {
-  .hero__squares { gap: 10px; top: 48%; }
-  .hero__square { width: 18px; height: 18px; }
+  /* Move squares higher and reduce size for better visibility on tablets/compact screens */
+  .hero__squares { gap: 8px; top: 28%; }
+  .hero__square { width: 14px; height: 14px; }
 }
 
-@media (max-width: 600px) { .hero__squares { display: none; } }
+@media (max-width: 700px) {
+  /* Smaller devices: bring squares further up so they're inside the viewport */
+  .hero__squares { gap: 6px; top: 20%; }
+  .hero__square { width: 12px; height: 12px; }
+}
+
+/* keep hero squares visible on phones; will be adjusted further in the 420px breakpoint */
 
 .hero__image {
   position: absolute;
@@ -95,3 +102,20 @@
 .hero__title .section-letter:nth-child(3n+1) { color: #7ab6ff; }
 .hero__title .section-letter:nth-child(3n+2) { color: #b894ff; }
 .hero__title .section-letter:nth-child(3n) { color: #ff8ccf; }
+
+/* Responsive hero adjustments */
+@media (max-width: 900px) {
+  .hero { height: 100vh; min-height: 100vh; padding: 32px 0; }
+  .hero__image { display: none; }
+  .hero__bgimg { width: 48vw; top: 45%; }
+} 
+
+@media (max-width: 420px) {
+  .hero { height: 100vh; padding: 24px 0; }
+  .hero__bgimg { display: none; }
+  .hero__name { font-size: clamp(28px, 8vw, 48px); }
+  .hero__title { font-size: clamp(16px, 4vw, 22px); }
+  /* Ensure squares are visible and positioned inside the viewport on small phones */
+  .hero__squares { gap: 4px; top: 6%; }
+  .hero__square { width: 10px; height: 10px; }
+}

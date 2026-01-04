@@ -17,7 +17,7 @@ body {
   color: var(--text);
   background: var(--bg);
   position: relative;
-  padding-top: 60px;
+  padding-top: 0; /* removed global top padding to let header overlay; sections already have internal spacing */
   overflow-wrap: break-word;
 }
 
@@ -42,6 +42,25 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  background: var(--bg);
+  color: var(--text);
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  z-index: 20000;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+  outline: none;
+}
+
 
 img {
   max-width: 100%;

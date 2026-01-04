@@ -1,8 +1,18 @@
+<a class="skip-link" href="#main">Passer au contenu</a>
+
 <div class="nav" id="nav">
   <div class="container nav__inner">
     <!-- No brand -->
 
-    <nav class="nav__links" aria-label="Primary">
+    <button id="nav-toggle" class="nav__toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Afficher la navigation">
+      <span class="nav__toggle-box" aria-hidden="true">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </span>
+    </button>
+
+    <nav id="primary-nav" class="nav__links" aria-label="Primary">
       <a href="index.html#home">Home</a>
 
       <div class="nav__dropdown" data-dropdown>

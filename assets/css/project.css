@@ -1,8 +1,17 @@
 .project-detail-split {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: minmax(220px, 320px) 1fr;
   gap: 10px;
   align-items: flex-start;
+}
+
+/* Project grid responsive */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
 }
 
 .project-detail-left {
@@ -34,6 +43,12 @@
 @media (max-width: 900px) {
   .project-detail-split { grid-template-columns: 1fr; gap: 16px; }
   .project-detail-image { max-width: 100%; }
+}
+
+/* Phone: switch right border to top for stacked project detail */
+@media (max-width: 520px) {
+  .project-detail-right { border-left: 0; border-top: 3px solid var(--text); padding-top: 12px; }
+  .project-detail-left { padding-bottom: 12px; border-bottom: none; }
 }
 
 .project-hero__inner, .project-hero__inner.no-banner {
@@ -106,8 +121,30 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: 16px;
+  /* Default to 2 columns (2x2) for cleaner listing */
+  /* reduce the min width so two columns comfortably fit on narrower viewports */
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+/* Slightly larger cards on wide screens (4 columns) */
+@media (min-width: 1100px) {
+  .grid { grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 16px; }
+}
+
+/* Stack to 1 column only on very narrow screens (<=320px) */
+@media (max-width: 320px) {
+  .grid { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* Ensure cards fill their grid cells and remain square */
+.card { width: 100%; max-width: 100%; aspect-ratio: 1 / 1; }
+.card .card__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Expand to 4 columns on wide screens */
+@media (min-width: 1100px) {
+  .grid { grid-template-columns: repeat(4, minmax(220px, 1fr)); }
 }
 
 #personal-grid, #commissions-grid, #projects-grid { gap: 6px; }
@@ -122,6 +159,15 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
+
+/* Keyboard accessibility for cards */
+.card:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.card:focus .card__meta,
+.card:focus-within .card__meta { opacity: 1; transform: translateY(0); }
+.card:focus .card__title .letter { opacity: 1; transform: translateY(0); }
 
 .card.placeholder { background: var(--active-bg); border: 2px solid rgba(255,255,255,0.85); cursor: default; }
 

@@ -54,13 +54,41 @@
     }
 
     const total = slice.length;
-    const needed = (4 - (total % 4)) % 4;
-    for (let i = 0; i < needed; i++) {
-      if (placeholderTpl) frag.appendChild(placeholderTpl.content.cloneNode(true)); else { const d = document.createElement('div'); d.className='card placeholder'; frag.appendChild(d); }
-    }
 
+    // First render the actual project cards so we can measure the real layout (rows/columns)
     container.innerHTML = '';
     container.appendChild(frag);
+
+    // Prefer the configured grid-template-columns from CSS (handles single-item cases like 'commissions')
+    let columns = 1;
+    try {
+      const style = window.getComputedStyle(container);
+      const colsProp = style.getPropertyValue('grid-template-columns');
+      const cssColumns = colsProp ? colsProp.trim().split(/\s+/).length : 0;
+
+      // Also measure first row count if multiple items exist (sanity check)
+      const children = Array.from(container.children).filter((el) => el.nodeType === 1 && el.classList && el.classList.contains('card'));
+      let measuredColumns = 0;
+      if (children.length) {
+        const firstTop = children[0].offsetTop;
+        measuredColumns = children.filter((c) => c.offsetTop === firstTop).length || 0;
+      }
+
+      // Prefer CSS columns when defined (prevents single-item grids measuring as 1)
+      if (cssColumns && cssColumns > 0) columns = cssColumns;
+      else if (measuredColumns && measuredColumns > 0) columns = measuredColumns;
+      else columns = 1;
+
+    } catch (err) {
+      columns = 4; // fallback
+    }
+
+    // Only add placeholders to finish the current row (avoid creating rows made only of placeholders)
+    const needed = (columns - (total % columns)) % columns;
+
+    for (let i = 0; i < needed; i++) {
+      if (placeholderTpl) container.appendChild(placeholderTpl.content.cloneNode(true)); else { const d = document.createElement('div'); d.className='card placeholder'; container.appendChild(d); }
+    }
   }
 
   async function initGrids() {
@@ -81,6 +109,15 @@
       try {
         const projects = await loadProjects(source);
         renderGrid(grid, projects, limit);
+
+        // Re-render on resize to recalc placeholders when column count changes
+        const debounced = (fn, wait=120) => {
+          let t = null;
+          return (...args) => { clearTimeout(t); t = setTimeout(()=>fn(...args), wait); };
+        };
+        const rerender = debounced(() => renderGrid(grid, projects, limit));
+        window.addEventListener('resize', rerender);
+
       } catch (err) {
         console.error(`Failed to load grid for ${source}:`, err);
         grid.innerHTML = '<p class="muted">Failed to load projects.</p>';

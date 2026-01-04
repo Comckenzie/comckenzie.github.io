@@ -161,5 +161,85 @@
     }
   }
 
+  function initMobileNav() {
+    const nav = document.querySelector('.nav');
+    const toggle = document.getElementById('nav-toggle');
+    if (!nav || !toggle) return;
+
+    let docKeydown, docClick;
+
+    function openNav() {
+      nav.classList.add('nav--open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Fermer la navigation');
+      document.body.classList.add('nav-open');
+
+      // Focus management: focus first focusable link
+      const first = nav.querySelector('.nav__links a, .nav__links button');
+      if (first) first.focus();
+
+      // Keyboard handling (Esc + trap Tab inside menu)
+      docKeydown = (e) => {
+        if (e.key === 'Escape') {
+          closeNav();
+          toggle.focus();
+        }
+        if (e.key === 'Tab') {
+          const focusables = Array.from(nav.querySelectorAll('a, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+            .filter((el) => !el.hasAttribute('disabled'));
+          if (!focusables.length) return;
+          const firstEl = focusables[0];
+          const lastEl = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          } else if (!e.shiftKey && document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      };
+
+      document.addEventListener('keydown', docKeydown);
+
+      // Close on outside click
+      docClick = (e) => {
+        if (!nav.contains(e.target) && e.target !== toggle) {
+          closeNav();
+        }
+      };
+      document.addEventListener('click', docClick);
+    }
+
+    function closeNav() {
+      nav.classList.remove('nav--open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Afficher la navigation');
+      document.body.classList.remove('nav-open');
+      if (docKeydown) document.removeEventListener('keydown', docKeydown);
+      if (docClick) document.removeEventListener('click', docClick);
+    }
+
+    toggle.addEventListener('click', () => {
+      if (nav.classList.contains('nav--open')) closeNav(); else openNav();
+    });
+
+    // Close menu when a link is clicked
+    nav.addEventListener('click', (ev) => {
+      if (ev.target.closest('.nav__links a')) {
+        closeNav();
+      }
+    });
+
+    // Also close on window resize if larger than mobile
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && nav.classList.contains('nav--open')) {
+        closeNav();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initMobileNav);
+
   window.initNav = initNav;
 })();
