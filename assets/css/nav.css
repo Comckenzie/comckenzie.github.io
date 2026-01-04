@@ -1,52 +1,33 @@
 /* Theme */
 .theme-toggle-fixed {
   position: fixed;
-  right: 28px;
-  bottom: 28px;
+  right: 0;
+  bottom: 0;
   z-index: 10050;
-  min-width: 132px;
-  min-height: 44px;
-  padding: 0 20px;
-  font-size: 0.95rem;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  font-size: 0.75rem;
   font-family: var(--font-pixel);
-  border: var(--border-thick);
-  box-shadow: var(--shadow-flat);
   background: var(--bg);
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
   cursor: pointer;
+  outline: 3px solid var(--text);
 }
 
-.theme-toggle-fixed .theme-toggle-icon {
-  font-size: 1.05em;
-  display: inline-block;
-  margin-right: 8px;
-}
 
-.theme-toggle-fixed:hover,
-.theme-toggle-fixed[aria-pressed="true"]:hover {
-  background: var(--surface) !important;
-  text-decoration: none;
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--text) !important;
-}
 
 .theme-toggle-fixed[aria-pressed="true"] {
-  transform: translateY(1px);
-  box-shadow: var(--shadow-flat);
+  background: var(--bg);
 }
 
 .theme-toggle-fixed:focus,
 .theme-toggle-fixed:active {
   outline: none !important;
-  box-shadow: 0 0 0 3px var(--accent);
-}
-
-.theme-toggle-fixed[aria-pressed="true"] {
-  background: linear-gradient(135deg, var(--accent) 60%, var(--surface) 100%);
 }
 
 .theme-toggle-fixed #theme-toggle-label {
@@ -65,15 +46,15 @@
   left: 0;
   right: 0;
   z-index: 10000;
-  background: linear-gradient(var(--nav-overlay), var(--nav-overlay)), var(--bg) !important;
+  background: var(--bg) !important;
   border-bottom: var(--border-thick);
   box-shadow: none;
-}
+} 
 
 .nav {
   width: 100%;
   height: var(--nav-h);
-  background: linear-gradient(var(--nav-overlay), var(--nav-overlay)), var(--bg) !important;
+  background: var(--bg) !important;
   color: var(--text);
 }
 

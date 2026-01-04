@@ -6,6 +6,10 @@
     "creator": null,
     "image": "Ressources/Image/Tabula Rasa album cover.png",
     "logo": "Ressources/Image/Tabula Rasa album cover.png",
+    "spotify": "https://open.spotify.com/embed/album/EXAMPLE_ALBUM_ID",
+    "quote": "A 20-minute loop that is truly perfect.",
+    "quoteAuthor": "John Famiglietti (aka Johnny Health)",
+    "awards": ["Ressources/Image/Profile-Picture.png"],
     "tracks": [
       { "title": "Overture", "path": "assets/music/tabula-rasa/overture.mp3" },
       { "title": "New Beginnings", "path": "assets/music/tabula-rasa/new-beginnings.mp3" },
@@ -26,6 +30,26 @@
       { "title": "Fall from Grace", "path": "assets/music/sin-prince/fall-from-grace.mp3" },
       { "title": "Redemption Arc", "path": "assets/music/sin-prince/redemption-arc.mp3" },
       { "title": "Final Battle", "path": "assets/music/sin-prince/final-battle.mp3" }
+    ]
+  },
+  {
+    "id": "balatro",
+    "name": "Balatro (Original Game Soundtrack)",
+    "description": "Original soundtrack for Balatro — vibrant, pixel-inspired themes and loops.",
+    "creator": "Balatro Team",
+    "image": "Ressources/Image/Tabula Rasa album cover.png",
+    "logo": "Ressources/Image/Tabula Rasa album cover.png",
+    "video": "https://www.youtube.com/embed/VIDEO_ID",
+    "spotify": "https://open.spotify.com/embed/album/EXAMPLE_ALBUM_ID",
+    "store": "https://example.com/store/balatro",
+    "more": "https://example.com/games/balatro",
+    "quote": "A 20-minute loop that is truly perfect.",
+    "quoteAuthor": "John Famiglietti (aka Johnny Health)",
+    "awards": ["Ressources/Image/Profile-Picture.png"],
+    "tracks": [
+      { "title": "Main Theme", "path": "assets/music/balatro/main-theme.mp3" },
+      { "title": "Card Clash", "path": "assets/music/balatro/card-clash.mp3" },
+      { "title": "Victory Fanfare", "path": "assets/music/balatro/victory-fanfare.mp3" }
     ]
   },
   {

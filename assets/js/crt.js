@@ -28,7 +28,7 @@
         startWipe();
         setTimeout(startWipe, 5000);
         if (!overlay.__crtWipeInterval) {
-          overlay.__crtWipeInterval = setInterval(startWipe, 10000);
+          overlay.__crtWipeInterval = setInterval(startWipe, 30000);
         }
       }
 
@@ -41,7 +41,7 @@
           if (disabled) {
             if (overlay.__crtWipeInterval) { clearInterval(overlay.__crtWipeInterval); overlay.__crtWipeInterval = null; }
           } else {
-            if (!overlay.__crtWipeInterval && wipe) overlay.__crtWipeInterval = setInterval(startWipe, 10000);
+            if (!overlay.__crtWipeInterval && wipe) overlay.__crtWipeInterval = setInterval(startWipe, 30000);
           }
         }
       });

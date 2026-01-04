@@ -35,7 +35,7 @@
   font-size: 18px;
   border: var(--border-thick);
   box-shadow: var(--shadow-flat);
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   transition: transform 120ms ease, background 120ms ease;
   position: relative;
@@ -51,11 +51,17 @@
 .theme-toggle[aria-pressed="true"] {
   outline: none !important;
   box-shadow: 0 0 0 2px var(--accent);
+  background: var(--active-bg);
 }
 
 .theme-toggle:hover {
   transform: translate(2px, 2px);
-} 
+}
+
+/* Dark theme: ensure the theme toggle has a visible background when not active/hovered */
+:root[data-theme="dark"] .theme-toggle {
+  background: var(--surface);
+}
 
 /* Button */
 .btn {
@@ -79,14 +85,6 @@
 } 
 
 /* Button: primary */
-.btn--primary[href="about.html"] {
-  height: 44px;
-  padding: 0 20px;
-  font-size: 1rem;
-  min-width: 96px;
-  margin-left: 24px;
-}
-
 .btn--primary {
   background: var(--text);
   border-color: var(--text);
@@ -300,6 +298,7 @@ a[href^="mailto:"] {
   font-weight: 600;
   line-height: 1.2;
   overflow: hidden;
+  color: #ffffff; 
 }
 
 #personal-grid .card__title,
@@ -322,8 +321,9 @@ a[href^="mailto:"] {
   opacity: 0.9;
 }
 
-.card:hover .card__overlay {
-  background: var(--overlay);
+.card:hover .card__img {
+  filter: brightness(0.5);
+  transition: filter 200ms ease;
 }
 
 .card:hover .card__meta {

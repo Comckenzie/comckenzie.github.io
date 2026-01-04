@@ -18,7 +18,7 @@
   <main role="main">
     <section class="section" aria-labelledby="project-heading">
       <div class="container">
-        <h1 id="project-heading" class="section__head--row" hidden>Project</h1>
+
         <div id="project-root" class="project" aria-live="polite"></div>
         <noscript><p class="muted">JavaScript is required to view project details. <a href="projects.html?source=personal">Browse projects</a>.</p></noscript>
       </div>
@@ -31,5 +31,8 @@
   <script src="assets/js/projects.js" defer></script>
   <script src="assets/js/crt.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <script>
+    if (window.initProjectPage) window.initProjectPage();
+  </script>
 </body>
 </html>

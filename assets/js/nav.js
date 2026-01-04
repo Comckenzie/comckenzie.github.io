@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  const NAV_ROLL_CHARS = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
-
   function wrapNavLetters(el) {
     const text = (el.textContent || '').trim();
     if (!text) return;
@@ -113,7 +111,7 @@
   function addRollHover(element) {
     element.addEventListener('mouseenter', () => {
       if (element.__navRollState) element.__navRollState.cancel();
-      element.__navRollState = startRoll(element, 1000);
+      element.__navRollState = startRoll(element, 1500);
     });
 
     element.addEventListener('mouseleave', () => {

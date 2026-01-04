@@ -20,18 +20,15 @@
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
     const label = document.getElementById('theme-toggle-label');
-    const icon = document.getElementById('theme-toggle-icon');
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
 
-    if (icon) {
-      icon.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    } else {
-      btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    }
-
+    // Use icon and label text
     if (label) {
-      label.textContent = isDark ? 'Light' : 'Dark';
+      label.innerHTML = isDark ? '<img src="assets/images/icons/sun.png" alt="sun" style="height:32px; width:auto;">' : '<img src="assets/images/icons/moon.png" alt="moon" style="height:32px; width:auto;">';
+    } else {
+      // fallback: set button text
+      btn.innerHTML = isDark ? '<img src="assets/images/icons/sun.png" alt="sun" style="height:32px; width:auto;">' : '<img src="assets/images/icons/moon.png" alt="moon" style="height:32px; width:auto;">';
     }
   }
 

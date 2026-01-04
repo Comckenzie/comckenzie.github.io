@@ -12,6 +12,8 @@ body {
   color: var(--text);
   background: var(--bg);
   position: relative;
+  padding-top: 60px;
+  overflow-wrap: break-word;
 }
 
 /* Custom cursor (site-wide) */

@@ -22,7 +22,7 @@ function wrapSectionLetters(el) {
 }
 
 function initSectionTitles() {
-  const heads = document.querySelectorAll('.section__head h2');
+  const heads = document.querySelectorAll('.section__head h2, .accentuation-title');
   for (const h of heads) {
     wrapSectionLetters(h);
   }
@@ -98,6 +98,7 @@ initShell()
   .then(() => {
     initSectionTitles();
     if (window.initGrids) window.initGrids();
+    if (window.initProjectPage) window.initProjectPage();
     initScrollEffects();
     if (window.initCRT) window.initCRT();
   })
