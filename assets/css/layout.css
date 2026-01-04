@@ -98,7 +98,6 @@
 .project__cover { width:100%; height:auto; border: var(--border-thick); box-shadow: var(--shadow-flat); display:block; max-width: 100%; }
 .project__right { display:flex; flex-direction:column; gap: 16px; }
 .project__top { display:flex; align-items:center; gap: 16px; }
-.project__logo { width: 64px; height:64px; object-fit: contain; border-radius: 8px; }
 .project__desc { color: var(--muted); line-height:1.6; }
 .tracks { width:100%; border-collapse: collapse; }
 .tracks th, .tracks td { text-align:left; padding:8px 12px; border-top: 1px solid rgba(0,0,0,0.06); }

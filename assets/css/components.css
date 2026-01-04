@@ -415,9 +415,9 @@ a[href^="mailto:"] {
 .crt-vignette {
   background: radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 100%);
   opacity: 0.35;
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 9000;
+  z-index: 0;
   pointer-events: none;
 }
 

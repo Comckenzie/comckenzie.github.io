@@ -25,11 +25,11 @@
       };
 
       if (wipe) {
-        startWipe();
-        setTimeout(startWipe, 5000);
-        if (!overlay.__crtWipeInterval) {
+        const startInterval = () => {
+          startWipe();
           overlay.__crtWipeInterval = setInterval(startWipe, 30000);
-        }
+        };
+        setTimeout(startInterval, 30000);
       }
 
       document.addEventListener('keydown', (e) => {
@@ -41,7 +41,13 @@
           if (disabled) {
             if (overlay.__crtWipeInterval) { clearInterval(overlay.__crtWipeInterval); overlay.__crtWipeInterval = null; }
           } else {
-            if (!overlay.__crtWipeInterval && wipe) overlay.__crtWipeInterval = setInterval(startWipe, 30000);
+            if (!overlay.__crtWipeInterval && wipe) {
+              const startInterval = () => {
+                startWipe();
+                overlay.__crtWipeInterval = setInterval(startWipe, 30000);
+              };
+              setTimeout(startInterval, 30000);
+            }
           }
         }
       });

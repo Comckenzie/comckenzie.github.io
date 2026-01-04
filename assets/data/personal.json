@@ -1,35 +1,34 @@
 [
   {
-    "id": "tabula-rasa",
-    "name": "Tabula Rasa",
-    "description": "A concept album exploring themes of rebirth and transformation.",
-    "creator": null,
-    "image": "Ressources/Image/Tabula Rasa album cover.png",
-    "logo": "Ressources/Image/Tabula Rasa album cover.png",
-    "spotify": "https://open.spotify.com/embed/album/EXAMPLE_ALBUM_ID",
-    "quote": "A 20-minute loop that is truly perfect.",
-    "quoteAuthor": "John Famiglietti (aka Johnny Health)",
-    "awards": ["Ressources/Image/Profile-Picture.png"],
-    "tracks": [
-      { "title": "Overture", "path": "assets/music/tabula-rasa/overture.mp3" },
-      { "title": "New Beginnings", "path": "assets/music/tabula-rasa/new-beginnings.mp3" },
-      { "title": "Blank Slate", "path": "assets/music/tabula-rasa/blank-slate.mp3" },
-      { "title": "Memories Fade", "path": "assets/music/tabula-rasa/memories-fade.mp3" },
-      { "title": "Restart", "path": "assets/music/tabula-rasa/restart.mp3" }
-    ]
-  },
-  {
     "id": "sin-prince",
     "name": "The Sin Prince",
     "description": "Dark orchestral score for a fantasy narrative.",
     "creator": null,
-    "image": "Ressources/Image/The sin prince.png",
-    "logo": "Ressources/Image/The sin prince.png",
     "tracks": [
-      { "title": "Coronation", "path": "assets/music/sin-prince/coronation.mp3" },
-      { "title": "Fall from Grace", "path": "assets/music/sin-prince/fall-from-grace.mp3" },
-      { "title": "Redemption Arc", "path": "assets/music/sin-prince/redemption-arc.mp3" },
-      { "title": "Final Battle", "path": "assets/music/sin-prince/final-battle.mp3" }
+      { "title": "A Story", "path": "assets/projects/personal/sin-prince/AStory.mp3" },
+      { "title": "Blooming Death", "path": "assets/projects/personal/sin-prince/BloomingDeath.mp3" },
+      { "title": "For Science", "path": "assets/projects/personal/sin-prince/ForScience.mp3" },
+      { "title": "Into The Dweller's Hollow", "path": "assets/projects/personal/sin-prince/IntoTheDwellersHollow.mp3" }
+    ]
+  },
+  {
+    "id": "tabula-rasa",
+    "name": "Tabula Rasa",
+    "description": "A concept album exploring themes of rebirth and transformation.",
+    "creator": null,
+    "tracks": [
+      { "title": "Battle Essentia", "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3" },
+      { "title": "Battle Novus Syndicate", "path": "assets/projects/personal/tabula-rasa/BattleNovusSyndicate.mp3" },
+      { "title": "Mt Throne 1", "path": "assets/projects/personal/tabula-rasa/MtThrone_1.mp3" }
+    ]
+  },
+  {
+    "id": "others",
+    "name": "Other Personal Pieces",
+    "description": "Miscellaneous personal compositions and sound experiments.",
+    "creator": null,
+    "tracks": [
+      { "title": "Sample Track", "path": "assets/projects/personal/others/sample.mp3" }
     ]
   }
 ]

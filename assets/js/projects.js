@@ -23,7 +23,7 @@
       .map(
         (p) => `
     <a class="card" href="project.html?source=${container.dataset.source}&id=${p.id}" aria-label="${p.name} — Open project">
-      <img class="card__img" src="${p.image}" alt="${p.name}" loading="lazy" />
+      <img class="card__img" src="assets/projects/${container.dataset.source}/${p.id}/cover.png" alt="${p.name}" loading="lazy" />
       <div class="card__overlay">
         <div class="card__meta">
           <h3 class="card__title">${wrapLetters(p.name)}</h3>
@@ -119,7 +119,7 @@
     // Populate fields
     clone.querySelector('[data-field="name"]').textContent = project.name;
     clone.querySelector('.tracklist-card__title [data-field="name"]').textContent = project.name;
-    clone.querySelector('[data-field="image"]').src = project.image;
+    clone.querySelector('[data-field="image"]').src = `assets/projects/${source}/${project.id}/cover.png`;
     clone.querySelector('[data-field="image"]').alt = project.name;
     clone.querySelector('[data-field="description"]').textContent = project.description;
 

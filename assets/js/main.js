@@ -47,23 +47,7 @@ async function initShell() {
     document.body.appendChild(crt);
   }
 
-  (function ensureVignette() {
-    const existing = document.querySelector('.crt-vignette');
-    const header = document.getElementById('site-header');
-    if (!header) return;
-
-    if (existing) {
-      if (existing.parentElement !== document.body) {
-        document.body.insertBefore(existing, header);
-      }
-      return;
-    }
-
-    const v = document.createElement('div');
-    v.className = 'crt-vignette';
-    v.setAttribute('aria-hidden', 'true');
-    document.body.insertBefore(v, header);
-  })();
+  // vignette is included inside the .crt-overlay markup in the header partial
 
   if (window.initNav) window.initNav();
   initFooterYear();
