@@ -75,12 +75,25 @@
       return `${m}:${ss}`;
     }
 
+    function loadTrackDuration(track, durationEl) {
+      const tempAudio = new Audio();
+      tempAudio.preload = 'metadata';
+      tempAudio.src = track.path;
+      tempAudio.addEventListener('loadedmetadata', () => {
+        const dur = tempAudio.duration;
+        durationEl.textContent = formatDuration(dur);
+      });
+      tempAudio.addEventListener('error', () => {
+        durationEl.textContent = '—';
+      });
+    }
+
     const tracksHtml = project.tracks && project.tracks.length
       ? project.tracks
           .map((t, i) => `<li class="track" data-index="${i}" data-path="${t.path}">
               <button class="iconbtn play-track" aria-label="Play ${t.title}"><i class="fa-solid fa-play"></i></button>
               <span class="track-title">${t.title}</span>
-              <span class="track-duration">${formatDuration(t.duration)}</span>
+              <span class="track-duration">—</span>
             </li>`)
           .join('')
       : '';
@@ -144,6 +157,13 @@
     const titleEl = document.querySelector('.project-hero__title.accentuation-title');
     if (titleEl && typeof wrapSectionLetters === 'function') wrapSectionLetters(titleEl);
 
+    // Load durations for tracks
+    const trackItems = document.querySelectorAll('.track');
+    trackItems.forEach((item, i) => {
+      const durationEl = item.querySelector('.track-duration');
+      loadTrackDuration(project.tracks[i], durationEl);
+    });
+
     // Find player elements (they may not exist on all projects)
     const playerEl = document.getElementById('project-player');
     const playBtn = playerEl ? playerEl.querySelector('#play') : null;
@@ -153,8 +173,6 @@
     const trackTitle = playerEl ? playerEl.querySelector('.player__track') : null;
     const timeline = playerEl ? playerEl.querySelector('.player__timeline') : null;
     const elapsedEl = playerEl ? playerEl.querySelector('.player__elapsed') : null;
-
-    const trackItems = document.querySelectorAll('.track');
 
     let audio = new Audio();
     // Help detect cutoffs: load metadata, allow CORS fetches, and log progress/errors

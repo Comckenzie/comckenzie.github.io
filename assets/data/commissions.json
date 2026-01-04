@@ -7,10 +7,10 @@
     "image": "assets/projects/SMGravity/cover.png",
     "video": "https://www.youtube.com/embed/_eBBxY5oniE",
     "tracks": [
-      { "title": "Beat Street Galaxy", "path": "assets/projects/SMGravity/BeatStreetGalaxy.mp3", "duration": 180 },
-      { "title": "Clam Noodle Beach Galaxy", "path": "assets/projects/SMGravity/ClamNoodleBeachGalaxy.mp3", "duration": 200 },
-      { "title": "World 3", "path": "assets/projects/SMGravity/World3.mp3", "duration": 150 },
-      { "title": "World 4", "path": "assets/projects/SMGravity/World4.wav", "duration": 170 }
+      { "title": "Beat Street Galaxy", "path": "assets/projects/SMGravity/BeatStreetGalaxy.mp3" },
+      { "title": "Clam Noodle Beach Galaxy", "path": "assets/projects/SMGravity/ClamNoodleBeachGalaxy.mp3" },
+      { "title": "World 3", "path": "assets/projects/SMGravity/World3.mp3" },
+      { "title": "World 4", "path": "assets/projects/SMGravity/World4.wav" }
     ]
   },
   {
@@ -21,10 +21,10 @@
     "image": "assets/projects/SMAG/cover.png",
     "video": "https://www.youtube.com/embed/MMpBh_gVShs",
     "tracks": [
-      { "title": "Pollen Highlands Galaxy (Night)", "path": "assets/projects/SMAG/PollenHighlandsGalaxy_night.mp3", "duration": 180 },
-      { "title": "Pumpkin Town Galaxy", "path": "assets/projects/SMAG/PumpkinTownGalaxy.mp3", "duration": 200 },
-      { "title": "Space Port Galaxy", "path": "assets/projects/SMAG/SpacePortGalaxy.mp3", "duration": 150 },
-      { "title": "Up Down Ruin Galaxy", "path": "assets/projects/SMAG/UpDownRuinGalaxy.mp3", "duration": 170 }
+      { "title": "Pollen Highlands Galaxy (Night)", "path": "assets/projects/SMAG/PollenHighlandsGalaxy_night.mp3" },
+      { "title": "Pumpkin Town Galaxy", "path": "assets/projects/SMAG/PumpkinTownGalaxy.mp3" },
+      { "title": "Space Port Galaxy", "path": "assets/projects/SMAG/SpacePortGalaxy.mp3" },
+      { "title": "Up Down Ruin Galaxy", "path": "assets/projects/SMAG/UpDownRuinGalaxy.mp3" }
     ]
   }
 ]
