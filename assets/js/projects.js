@@ -113,46 +113,44 @@
         </div>`
       : '';
 
+    const template = document.getElementById('project-template');
+    const clone = template.content.cloneNode(true);
 
+    // Populate fields
+    clone.querySelector('[data-field="name"]').textContent = project.name;
+    clone.querySelector('.tracklist-card__title [data-field="name"]').textContent = project.name;
+    clone.querySelector('[data-field="image"]').src = project.image;
+    clone.querySelector('[data-field="image"]').alt = project.name;
+    clone.querySelector('[data-field="description"]').textContent = project.description;
 
-    root.innerHTML = `
-    <article class="project-page" role="article">
-      <section class="project-hero__inner container no-banner">
-        <div class="project-hero__title-col">
-          <h1 class="project-hero__title accentuation-title">${project.name}</h1>
-          ${project.creator ? `<p class="muted">by ${project.creator}</p>` : ''}
-        </div>
-      </section>
-      ${project.video ? `<section class="project-media container"><div class="project-media__video">${videoHtml}</div><div class="project-media__desc"><p class="project-hero__desc">${project.description}</p></div></section>` : `<section class="project-desc container"><p class="project-hero__desc">${project.description}</p></section>`}
+    if (project.creator) {
+      clone.querySelector('[data-field="creator"]').textContent = 'by ' + project.creator;
+      clone.querySelector('[data-field="creator"]').style.display = '';
+    }
 
-      <section class="project-content container">
-        <div class="content-full">
-          <div class="tracklist-card tracklist-card--full project-detail-split">
-            <div class="project-detail-left">
-              <img class="project-detail-image" src="${project.image}" alt="${project.name}" />
-              <div class="project__player project__player--full" id="project-player" aria-label="Audio player">
-                <div class="player__controls">
-                  <button class="iconbtn" id="prev" aria-label="Previous"><i class="fa-solid fa-backward"></i></button>
-                  <button class="iconbtn btn--play" id="play" aria-label="Play/Pause"><i class="fa-solid fa-play"></i></button>
-                  <button class="iconbtn" id="next" aria-label="Next"><i class="fa-solid fa-forward"></i></button>
-                  <div class="player__track" aria-live="polite">—</div>
-                </div>
+    const videoSection = clone.querySelector('[data-conditional="video"]');
+    const noVideoSection = clone.querySelector('[data-conditional="no-video"]');
+    if (project.video) {
+      videoSection.style.display = '';
+      noVideoSection.style.display = 'none';
+      clone.querySelector('[data-field="videoHtml"]').innerHTML = videoHtml;
+    } else {
+      videoSection.style.display = 'none';
+      noVideoSection.style.display = '';
+    }
 
-                <div class="player__timeline" role="progressbar" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                  <div class="player__elapsed" style="width:0%"></div>
-                </div>
+    const tracklist = clone.querySelector('.tracklist');
+    const noTracks = clone.querySelector('.no-tracks');
+    if (tracksHtml) {
+      tracklist.innerHTML = tracksHtml;
+      noTracks.style.display = 'none';
+    } else {
+      tracklist.style.display = 'none';
+      noTracks.style.display = '';
+    }
 
-              </div>
-            </div>
-            <div class="project-detail-right">
-              <h3 class="tracklist-card__title">${project.name} Original Soundtrack</h3>
-              ${tracksHtml ? `<ol class="tracklist">${tracksHtml}</ol>` : '<p class="muted">No tracks available.</p>'}
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
-    `;
+    root.innerHTML = '';
+    root.appendChild(clone);
     // Apply per-letter accentuation to the hero title if available
     const titleEl = document.querySelector('.project-hero__title.accentuation-title');
     if (titleEl && typeof wrapSectionLetters === 'function') wrapSectionLetters(titleEl);
