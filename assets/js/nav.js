@@ -161,6 +161,5 @@
     }
   }
 
-  window.initMobileNav = initMobileNav;
   window.initNav = initNav;
 })();
