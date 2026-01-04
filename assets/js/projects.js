@@ -8,13 +8,17 @@
   }
 
   function wrapLetters(text) {
+    let globalIndex = 0;
     return text
-      .split('')
-      .map((char, i) => {
-        if (char === ' ') return '<span class="letter" style="width: 0.3em;"> </span>';
-        return `<span class="letter" style="transition-delay: ${i * 25}ms;">${char}</span>`;
+      .split(' ')
+      .map(word => {
+        const letters = word.split('').map(ch => {
+          const span = `<span class="letter" style="--i: ${globalIndex++}">${ch}</span>`;
+          return span;
+        }).join('');
+        return `<span class="word">${letters}</span>`;
       })
-      .join('');
+      .join(' ');
   }
 
   function renderGrid(container, projects, limit) {
@@ -149,6 +153,12 @@
       noTracks.style.display = '';
     }
 
+    // Hide player if no tracks
+    let playerEl = clone.querySelector('#project-player');
+    if (playerEl) {
+      playerEl.style.display = tracksHtml ? '' : 'none';
+    }
+
     root.innerHTML = '';
     root.appendChild(clone);
     // Apply per-letter accentuation to the hero title if available
@@ -163,7 +173,8 @@
     });
 
     // Find player elements (they may not exist on all projects)
-    const playerEl = document.getElementById('project-player');
+    playerEl = document.getElementById('project-player');
+    if (!tracksHtml) return;  // No player setup needed if no tracks
     const playBtn = playerEl ? playerEl.querySelector('#play') : null;
     const prevBtn = playerEl ? playerEl.querySelector('#prev') : null;
     const nextBtn = playerEl ? playerEl.querySelector('#next') : null;

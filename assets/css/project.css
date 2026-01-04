@@ -65,7 +65,7 @@
 .accentuation-title .section-letter {
   display: inline-block;
   animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
-  animation-delay: calc(var(--i, 0) * 80ms), calc(var(--i, 0) * 120ms);
+  animation-delay: calc(var(--i, 0) * 40ms), calc(var(--i, 0) * 60ms);
   animation-fill-mode: both;
   will-change: transform, color;
 }
@@ -73,6 +73,10 @@
 .accentuation-title .section-letter:nth-child(3n+1) { color: #7ab6ff; }
 .accentuation-title .section-letter:nth-child(3n+2) { color: #b894ff; }
 .accentuation-title .section-letter:nth-child(3n) { color: #ff8ccf; }
+
+.accentuation-title .section-word {
+  white-space: nowrap;
+}
 .project-hero__right-col { color: var(--text); }
 .project-hero__desc { color: var(--text) !important; font-family: var(--font-body); max-width: 100%; overflow-wrap: break-word; }
 .project-hero__video { margin-top: 18px; }

@@ -11,14 +11,23 @@ function wrapSectionLetters(el) {
   if (!text) return;
 
   el.textContent = '';
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    const span = document.createElement('span');
-    span.className = 'section-letter';
-    span.style.setProperty('--i', String(i));
-    span.textContent = ch === ' ' ? '\u00A0' : ch;
-    el.appendChild(span);
-  }
+  const words = text.split(' ');
+  words.forEach((word, wordIndex) => {
+    const wordSpan = document.createElement('span');
+    wordSpan.className = 'section-word';
+    for (let i = 0; i < word.length; i++) {
+      const ch = word[i];
+      const span = document.createElement('span');
+      span.className = 'section-letter';
+      span.style.setProperty('--i', String(wordIndex * 10 + i));
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      wordSpan.appendChild(span);
+    }
+    el.appendChild(wordSpan);
+    if (wordIndex < words.length - 1) {
+      el.appendChild(document.createTextNode(' '));
+    }
+  });
 }
 
 function initSectionTitles() {
