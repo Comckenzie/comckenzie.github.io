@@ -18,6 +18,9 @@
 
   --border-thick: 3px solid var(--text);
   --shadow-flat: 4px 4px 0 var(--text);
+
+  /* Subtle overlay to tint the navbar and slightly reduce brightness */
+  --nav-overlay: rgba(0, 0, 0, 0.04);
 }
 
 /* Call-to-action (CTA) colors */
@@ -54,6 +57,9 @@
   /* keep container/gap the same */
   --border-thick: 3px solid var(--text);
   --shadow-flat: 4px 4px 0 var(--text);
+
+  /* Subtle overlay for navbar in dark theme (slightly lightens) */
+  --nav-overlay: rgba(255, 255, 255, 0.03);
 }
 
 /* Removed automatic prefers-color-scheme adjustments to avoid unexpected theme flips */

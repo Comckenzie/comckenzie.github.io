@@ -1,7 +1,7 @@
 /* Header / navigation styles */
-#site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: var(--bg) !important; border-bottom: var(--border-thick); box-shadow: none; }
+#site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: linear-gradient(var(--nav-overlay), var(--nav-overlay)), var(--bg) !important; border-bottom: var(--border-thick); box-shadow: none; }
 
-.nav { width: 100%; height: var(--nav-h); background: var(--bg) !important; color: var(--text); }
+.nav { width: 100%; height: var(--nav-h); background: linear-gradient(var(--nav-overlay), var(--nav-overlay)), var(--bg) !important; color: var(--text); }
 
 .nav__inner { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: var(--gap); }
 
@@ -10,8 +10,7 @@
 .nav__links a {
   position: relative;
   text-decoration: none;
-  color: #f6f9fb;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 2px #fff;
+  color: var(--text);
 }
 
 .nav__links a.is-active { color: #7ab6ff; }
