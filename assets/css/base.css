@@ -1,8 +1,13 @@
-/* Base / global rules (box-sizing, reset, typography, utilities) */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body { height: 100%; }
-html { scroll-behavior: smooth; }
+html, body {
+  height: 100%;
+}
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -16,29 +21,32 @@ body {
   overflow-wrap: break-word;
 }
 
-/* Custom cursor (site-wide) */
 html, body {
   cursor: url('/assets/images/cursor.png') 16 16, auto;
 }
 
-/* Hover cursor for interactive elements */
-a:hover,
-button:hover,
-.btn:hover,
-.iconbtn:hover,
-.nav__links a:hover,
-.nav__dropbtn:hover,
-.contact-social-btn:hover {
+a:hover, button:hover, .btn:hover, .iconbtn:hover, .nav__links a:hover, .nav__dropbtn:hover, .contact-social-btn:hover {
   cursor: url('/assets/images/cursor-hover.png') 16 16, pointer;
 }
 
-/* Keep text inputs using native text cursor */
-input, textarea, select, [contenteditable] { cursor: text; }
+input, textarea, select, [contenteditable] {
+  cursor: text;
+}
 
-/* Links, images and basics */
-a { color: inherit; text-decoration: none; font-size: 1.3rem; }
-a:hover { text-decoration: underline; }
-img { max-width: 100%; display: block; }
+a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
 
 button {
   font: inherit;
@@ -48,16 +56,32 @@ button {
   padding: 8px 10px;
 }
 
-button:hover { background: var(--surface); }
+button:hover {
+  background: var(--surface);
+}
 
-button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
 
-.container { width: min(var(--container), calc(100% - 32px)); margin: 0 auto; }
+.container {
+  width: min(var(--container), calc(100% - 32px));
+  margin: 0 auto;
+}
 
-.muted { color: var(--muted); }
+.muted {
+  color: var(--muted);
+}
 
-/* Typographic hierarchy */
-h1, h2, h3 { margin: 0 0 8px 0; font-family: var(--font-pixel); font-weight: 400; letter-spacing: 0; line-height: 1.4; }
+h1, h2, h3 {
+  margin: 0 0 8px 0;
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
 h1 {
   font-family: var(--font-pixel);
   font-size: 2.6rem;
@@ -66,6 +90,7 @@ h1 {
   line-height: 1.2;
   color: var(--text);
 }
+
 h2 {
   font-family: var(--font-pixel);
   font-size: 2rem;
@@ -74,6 +99,7 @@ h2 {
   line-height: 1.25;
   color: var(--text);
 }
+
 h3 {
   font-family: var(--font-pixel);
   font-size: 1.4rem;
@@ -83,4 +109,8 @@ h3 {
   color: var(--text);
 }
 
-p { margin: 0 0 18px 0; font-size: 1.3rem; color: var(--text); }
+p {
+  margin: 0 0 18px 0;
+  font-size: 1.3rem;
+  color: var(--text);
+}

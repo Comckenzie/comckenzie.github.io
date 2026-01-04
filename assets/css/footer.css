@@ -1,4 +1,3 @@
-/* Footer styles */
 .footer {
   border-top: var(--border-thick);
   padding: 96px 0 48px;
@@ -18,10 +17,9 @@
 .footer__bottom { margin-top: 24px; padding-top: 20px; display: flex; align-items: center; justify-content: flex-start; border-top: var(--border-thick); gap: 12px; }
 
 .footer__author { font-family: inherit; font-size: 1.1em; font-weight: 400; color: var(--text); text-decoration: none; }
+
 .footer__author:hover { text-decoration: underline; }
 
-@media (max-width: 900px) {
-  .footer__inner { grid-template-columns: 1fr 1fr; }
-}
+@media (max-width: 900px) { .footer__inner { grid-template-columns: 1fr 1fr; } }
 
 @media (max-width: 520px) { .nav__links { display: none; } .footer__inner { grid-template-columns: 1fr; } }

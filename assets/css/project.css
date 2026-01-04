@@ -1,10 +1,10 @@
-/* Project detail split layout */
 .project-detail-split {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 10px;
   align-items: flex-start;
 }
+
 .project-detail-left {
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
   height: 100%;
   padding: 15px;
 }
+
 .project-detail-image {
   width: 100%;
   max-width: 320px;
@@ -19,6 +20,7 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   background: var(--pixel-bg);
 }
+
 .project-detail-right {
   width: 100%;
   display: flex;
@@ -28,17 +30,11 @@
   padding: 15px;
   height: 100%;
 }
-@media (max-width: 900px) {
-  .project-detail-split {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .project-detail-image {
-    max-width: 100%;
-  }
-}
 
-/* Project page layout (moved from components.css) */
+@media (max-width: 900px) {
+  .project-detail-split { grid-template-columns: 1fr; gap: 16px; }
+  .project-detail-image { max-width: 100%; }
+}
 
 .project-hero__inner, .project-hero__inner.no-banner {
   position: relative;
@@ -51,7 +47,9 @@
   background: none;
   padding: 48px 0 0 0;
 }
-.project-hero__title-col { display:flex; align-items:center; flex-direction: column; }
+
+.project-hero__title-col { display: flex; align-items: center; flex-direction: column; }
+
 .project-hero__title {
   font-family: var(--font-pixel);
   font-size: 2.2rem;
@@ -61,7 +59,6 @@
   hyphens: none;
 }
 
-/* Animate individual letters and apply pastel cycling color */
 .accentuation-title .section-letter {
   display: inline-block;
   animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
@@ -74,25 +71,19 @@
 .accentuation-title .section-letter:nth-child(3n+2) { color: #b894ff; }
 .accentuation-title .section-letter:nth-child(3n) { color: #ff8ccf; }
 
-.accentuation-title .section-word {
-  white-space: nowrap;
-}
+.accentuation-title .section-word { white-space: nowrap; }
+
 .project-hero__right-col { color: var(--text); }
+
 .project-hero__desc { color: var(--text) !important; font-family: var(--font-body); max-width: 100%; overflow-wrap: break-word; }
+
 .project-hero__video { margin-top: 18px; }
+
 .project-hero__video .project__video .video__wrap { border-radius: 6px; overflow: hidden; }
 
-.project-media {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-  margin-top: 24px;
-}
-.project-desc {
-  text-align: center;
-  margin-top: 24px;
-}
+.project-media { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; margin-top: 24px; }
+
+.project-desc { text-align: center; margin-top: 24px; }
 
 @media (max-width: 900px) {
   .project-hero__inner, .project-hero__inner.no-banner { padding: 24px 0 0 0; }
@@ -101,62 +92,89 @@
   .project-media { grid-template-columns: 1fr; gap: 12px; }
 }
 
-/* Content area: single column layout with full-width music panel */
 .project-content { display: block; padding: 48px 0; }
+
 .content-full { display: flex; flex-direction: column; gap: 24px; }
+
 .tracklist-card { width: 100%; }
+
 .tracklist-card--full { width: 100%; }
 
-/* Make player full width and static so it sits under the tracklist */
 .project__player { position: static; top: auto; padding-top: 12px; background: transparent; }
+
 .project__player--full { width: 100%; }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 16px;
+}
 
-/* Video */
-.project__video .video__wrap { position: relative; padding-top: 56.25%; background: #000; overflow: hidden; border: var(--border-thick); box-shadow: var(--shadow-flat); }
-.project__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+#personal-grid, #commissions-grid, #projects-grid { gap: 6px; }
 
-/* Spotify card */
+#personal-grid .card, #commissions-grid .card, #projects-grid .card { border: none; box-shadow: none; }
 
-/* Tracklist card */
-.tracklist-card { border: var(--border-thick); padding: 12px; box-shadow: var(--shadow-flat); background: var(--surface); }
-.tracklist-card__title { font-family: var(--font-pixel); font-size: 0.85rem; margin: 0 0 8px 0; }
-.tracklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; }
-.track { display:flex; gap: 10px; align-items: center; padding: 8px; box-shadow: none; }
-.track .track-title { font-family: var(--font-body); font-size: 1.2rem; }
-.track.active { transform: translate(2px,2px); box-shadow: var(--shadow-flat); background: var(--active-bg); }
-
-/* Player sticks in the right sidebar */
-.project__player { position: sticky; top: 24px; padding-top: 12px; background: transparent; }
-.player__controls { display:flex; align-items:center; gap:8px; }
-.player__track { font-family: var(--font-body); font-size: 1.2rem; color: var(--muted); margin-left: 6px; }
-/* timeline visuals */
-.player__timeline {
-  height: 10px;
-  background: var(--active-bg);
-  margin-top: 12px;
+.card {
   position: relative;
-  cursor: pointer;
+  display: block;
+  border: 2px solid rgba(255,255,255,0.85);
+  background: var(--surface);
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
-.player__elapsed {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #7ab6ff 0%, #b894ff 50%, #ff8ccf 100%);
-  border-right: 2px solid var(--pixel-border);
-}
-.track-duration { 
-  margin-left: auto;
-  font-family: var(--font-pixel);
-  font-size: 0.75rem;
-  color: var(--muted);
-}
 
-/* Quote and awards */
+.card.placeholder { background: var(--active-bg); border: 2px solid rgba(255,255,255,0.85); cursor: default; }
 
-/* CTAs */
+.card__img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Small screens */
+.card__overlay { position: absolute; inset: 0; background: transparent; display: flex; align-items: flex-end; justify-content: flex-start; padding: 10px; transition: background 300ms ease; }
+
+.card__meta { width: 100%; opacity: 0; transition: opacity 200ms ease; }
+
+.card__title { margin: 0; font-size: 1.3rem; font-weight: 600; line-height: 1.2; overflow: hidden; color: #ffffff; }
+
+#personal-grid .card__title, #commissions-grid .card__title, #projects-grid .card__title { font-size: 1.05rem; }
+
+.card__title .letter { display: inline-block; opacity: 0; transform: translateY(20px); transition: opacity 280ms ease, transform 380ms cubic-bezier(0.68,-0.55,0.265,1.55); transition-delay: calc(var(--i, 0) * 15ms); white-space: nowrap; }
+
+.card__title .word { white-space: nowrap; }
+
+.card__creator { margin: 4px 0 0 0; font-size: 1rem; color: #ffffff; opacity: 0.9; }
+
+.card:hover .card__img { filter: brightness(0.5); transition: filter 200ms ease; }
+
+.card:hover .card__meta { opacity: 1; color: #ffffff; }
+
+.card:hover .card__title .letter { opacity: 1; transform: translateY(0); }
+
+.project__video .video__wrap { position: relative; padding-top: 56.25%; background: #000; overflow: hidden; border: var(--border-thick); box-shadow: var(--shadow-flat); }
+
+.project__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+.tracklist-card { border: var(--border-thick); padding: 12px; box-shadow: var(--shadow-flat); background: var(--surface); }
+
+.tracklist-card__title { font-family: var(--font-pixel); font-size: 0.85rem; margin: 0 0 8px 0; }
+
+.tracklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; }
+
+.track { display: flex; gap: 10px; align-items: center; padding: 8px; box-shadow: none; }
+
+.track .track-title { font-family: var(--font-body); font-size: 1.2rem; }
+
+.track.active { transform: translate(2px, 2px); box-shadow: var(--shadow-flat); background: var(--active-bg); }
+
+.project__player { position: sticky; top: 24px; padding-top: 12px; background: transparent; }
+
+.player__controls { display: flex; align-items: center; gap: 8px; }
+
+.player__track { font-family: var(--font-body); font-size: 1.2rem; color: var(--muted); margin-left: 6px; }
+
+.player__timeline { height: 10px; background: var(--active-bg); margin-top: 12px; position: relative; cursor: pointer; overflow: hidden; }
+
+.player__elapsed { height: 100%; width: 0%; background: linear-gradient(90deg, #7ab6ff 0%, #b894ff 50%, #ff8ccf 100%); border-right: 2px solid var(--pixel-border); }
+
+.track-duration { margin-left: auto; font-family: var(--font-pixel); font-size: 0.75rem; color: var(--muted); }
+
 @media (max-width: 900px) {
   .project-content { grid-template-columns: 1fr; }
   .project-hero { padding: 28px 0; }

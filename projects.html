@@ -23,6 +23,21 @@
         </div>
 
         <div class="grid" id="projects-grid" data-source="" aria-label="Projects"></div>
+
+        <template id="card-template">
+          <a class="card" href="#" aria-label="">
+            <img class="card__img" src="" alt="" loading="lazy" />
+            <div class="card__overlay">
+              <div class="card__meta">
+                <h3 class="card__title"><span data-field="name"></span></h3>
+                <p class="card__creator" data-field="creator" style="display:none;"></p>
+              </div>
+            </div>
+          </a>
+        </template>
+
+        <template id="card-placeholder"><div class="card placeholder"></div></template>
+
         <noscript><p class="muted">JavaScript is required to view projects. Try again with JavaScript enabled.</p></noscript>
       </div>
     </section>

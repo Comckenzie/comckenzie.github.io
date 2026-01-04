@@ -23,30 +23,44 @@
 
   function renderGrid(container, projects, limit) {
     const slice = limit ? projects.slice(0, limit) : projects;
-    let html = slice
-      .map(
-        (p) => `
-    <a class="card" href="project.html?source=${container.dataset.source}&id=${p.id}" aria-label="${p.name} — Open project">
-      <img class="card__img" src="assets/projects/${container.dataset.source}/${p.id}/cover.png" alt="${p.name}" loading="lazy" />
-      <div class="card__overlay">
-        <div class="card__meta">
-          <h3 class="card__title">${wrapLetters(p.name)}</h3>
-          ${p.creator ? `<p class="card__creator">${p.creator}</p>` : ''}
-        </div>
-      </div>
-    </a>
-  `
-      )
-      .join('');
+    const tpl = document.getElementById('card-template');
+    const placeholderTpl = document.getElementById('card-placeholder');
+    const frag = document.createDocumentFragment();
 
-    // Add placeholders to fill rows to 4 columns
-    const totalCards = slice.length;
-    const placeholdersNeeded = (4 - (totalCards % 4)) % 4;
-    for (let i = 0; i < placeholdersNeeded; i++) {
-      html += '<div class="card placeholder"></div>';
+    for (const p of slice) {
+      if (tpl) {
+        const node = tpl.content.cloneNode(true);
+        const a = node.querySelector('.card');
+        a.href = `project.html?source=${container.dataset.source}&id=${p.id}`;
+        a.setAttribute('aria-label', `${p.name} — Open project`);
+        const img = node.querySelector('.card__img');
+        img.src = `assets/projects/${container.dataset.source}/${p.id}/cover.png`;
+        img.alt = p.name;
+        const title = node.querySelector('.card__title');
+        title.innerHTML = wrapLetters(p.name);
+        const creator = node.querySelector('.card__creator');
+        if (creator) {
+          if (p.creator) { creator.textContent = p.creator; creator.style.display = ''; }
+          else { creator.style.display = 'none'; }
+        }
+        frag.appendChild(node);
+      } else {
+        // Fallback if template missing
+        const a = document.createElement('a'); a.className = 'card'; a.href = `project.html?source=${container.dataset.source}&id=${p.id}`; a.setAttribute('aria-label', `${p.name} — Open project`);
+        const img = document.createElement('img'); img.className = 'card__img'; img.src = `assets/projects/${container.dataset.source}/${p.id}/cover.png`; img.alt = p.name; img.loading = 'lazy';
+        const overlay = document.createElement('div'); overlay.className = 'card__overlay'; const meta = document.createElement('div'); meta.className = 'card__meta'; const h3 = document.createElement('h3'); h3.className = 'card__title'; h3.innerHTML = wrapLetters(p.name);
+        meta.appendChild(h3); if (p.creator) {const c=document.createElement('p'); c.className='card__creator'; c.textContent=p.creator; meta.appendChild(c);} overlay.appendChild(meta); a.appendChild(img); a.appendChild(overlay); frag.appendChild(a);
+      }
     }
 
-    container.innerHTML = html;
+    const total = slice.length;
+    const needed = (4 - (total % 4)) % 4;
+    for (let i = 0; i < needed; i++) {
+      if (placeholderTpl) frag.appendChild(placeholderTpl.content.cloneNode(true)); else { const d = document.createElement('div'); d.className='card placeholder'; frag.appendChild(d); }
+    }
+
+    container.innerHTML = '';
+    container.appendChild(frag);
   }
 
   async function initGrids() {

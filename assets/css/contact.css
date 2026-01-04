@@ -1,0 +1,116 @@
+.contact-social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95em;
+  padding: 4px 8px;
+  min-width: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+  background: var(--bg) !important;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-flat);
+  outline: none !important;
+}
+
+.contact-social-btn:focus,
+.contact-social-btn:active {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.contact-social-btn i {
+  font-size: 18px;
+  display: inline-block;
+}
+
+.contact-social-label {
+  font-family: var(--font-body);
+  font-size: 1em;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  margin-left: 2px;
+  display: inline-block;
+}
+
+.contact-info-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin: 32px 0 0 0;
+}
+
+.contact-info-row > div {
+  min-width: 44px;
+  min-height: 44px;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.contact-info-row strong {
+  color: var(--muted);
+  font-size: 0.98em;
+}
+
+.contact-info-row a {
+  color: inherit;
+  text-decoration: none;
+  word-break: break-all;
+  background-image: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.contact-info-row a:not([href^="mailto:"])::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  pointer-events: none;
+}
+
+a[href^="mailto:"] {
+  color: inherit;
+  text-decoration: none;
+  background-image: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  padding-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .contact-info-row {
+    gap: 16px;
+  }
+  .contact-info-row > div {
+    min-width: 120px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .contact-card { padding: 48px 32px; }
+  .contact-layout { grid-template-columns: 1fr 280px; gap: 24px; }
+}
+
+@media (max-width: 700px) {
+  .contact-card { padding: 24px; width: calc(100% - 32px); margin-left: 0; }
+  .contact-right { padding-top: 16px; }
+  .contact-grid { display: block; }
+  .contact-panel { margin-top: 24px; }
+}
