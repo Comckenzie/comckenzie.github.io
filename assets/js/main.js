@@ -59,7 +59,6 @@ async function initShell() {
   // vignette is included inside the .crt-overlay markup in the header partial
 
   if (window.initNav) window.initNav();
-  if (window.initMobileNav) window.initMobileNav();
   initFooterYear();
   if (window.initTheme) window.initTheme();
   initSectionActivation();

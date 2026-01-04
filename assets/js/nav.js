@@ -167,48 +167,24 @@
     if (!nav || !toggle) return;
 
     let docKeydown, docClick;
-    let animationTimeout = null;
 
-    // Ensure nav links start hidden for assistive tech and set initial transform
+    // Set initial aria-hidden
     const primaryNav = document.getElementById('primary-nav');
-    if (primaryNav) {
-      primaryNav.setAttribute('aria-hidden', 'true');
-      primaryNav.style.transform = 'translateX(-100%)';
-      primaryNav.style.opacity = '0';
-      primaryNav.style.transition = 'transform 500ms ease, opacity 300ms ease';
-      primaryNav.style.display = '';
-    }
+    if (primaryNav) primaryNav.setAttribute('aria-hidden', 'true');
 
     function openNav() {
-      // clear any pending close timeout
-      if (animationTimeout) {
-        clearTimeout(animationTimeout);
-        animationTimeout = null;
-      }
-
       nav.classList.add('nav--open');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Fermer la navigation');
       document.body.classList.add('nav-open');
 
-      // Animate panel via inline styles to ensure transition works across browsers
-      const primary = document.getElementById('primary-nav');
-      if (primary) {
-        // ensure transition properties are applied
-        primary.style.transition = 'transform 500ms ease, opacity 300ms ease';
-        // trigger the animation to open
-        requestAnimationFrame(() => {
-          primary.style.transform = 'translateX(0)';
-          primary.style.opacity = '1';
-          primary.setAttribute('aria-hidden', 'false');
-        });
-      }
+      if (primaryNav) primaryNav.setAttribute('aria-hidden', 'false');
 
-      // Focus management: focus first focusable link
+      // Focus management
       const first = nav.querySelector('.nav__links a, .nav__links button');
       if (first) first.focus();
 
-      // Keyboard handling (Esc + trap Tab inside menu)
+      // Keyboard handling
       docKeydown = (e) => {
         if (e.key === 'Escape') {
           closeNav();
@@ -229,7 +205,6 @@
           }
         }
       };
-
       document.addEventListener('keydown', docKeydown);
 
       // Close on outside click
@@ -242,39 +217,18 @@
     }
 
     function closeNav() {
-      // animate closed then remove open state after transition finishes
-      const primary = document.getElementById('primary-nav');
-      if (primary) {
-        // force reflow then animate closed to ensure transition runs
-        primary.getBoundingClientRect();
-        requestAnimationFrame(() => {
-          primary.style.transform = 'translateX(-100%)';
-          primary.style.opacity = '0';
-          primary.setAttribute('aria-hidden', 'true');
-        });
-      }
+      nav.classList.remove('nav--open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Afficher la navigation');
+      document.body.classList.remove('nav-open');
 
-      // keep nav--open class until animation completes so toggle stays rotated
-      if (animationTimeout) {
-        clearTimeout(animationTimeout);
-      }
-      animationTimeout = setTimeout(() => {
-        nav.classList.remove('nav--open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Afficher la navigation');
-        document.body.classList.remove('nav-open');
+      if (primaryNav) primaryNav.setAttribute('aria-hidden', 'true');
 
-        if (primary) {
-          primary.style.display = '';
-        }
-
-        if (docKeydown) document.removeEventListener('keydown', docKeydown);
-        if (docClick) document.removeEventListener('click', docClick);
-        animationTimeout = null;
-      }, 520);
+      if (docKeydown) document.removeEventListener('keydown', docKeydown);
+      if (docClick) document.removeEventListener('click', docClick);
     }
 
-    // Support both click and touch events for better mobile reliability
+    // Support both click and touch events
     const toggleFn = (e) => {
       e.preventDefault();
       if (nav.classList.contains('nav--open')) closeNav(); else openNav();
@@ -289,7 +243,7 @@
       }
     });
 
-    // Also close on window resize if larger than mobile
+    // Close on window resize if larger than mobile
     window.addEventListener('resize', () => {
       if (window.innerWidth > 900 && nav.classList.contains('nav--open')) {
         closeNav();

@@ -47,7 +47,7 @@
 
 /* Phone: switch right border to top for stacked project detail */
 @media (max-width: 520px) {
-  .project-detail-right { border-left: 0; border-top: 3px solid var(--text); padding-top: 12px; }
+  .project-detail-right { border-left: 0; padding-top: 12px; }
   .project-detail-left { padding-bottom: 12px; border-bottom: none; }
 }
 

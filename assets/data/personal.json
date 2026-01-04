@@ -1,5 +1,31 @@
 [
   {
+    "id": "super-mario-gravity",
+    "name": "Super Mario Gravity",
+    "description": "Super Mario Gravity is a Super Mario Galaxy 2 mod by Louis Miles. First released as a demo in 2016, then a second demo in 2022, and still being worked on. It's a complete game with multiple levels and galaxies.",
+    "creator": "Louis Miles",
+    "video": "https://www.youtube.com/embed/_eBBxY5oniE",
+    "tracks": [
+      { "title": "Beat Street Galaxy", "path": "assets/projects/personal/super-mario-gravity/BeatStreetGalaxy.mp3" },
+      { "title": "Clam Noodle Beach Galaxy", "path": "assets/projects/personal/super-mario-gravity/ClamNoodleBeachGalaxy.mp3" },
+      { "title": "World 3", "path": "assets/projects/personal/super-mario-gravity/World3.mp3" },
+      { "title": "World 4", "path": "assets/projects/personal/super-mario-gravity/World4.wav" }
+    ]
+  },
+  {
+    "id": "super-mario-another-galaxy",
+    "name": "Super Mario Another Galaxy",
+    "description": "Super Mario Another Galaxy is a Super Mario Galaxy 2 mod by the SMAG Team. It's an exciting project with unique galaxies and levels.",
+    "creator": "SMAG Team",
+    "video": "https://www.youtube.com/embed/MMpBh_gVShs",
+    "tracks": [
+      { "title": "Pollen Highlands Galaxy (Night)", "path": "assets/projects/personal/super-mario-another-galaxy/PollenHighlandsGalaxy_night.mp3" },
+      { "title": "Pumpkin Town Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/PumpkinTownGalaxy.mp3" },
+      { "title": "Space Port Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/SpacePortGalaxy.mp3" },
+      { "title": "Up Down Ruin Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/UpDownRuinGalaxy.mp3" }
+    ]
+  },
+  {
     "id": "sin-prince",
     "name": "The Sin Prince",
     "description": "Dark orchestral score for a fantasy narrative.",
@@ -20,32 +46,6 @@
       { "title": "Battle Essentia", "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3" },
       { "title": "Battle Novus Syndicate", "path": "assets/projects/personal/tabula-rasa/BattleNovusSyndicate.mp3" },
       { "title": "Mt Throne 1", "path": "assets/projects/personal/tabula-rasa/MtThrone_1.mp3" }
-    ]
-  },
-  {
-    "id": "super-mario-gravity",
-    "name": "Super Mario Gravity",
-    "description": "Super Mario Gravity is a Super Mario Galaxy 2 mod by Louis Miles. First released as a demo in 2016, then a second demo in 2022, and still being worked on. It's a complete game with multiple levels and galaxies.",
-    "creator": null,
-    "video": "https://www.youtube.com/embed/_eBBxY5oniE",
-    "tracks": [
-      { "title": "Beat Street Galaxy", "path": "assets/projects/personal/super-mario-gravity/BeatStreetGalaxy.mp3" },
-      { "title": "Clam Noodle Beach Galaxy", "path": "assets/projects/personal/super-mario-gravity/ClamNoodleBeachGalaxy.mp3" },
-      { "title": "World 3", "path": "assets/projects/personal/super-mario-gravity/World3.mp3" },
-      { "title": "World 4", "path": "assets/projects/personal/super-mario-gravity/World4.wav" }
-    ]
-  },
-  {
-    "id": "super-mario-another-galaxy",
-    "name": "Super Mario Another Galaxy",
-    "description": "Super Mario Another Galaxy is a Super Mario Galaxy 2 mod by the SMAG Team. It's an exciting project with unique galaxies and levels.",
-    "creator": null,
-    "video": "https://www.youtube.com/embed/MMpBh_gVShs",
-    "tracks": [
-      { "title": "Pollen Highlands Galaxy (Night)", "path": "assets/projects/personal/super-mario-another-galaxy/PollenHighlandsGalaxy_night.mp3" },
-      { "title": "Pumpkin Town Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/PumpkinTownGalaxy.mp3" },
-      { "title": "Space Port Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/SpacePortGalaxy.mp3" },
-      { "title": "Up Down Ruin Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/UpDownRuinGalaxy.mp3" }
     ]
   },
   {
