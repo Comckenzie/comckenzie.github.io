@@ -162,19 +162,47 @@
   }
 
   function initMobileNav() {
-    console.log('initMobileNav called');
     const nav = document.querySelector('.nav');
     const toggle = document.getElementById('nav-toggle');
-    console.log('nav:', nav, 'toggle:', toggle);
     if (!nav || !toggle) return;
 
     let docKeydown, docClick;
+    let animationTimeout = null;
+
+    // Ensure nav links start hidden for assistive tech and set initial transform
+    const primaryNav = document.getElementById('primary-nav');
+    if (primaryNav) {
+      primaryNav.setAttribute('aria-hidden', 'true');
+      primaryNav.style.transform = 'translateX(-100%)';
+      primaryNav.style.opacity = '0';
+      primaryNav.style.transition = 'transform 500ms ease, opacity 300ms ease';
+      primaryNav.style.display = '';
+    }
 
     function openNav() {
+      // clear any pending close timeout
+      if (animationTimeout) {
+        clearTimeout(animationTimeout);
+        animationTimeout = null;
+      }
+
       nav.classList.add('nav--open');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Fermer la navigation');
       document.body.classList.add('nav-open');
+
+      // Animate panel via inline styles to ensure transition works across browsers
+      const primary = document.getElementById('primary-nav');
+      if (primary) {
+        // ensure transition properties are applied
+        primary.style.transition = 'transform 500ms ease, opacity 300ms ease';
+        // trigger the animation to open
+        requestAnimationFrame(() => {
+          primary.style.transform = 'translateX(0)';
+          primary.style.opacity = '1';
+          primary.setAttribute('aria-hidden', 'false');
+        });
+      }
 
       // Focus management: focus first focusable link
       const first = nav.querySelector('.nav__links a, .nav__links button');
@@ -214,34 +242,45 @@
     }
 
     function closeNav() {
-      nav.classList.remove('nav--open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Afficher la navigation');
-      document.body.classList.remove('nav-open');
-      if (docKeydown) document.removeEventListener('keydown', docKeydown);
-      if (docClick) document.removeEventListener('click', docClick);
+      // animate closed then remove open state after transition finishes
+      const primary = document.getElementById('primary-nav');
+      if (primary) {
+        // force reflow then animate closed to ensure transition runs
+        primary.getBoundingClientRect();
+        requestAnimationFrame(() => {
+          primary.style.transform = 'translateX(-100%)';
+          primary.style.opacity = '0';
+          primary.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      // keep nav--open class until animation completes so toggle stays rotated
+      if (animationTimeout) {
+        clearTimeout(animationTimeout);
+      }
+      animationTimeout = setTimeout(() => {
+        nav.classList.remove('nav--open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Afficher la navigation');
+        document.body.classList.remove('nav-open');
+
+        if (primary) {
+          primary.style.display = '';
+        }
+
+        if (docKeydown) document.removeEventListener('keydown', docKeydown);
+        if (docClick) document.removeEventListener('click', docClick);
+        animationTimeout = null;
+      }, 520);
     }
 
     // Support both click and touch events for better mobile reliability
     const toggleFn = (e) => {
       e.preventDefault();
-      console.log('Toggle clicked/touched');
       if (nav.classList.contains('nav--open')) closeNav(); else openNav();
     };
     toggle.addEventListener('click', toggleFn);
     toggle.addEventListener('touchstart', toggleFn);
-
-    // For extra robustness, if CSS fails, ensure the nav links are shown/hidden inline
-    function ensureMenuVisibility(open) {
-      const primary = document.getElementById('primary-nav');
-      if (!primary) return;
-      if (open) primary.style.display = 'flex'; else primary.style.display = '';
-    }
-
-    const origOpen = openNav;
-    openNav = function() { origOpen(); ensureMenuVisibility(true); };
-    const origClose = closeNav;
-    closeNav = function() { origClose(); ensureMenuVisibility(false); };
 
     // Close menu when a link is clicked
     nav.addEventListener('click', (ev) => {
