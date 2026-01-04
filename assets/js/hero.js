@@ -1,221 +1,254 @@
-// Hero-only script: clean, simple, round-number constants
 (function () {
-  function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-  }
-
   async function initHero() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
-    const container = hero.querySelector('.hero__squares');
-    if (!container) return;
+    // Wrap only the hero subtitle into per-letter spans (keep the name unchanged)
+    try {
+      const subtitle = hero.querySelector('.hero__title');
+      if (typeof wrapSectionLetters === 'function' && subtitle) {
+        wrapSectionLetters(subtitle);
+        // Activate subtitle animations immediately
+        subtitle.classList.add('is-active');
+      }
+    } catch (e) {
+      // ignore if helper not available for any reason
+      console.warn('wrapSectionLetters not available:', e);
+    }
 
-    // Clear existing
-    container.innerHTML = '';
+    await initHeroParallax();
+  }
 
-    // Image set
-    const sources = ['assets/images/noteC.png', 'assets/images/noteA.png', 'assets/images/noteB.png'];
+  async function initHeroParallax() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
 
-    // Preload metadata (natural sizes)
-    const meta = await Promise.all(
-      sources.map((s) =>
+    const squaresContainer = hero.querySelector('.hero__squares');
+    if (!squaresContainer) return;
+
+    squaresContainer.innerHTML = '';
+
+    const heroImages = [
+      'assets/images/noteA.png',
+      'assets/images/noteB.png',
+      'assets/images/noteC.png'
+    ];
+
+    const imgMeta = await Promise.all(
+      heroImages.map((src) =>
         new Promise((res) => {
-          const i = new Image();
-          i.src = s;
-          i.onload = () => res({ src: s, w: i.naturalWidth || 1, h: i.naturalHeight || 1 });
-          i.onerror = () => res({ src: s, w: 1, h: 1 });
+          const img = new Image();
+          img.src = src;
+          img.onload = () => res({ src, w: img.naturalWidth || 1, h: img.naturalHeight || 1 });
+          img.onerror = () => res({ src, w: 1, h: 1 });
         })
       )
     );
 
-    // Round-number constants
     const IMG_COUNT = 18;
-    const MIN_SIZE = 24; // px
-    const MAX_SIZE = 88; // px
-    const MIN_SPEED = 2; // depth units (even)
-    const MAX_SPEED = 4; // even
+    const MIN_SPEED = 0.06;
+    const MAX_SPEED = 0.12;
+    const MIN_SIZE = 24;
+    const MAX_SIZE = 88;
+    const MIN_TOP = 60;
+    const MAX_TOP = 100;
 
-    const MIN_TOP = 60; // percent
-    const MAX_TOP = 100; // percent
+    const PARALLAX_FACTOR = 600;
+    const PARALLAX_MAX = 360;
 
-    const PARALLAX_FACTOR = 200;
-    const PARALLAX_MAX = 160; // px
-
-    const MOUSE_MULT_X = 14; // will be divided by 10 when used
-    const MOUSE_MULT_Y = 12; // will be divided by 10 when used
-
-    const MAX_OFFSET_X = 64; // px
-    const MAX_OFFSET_Y = 36; // px
-
-    const EASE_NUM = 2; // smoothing numerator (even)
-    const EASE_DEN = 50; // smoothing denominator (2/50 = 0.04)
-
-    const MIN_OPACITY = 5; // percent
-    const MAX_OPACITY = 20; // percent
-
-    // Layout grid
-    const rows = Math.max(2, Math.round(Math.sqrt(IMG_COUNT)));
-    const cols = Math.ceil(IMG_COUNT / rows);
+    function isOverlappingPx(newBox, boxes) {
+      for (const box of boxes) {
+        if (
+          newBox.left < box.right &&
+          newBox.right > box.left &&
+          newBox.top < box.bottom &&
+          newBox.bottom > box.top
+        ) {
+          return true;
+        }
+      }
+      return false;
+    }
 
     const heroRect = hero.getBoundingClientRect();
-    const heroW = Math.round(heroRect.width);
-    const heroH = Math.round(heroRect.height);
+    const heroW = heroRect.width;
+    const heroH = heroRect.height;
 
-    const areaTop = Math.round((MIN_TOP / 100) * heroH);
-    const areaHeight = Math.round(((MAX_TOP - MIN_TOP) / 100) * heroH);
+    const squares = [];
+    const placedBoxes = [];
 
-    const cellW = Math.round(heroW / cols);
-    const cellH = Math.max(32, Math.round(areaHeight / rows));
+    const rows = Math.max(2, Math.min(6, Math.round(Math.sqrt(IMG_COUNT))));
+    const cols = Math.ceil(IMG_COUNT / rows);
+
+    const areaTop = (MIN_TOP / 100) * heroH;
+    const areaHeight = ((MAX_TOP - MIN_TOP) / 100) * heroH;
+
+    const cellW = heroW / cols;
+    const cellH = areaHeight / rows;
 
     const cells = [];
-    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) cells.push({ r, c });
-    shuffle(cells);
-
-    const placed = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        cells.push({ r, c });
+      }
+    }
+    for (let i = cells.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cells[i], cells[j]] = [cells[j], cells[i]];
+    }
 
     for (let i = 0; i < IMG_COUNT && i < cells.length; i++) {
       const cell = cells[i];
-
-      // pick random meta
-      const m = meta[randInt(0, meta.length - 1)];
-      const aspect = Math.round((m.h / m.w) * 100) / 100; // rounded two decimals
-
-      let size = randInt(MIN_SIZE, MAX_SIZE);
-
-      const pad = 6;
-      const availW = Math.max(16, cellW - pad * 2);
-      const availH = Math.max(16, cellH - pad * 2);
-
-      if (size > availW) size = availW;
-      const height = Math.min(availH, Math.max(MIN_SIZE, Math.round(size * aspect)));
-      if (height > availH) size = Math.max(MIN_SIZE, Math.round(availH / Math.max(0.01, aspect)));
-
-      const cellLeft = cell.c * cellW;
-      const cellTop = areaTop + cell.r * cellH;
-
-      const minLeft = cellLeft + pad;
-      const maxLeft = cellLeft + cellW - size - pad;
-      const minTop = cellTop + pad;
-      const maxTop = cellTop + cellH - height - pad;
-
-      const leftPx = Math.round(minLeft + Math.random() * Math.max(0, maxLeft - minLeft));
-      const topPx = Math.round(minTop + Math.random() * Math.max(0, maxTop - minTop));
-
-      const box = { left: leftPx, right: leftPx + size, top: topPx, bottom: topPx + height };
-
-      // avoid overlap modestly
+      let leftPx, topPx, size, newBox;
       let tries = 0;
-      while (placed.some((b) => !(box.right <= b.left || box.left >= b.right || box.bottom <= b.top || box.top >= b.bottom)) && tries < 8) {
-        // nudge inside cell
-        const nx = Math.round(minLeft + Math.random() * Math.max(0, maxLeft - minLeft));
-        const ny = Math.round(minTop + Math.random() * Math.max(0, maxTop - minTop));
-        box.left = nx; box.right = nx + size; box.top = ny; box.bottom = ny + height;
+
+      do {
+        size = MIN_SIZE + Math.random() * (MAX_SIZE - MIN_SIZE);
+
+        const meta = imgMeta[Math.floor(Math.random() * imgMeta.length)];
+        const aspect = meta.h / meta.w;
+
+        const pad = 6;
+        const availableW = Math.max(16, cellW - pad * 2);
+        const availableH = Math.max(16, cellH - pad * 2);
+
+        if (size > availableW) size = Math.max(MIN_SIZE, availableW);
+        const height = Math.min(availableH, Math.max(MIN_SIZE * aspect, size * aspect));
+        const finalSize = Math.min(size, Math.max(MIN_SIZE, availableH / Math.max(0.001, aspect)));
+
+        const cellLeft = cell.c * cellW;
+        const cellTop = areaTop + cell.r * cellH;
+
+        const maxLeftInCell = cellLeft + cellW - finalSize - pad;
+        const minLeftInCell = cellLeft + pad;
+        const maxTopInCell = cellTop + cellH - Math.max(16, finalSize * aspect) - pad;
+        const minTopInCell = cellTop + pad;
+
+        leftPx = minLeftInCell + Math.random() * Math.max(0, maxLeftInCell - minLeftInCell);
+        topPx = minTopInCell + Math.random() * Math.max(0, maxTopInCell - minTopInCell);
+
+        newBox = {
+          left: leftPx,
+          right: leftPx + finalSize,
+          top: topPx,
+          bottom: topPx + Math.max(16, finalSize * aspect)
+        };
+
+        newBox.meta = meta;
+        newBox.finalSize = finalSize;
+        newBox.aspect = aspect;
+
         tries++;
-      }
+        if (tries > 30) {
+          size = Math.max(MIN_SIZE, size - 6);
+        }
+        if (tries > 120) break;
+      } while (isOverlappingPx(newBox, placedBoxes));
 
-      placed.push(box);
+      placedBoxes.push(newBox);
 
-      // choose even speed (2 or 4)
-      const speed = randInt(1, 2) * 2;
+      const speed = MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED);
 
-      const el = document.createElement('div');
-      el.className = 'hero__square';
-      el.style.position = 'absolute';
-      el.style.left = box.left + 'px';
-      el.style.top = box.top + 'px';
-      el.style.width = size + 'px';
-      el.style.height = height + 'px';
-      el.dataset.speed = String(speed);
+      const square = document.createElement('div');
+      square.className = 'hero__square';
+      square.dataset.speed = speed.toFixed(3);
+      square.style.position = 'absolute';
+      square.style.left = newBox.left + 'px';
+      square.style.top = newBox.top + 'px';
+      square.style.width = newBox.finalSize + 'px';
+      square.style.height = Math.max(16, newBox.finalSize * newBox.aspect) + 'px';
+      square.style.transition = 'none';
 
       const img = document.createElement('img');
-      img.src = m.src;
+      img.src = newBox.meta.src;
       img.alt = '';
       img.style.width = '100%';
       img.style.height = '100%';
       img.style.objectFit = 'contain';
+      img.style.pointerEvents = 'none';
+      const floatDuration = (2.5 + Math.random() * 2.5).toFixed(2) + 's';
+      const floatDelay = (Math.random() * 4).toFixed(2) + 's';
+      img.style.animationDuration = floatDuration;
+      img.style.animationDelay = floatDelay;
+      square.appendChild(img);
 
-      // floating animation: even seconds only (4 or 6)
-      const dur = (randInt(2, 3) * 2) + 's';
-      img.style.animationDuration = dur;
-      img.style.animationTimingFunction = 'cubic-bezier(0.22,1,0.36,1)';
-
-      el.appendChild(img);
-      container.appendChild(el);
+      squaresContainer.appendChild(square);
+      squares.push(square);
     }
 
-    // runtime state
-    let currentMouseX = 0;
-    let currentMouseY = 0;
-    let targetMouseX = 0;
-    let targetMouseY = 0;
+    let ticking = false;
     let currentCentered = 0;
-    let loopRunning = false;
 
-    function onMove(e) {
-      const r = hero.getBoundingClientRect();
-      const nx = (e.clientX - (r.left + r.width / 2)) / r.width;
-      const ny = (e.clientY - (r.top + r.height / 2)) / r.height;
-      // Use smooth floating point values (no rounding) for target to avoid quantization
-      targetMouseX = Math.max(-1, Math.min(1, nx * (MOUSE_MULT_X / 10)));
-      targetMouseY = Math.max(-1, Math.min(1, ny * (MOUSE_MULT_Y / 10)));
-      if (!loopRunning) {
-        loopRunning = true;
-        requestAnimationFrame(loop);
+
+
+
+    function setInitialTransforms() {
+      const rect = hero.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
+      const centered = (progress - 0.5) * 2;
+      for (const sq of squares) {
+        const speed = parseFloat(sq.dataset.speed) || 0.12;
+      const raw = centered * PARALLAX_FACTOR * speed;
+      const clamped = Math.max(-PARALLAX_MAX, Math.min(PARALLAX_MAX, raw));
+        sq.style.transition = 'none';
+        sq.style.transform = `translate3d(0, ${clamped}px, 0)`;
       }
+      void squaresContainer.offsetHeight;
+      setTimeout(() => {
+        for (const sq of squares) {
+          sq.style.transition = 'transform 0.35s cubic-bezier(0.22,1,0.36,1)';
+        }
+      }, 30);
     }
 
-    hero.addEventListener('mousemove', onMove);
-
-    function loop() {
+    function update() {
       const rect = hero.getBoundingClientRect();
       const vh = window.innerHeight;
       const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
       const targetCentered = (progress - 0.5) * 2;
 
-      // smooth with integer-based ease
-      currentMouseX += (targetMouseX - currentMouseX) * (EASE_NUM / EASE_DEN);
-      currentMouseY += (targetMouseY - currentMouseY) * (EASE_NUM / EASE_DEN);
-      currentCentered += (targetCentered - currentCentered) * (EASE_NUM / EASE_DEN);
+      const ease = 0.02;
+      currentCentered += (targetCentered - currentCentered) * ease;
 
-      for (const el of container.children) {
-        const speed = Number(el.dataset.speed) || 1;
-        const raw = currentCentered * PARALLAX_FACTOR * speed / 2; // divide to scale
-        const clamped = Math.max(-PARALLAX_MAX, Math.min(PARALLAX_MAX, Math.round(raw)));
+      let needsMoreFrames = false;
 
-        const speedNorm = (speed - MIN_SPEED) / (MAX_SPEED - MIN_SPEED);
+      for (const sq of squares) {
+        const speed = parseFloat(sq.dataset.speed) || 0.12;
+        const raw = currentCentered * PARALLAX_FACTOR * speed;
+        const clamped = Math.max(-PARALLAX_MAX, Math.min(PARALLAX_MAX, raw));
 
-        const offsetX = Math.round(currentMouseX * MAX_OFFSET_X * (0.8 + speedNorm * 0.6));
-        const offsetY = Math.round(currentMouseY * MAX_OFFSET_Y * (0.6 + speedNorm * 0.6));
+        sq.style.transform = `translate3d(0, ${clamped}px, 0)`;
 
-        el.style.transform = 'translate3d(' + offsetX + 'px, ' + (clamped + offsetY) + 'px, 0)';
+        const minOpacity = 0.06, maxOpacity = 0.22;
+        const norm = Math.max(0, Math.min(1, (speed - MIN_SPEED) / (MAX_SPEED - MIN_SPEED)));
+        const opacity = minOpacity + (maxOpacity - minOpacity) * norm;
+        const img = sq.querySelector('img');
+        if (img) img.style.opacity = opacity.toFixed(2);
 
-        const img = el.querySelector('img');
-        if (img) {
-          const opa = Math.round(MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * speedNorm);
-          img.style.opacity = (opa / 100).toFixed(2);
+        if (Math.abs(targetCentered - currentCentered) > 0.0005) {
+          needsMoreFrames = true;
         }
       }
 
-      // continue RAF until values have nearly converged
-      if (Math.abs(targetMouseX - currentMouseX) > 0.004 || Math.abs(targetMouseY - currentMouseY) > 0.004) {
-        requestAnimationFrame(loop);
+      if (needsMoreFrames) {
+        requestAnimationFrame(update);
       } else {
-        loopRunning = false;
+        ticking = false;
       }
     }
 
-    // start
-    requestAnimationFrame(loop);
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    setInitialTransforms();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
   }
 
-  // expose initHero globally
   window.initHero = initHero;
 })();

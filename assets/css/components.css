@@ -16,8 +16,9 @@
 
 /* Theme toggle button */
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; font-size: 18px; border: var(--border-thick); box-shadow: var(--shadow-flat); background: var(--surface); color: var(--text); transition: transform 120ms ease, background 120ms ease; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; font-size: 18px; border: var(--border-thick); box-shadow: var(--shadow-flat); background: linear-gradient(135deg, var(--surface) 60%, var(--accent) 100%); color: var(--text); transition: transform 120ms ease, background 120ms ease; position: relative; z-index: 1; }
 .theme-toggle i { font-size: 16px; }
-.theme-toggle:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.theme-toggle:focus, .theme-toggle:active, .theme-toggle[aria-pressed="true"] { outline: none !important; box-shadow: 0 0 0 2px var(--accent); }
 .theme-toggle:hover { transform: translate(2px, 2px); }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 28px; font-family: var(--font-pixel); font-size: 1.1rem; border: var(--border-thick); box-shadow: var(--shadow-flat); background: transparent; }
@@ -73,6 +74,12 @@ html[data-theme="dark"] .cta-banner h2 { color: var(--cta-text); }
   min-height: 32px;
   white-space: nowrap;
   background: var(--bg) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.contact-social-btn:focus, .contact-social-btn:active {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--accent);
 }
 .contact-social-btn i { font-size: 18px; display: inline-block; }
 .contact-social-label { font-family: var(--font-body); font-size: 1em; color: var(--text); letter-spacing: 0.01em; margin-left: 2px; display: inline-block; }
