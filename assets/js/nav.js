@@ -162,8 +162,10 @@
   }
 
   function initMobileNav() {
+    console.log('initMobileNav called');
     const nav = document.querySelector('.nav');
     const toggle = document.getElementById('nav-toggle');
+    console.log('nav:', nav, 'toggle:', toggle);
     if (!nav || !toggle) return;
 
     let docKeydown, docClick;
@@ -220,9 +222,26 @@
       if (docClick) document.removeEventListener('click', docClick);
     }
 
-    toggle.addEventListener('click', () => {
+    // Support both click and touch events for better mobile reliability
+    const toggleFn = (e) => {
+      e.preventDefault();
+      console.log('Toggle clicked/touched');
       if (nav.classList.contains('nav--open')) closeNav(); else openNav();
-    });
+    };
+    toggle.addEventListener('click', toggleFn);
+    toggle.addEventListener('touchstart', toggleFn);
+
+    // For extra robustness, if CSS fails, ensure the nav links are shown/hidden inline
+    function ensureMenuVisibility(open) {
+      const primary = document.getElementById('primary-nav');
+      if (!primary) return;
+      if (open) primary.style.display = 'flex'; else primary.style.display = '';
+    }
+
+    const origOpen = openNav;
+    openNav = function() { origOpen(); ensureMenuVisibility(true); };
+    const origClose = closeNav;
+    closeNav = function() { origClose(); ensureMenuVisibility(false); };
 
     // Close menu when a link is clicked
     nav.addEventListener('click', (ev) => {
@@ -239,7 +258,6 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initMobileNav);
-
+  window.initMobileNav = initMobileNav;
   window.initNav = initNav;
 })();

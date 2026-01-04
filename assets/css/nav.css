@@ -71,6 +71,7 @@
   position: relative;
   text-decoration: none;
   color: var(--text);
+  outline: none;
 }
 
 .nav__links a.is-active {
@@ -165,6 +166,7 @@
   cursor: url('/assets/images/cursor.png') 16 16, pointer;
   border: none;
   background: transparent;
+  outline: none;
 }
 
 .nav__dropbtn:hover {
@@ -251,6 +253,8 @@
   cursor: pointer;
   width: 44px;
   height: 44px;
+  z-index: 10050; /* ensure toggle sits above other elements */
+  outline: none;
 }
 
 .nav__toggle-box {
@@ -284,22 +288,26 @@
     border-top: 1px solid var(--line);
   }
   .nav.nav--open .nav__right .btn--primary { margin-left: 0; min-width: auto; align-self: stretch; }
+  .nav.nav--open .nav__dropbtn { display: none; }
 }
 @media (max-width: 900px) {
   .nav__toggle { display: inline-flex; }
   .nav__links { display: none; }
   .nav.nav--open .nav__links {
-    display: flex;
-    position: absolute;
-    top: var(--nav-h);
+    display: flex !important; /* ensure visible even if other rules conflict */
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background: var(--bg);
-    border-bottom: var(--border-thick);
     flex-direction: column;
-    gap: 8px;
-    padding: 16px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
     z-index: 10001;
+    border: none;
   }
   .nav.nav--open .nav__links .nav__dropdown .nav__menu {
     position: static;
