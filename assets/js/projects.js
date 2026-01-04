@@ -23,7 +23,7 @@
 
   function renderGrid(container, projects, limit) {
     const slice = limit ? projects.slice(0, limit) : projects;
-    container.innerHTML = slice
+    let html = slice
       .map(
         (p) => `
     <a class="card" href="project.html?source=${container.dataset.source}&id=${p.id}" aria-label="${p.name} — Open project">
@@ -38,6 +38,15 @@
   `
       )
       .join('');
+
+    // Add placeholders to fill rows to 4 columns
+    const totalCards = slice.length;
+    const placeholdersNeeded = (4 - (totalCards % 4)) % 4;
+    for (let i = 0; i < placeholdersNeeded; i++) {
+      html += '<div class="card placeholder"></div>';
+    }
+
+    container.innerHTML = html;
   }
 
   async function initGrids() {

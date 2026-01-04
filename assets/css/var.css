@@ -18,7 +18,7 @@
 
   --border-thick: 3px solid var(--text);
   --shadow-flat: 4px 4px 0 var(--text);
-  --active-bg: #80808040;
+  --active-bg: #80808020;
 } 
 
 :root {
