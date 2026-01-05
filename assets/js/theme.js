@@ -1,19 +1,19 @@
 (function () {
   'use strict';
 
-  function setTheme(theme) {
+  function setTheme(theme, save = true) {
     if (theme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
-    try { localStorage.setItem('theme', theme); } catch (e) {}
+    try { if (save) localStorage.setItem('theme', theme); } catch (e) {}
     updateThemeToggleIcon();
   }
 
   function toggleTheme() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    setTheme(isDark ? 'light' : 'dark');
+    setTheme(isDark ? 'light' : 'dark', true);
   }
 
   function updateThemeToggleIcon() {
@@ -36,9 +36,28 @@
     try {
       const saved = localStorage.getItem('theme');
       if (saved === 'dark' || saved === 'light') {
-        setTheme(saved);
+        setTheme(saved, true);
       } else {
-        setTheme('light');
+        const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        const systemPrefDark = mq ? mq.matches : false;
+        // apply system preference but do not save it as the user's explicit choice
+        setTheme(systemPrefDark ? 'dark' : 'light', false);
+
+        // listen for changes in system preference only when user hasn't saved a choice
+        const handleChange = (ev) => {
+          try {
+            const hasSaved = !!localStorage.getItem('theme');
+            if (!hasSaved) setTheme(ev.matches ? 'dark' : 'light', false);
+          } catch (e) {}
+        };
+
+        if (mq) {
+          if (typeof mq.addEventListener === 'function') {
+            mq.addEventListener('change', handleChange);
+          } else if (typeof mq.addListener === 'function') {
+            mq.addListener(handleChange);
+          }
+        }
       }
     } catch (e) {}
 

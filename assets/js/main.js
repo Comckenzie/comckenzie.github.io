@@ -1,3 +1,4 @@
+// Load partial HTML content
 async function loadPartial(targetId, url) {
   const target = document.getElementById(targetId);
   if (!target) return;
@@ -6,6 +7,7 @@ async function loadPartial(targetId, url) {
   target.innerHTML = await res.text();
 }
 
+// Wrap letters in section titles
 function wrapSectionLetters(el) {
   const text = (el.textContent || '').trim();
   if (!text) return;
@@ -30,23 +32,19 @@ function wrapSectionLetters(el) {
   });
 }
 
+// Initialize section titles
 function initSectionTitles() {
   const heads = document.querySelectorAll('.section__head h2, .accentuation-title');
-  for (const h of heads) {
-    wrapSectionLetters(h);
-  }
+  heads.forEach(h => wrapSectionLetters(h));
 }
 
-
-
-
-
+// Set footer year
 function initFooterYear() {
   const el = document.getElementById('year');
-  if (!el) return;
-  el.textContent = String(new Date().getFullYear());
+  if (el) el.textContent = String(new Date().getFullYear());
 }
 
+// Initialize main shell
 async function initShell() {
   await loadPartial('site-header', 'assets/partials/header.html');
   await loadPartial('site-footer', 'assets/partials/footer.html');
@@ -56,7 +54,7 @@ async function initShell() {
     document.body.appendChild(crt);
   }
 
-  // vignette is included inside the .crt-overlay markup in the header partial
+  // Vignette included in CRT overlay markup
 
   if (window.initNav) window.initNav();
   initFooterYear();
@@ -64,29 +62,28 @@ async function initShell() {
   initSectionActivation();
   if (window.initHero) window.initHero();
   if (window.initGrids) window.initGrids();
-} 
+}
 
+// Activate sections on intersection
 function initSectionActivation() {
-  const sections = Array.from(document.querySelectorAll('.section'));
+  const sections = document.querySelectorAll('.section');
   if (!sections.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      const el = entry.target;
-      if (entry.isIntersecting) {
-        el.classList.add('is-active');
-      } else {
-        el.classList.remove('is-active');
-      }
+      entry.target.classList.toggle('is-active', entry.isIntersecting);
     });
   }, { threshold: 0.55 });
 
   sections.forEach(s => observer.observe(s));
 }
 
+// Initialize scroll effects (placeholder)
 function initScrollEffects() {
+  // Future scroll effects
 }
 
+// Main initialization
 initShell()
   .then(() => {
     initSectionTitles();
@@ -95,9 +92,7 @@ initShell()
     initScrollEffects();
     if (window.initCRT) window.initCRT();
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
     initFooterYear();
   });
-
-

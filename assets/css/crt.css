@@ -15,15 +15,18 @@
 
 .crt-scanlines {
   background-image: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.08) 2px 4px);
-  background-size: 100% 4px;
+  /* double the cycle so rounding doesn't show a seam when looping */
+  background-size: 100% 8px;
   opacity: 0.6;
-  animation: scan 1.2s linear infinite;
+  animation: scan 1.6s linear infinite;
   mix-blend-mode: multiply;
+  will-change: background-position;
+  background-repeat: repeat;
 }
 
 @keyframes scan {
   0% { background-position: 0 0; }
-  100% { background-position: 0 4px; }
+  100% { background-position: 0 8px; }
 }
 
 .crt-flicker {
@@ -128,7 +131,8 @@
 
 @media (max-width: 600px) {
   .crt-scanlines {
-    background-size: 100% 6px;
+    /* match doubled cycle on small screens as well */
+    background-size: 100% 12px;
     opacity: 0.45;
   }
   .crt-chroma {

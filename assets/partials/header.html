@@ -13,11 +13,11 @@
       <a href="index.html#home">Home</a>
 
       <div class="nav__dropdown" data-dropdown>
-        <button class="nav__dropbtn" type="button" aria-haspopup="true" aria-expanded="false">
-          PROJECTS
+        <button id="nav-projects-btn" class="nav__dropbtn" type="button" aria-haspopup="true" aria-controls="nav-projects-menu" aria-expanded="false" data-dropdown-button>
+          <span class="nav__dropbtn-label">PROJECTS</span>
           <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </button>
-        <div class="nav__menu" role="menu">
+        <div id="nav-projects-menu" class="nav__menu" role="menu" aria-labelledby="nav-projects-btn" data-dropdown-menu>
           <a role="menuitem" href="projects.html?source=commissions">Commissions</a>
           <a role="menuitem" href="projects.html?source=personal">Personal Projects</a>
         </div>

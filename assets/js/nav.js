@@ -195,7 +195,122 @@
           if (window.innerWidth <= 900) closeMenu();
         });
       });
+
+      // Initialize dropdowns after the header partial is loaded
+      initDropdowns();
     }
+  }
+
+  // Dropdowns: accessible toggle + keyboard support
+  function initDropdowns() {
+    const dropdowns = document.querySelectorAll('[data-dropdown]');
+    if (!dropdowns.length) return;
+    const supportsHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches; // desktop-like devices
+
+
+    function closeAll() {
+      dropdowns.forEach(dd => {
+        const btn = dd.querySelector('[data-dropdown-button]') || dd.querySelector('.nav__dropbtn');
+        if (!btn) return;
+        btn.setAttribute('aria-expanded', 'false');
+        dd.classList.remove('is-open');
+      });
+    }
+
+    dropdowns.forEach((dd) => {
+      const btn = dd.querySelector('[data-dropdown-button]') || dd.querySelector('.nav__dropbtn');
+      const menu = dd.querySelector('[data-dropdown-menu]') || dd.querySelector('.nav__menu');
+      if (!btn || !menu) return;
+
+      // Open on focus (keyboard navigation)
+      dd.addEventListener('focusin', () => {
+        closeAll();
+        btn.setAttribute('aria-expanded', 'true');
+        dd.classList.add('is-open');
+      });
+
+      // Open on hover for hover-capable devices (desktop)
+      if (supportsHover) {
+        dd.addEventListener('mouseenter', () => {
+          if (window.innerWidth <= 900) return;
+          closeAll();
+          btn.setAttribute('aria-expanded', 'true');
+          dd.classList.add('is-open');
+        });
+        dd.addEventListener('mouseleave', () => {
+          btn.setAttribute('aria-expanded', 'false');
+          dd.classList.remove('is-open');
+        });
+      }
+
+      // Click toggles only on small screens (mobile)
+      btn.addEventListener('click', (e) => {
+        if (window.innerWidth <= 900) {
+          const open = btn.getAttribute('aria-expanded') === 'true';
+          if (open) {
+            btn.setAttribute('aria-expanded', 'false');
+            dd.classList.remove('is-open');
+          } else {
+            closeAll();
+            btn.setAttribute('aria-expanded', 'true');
+            dd.classList.add('is-open');
+            const first = menu.querySelector('[role="menuitem"]');
+            first && first.focus();
+          }
+        } else {
+          // prevent click toggling on desktop where hover is preferred
+          e.preventDefault();
+        }
+      });
+
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          btn.click();
+        }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+        if (e.key === 'Escape') {
+          dd.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+      });
+
+      menu.addEventListener('keydown', (e) => {
+        const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
+        const idx = items.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          items[(idx + 1) % items.length].focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          items[(idx - 1 + items.length) % items.length].focus();
+        } else if (e.key === 'Escape') {
+          btn.setAttribute('aria-expanded', 'false');
+          dd.classList.remove('is-open');
+          btn.focus();
+        }
+      });
+
+      // close when clicking outside
+      document.addEventListener('click', (ev) => {
+        if (!dd.contains(ev.target)) {
+          btn.setAttribute('aria-expanded', 'false');
+          dd.classList.remove('is-open');
+        }
+      });
+
+      // close on focus out
+      dd.addEventListener('focusout', (ev) => {
+        if (!dd.contains(ev.relatedTarget)) {
+          btn.setAttribute('aria-expanded', 'false');
+          dd.classList.remove('is-open');
+        }
+      });
+    });
   }
 
   window.initNav = initNav;
