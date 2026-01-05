@@ -1,69 +1,54 @@
 (function () {
   'use strict';
 
+  // Set theme
   function setTheme(theme, save = true) {
-    if (theme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-    try { if (save) localStorage.setItem('theme', theme); } catch (e) {}
+    document.documentElement.toggleAttribute('data-theme', theme === 'dark');
+    if (save) try { localStorage.setItem('theme', theme); } catch {}
     updateThemeToggleIcon();
   }
 
+  // Toggle theme
   function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    setTheme(isDark ? 'light' : 'dark', true);
+    const isDark = document.documentElement.hasAttribute('data-theme');
+    setTheme(isDark ? 'light' : 'dark');
   }
 
+  // Update toggle icon
   function updateThemeToggleIcon() {
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
     const label = document.getElementById('theme-toggle-label');
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-
-    // Use icon and label text
-    if (label) {
-      label.innerHTML = isDark ? '<img src="assets/images/icons/sun.png" alt="sun" style="height:32px; width:auto;">' : '<img src="assets/images/icons/moon.png" alt="moon" style="height:32px; width:auto;">';
-    } else {
-      // fallback: set button text
-      btn.innerHTML = isDark ? '<img src="assets/images/icons/sun.png" alt="sun" style="height:32px; width:auto;">' : '<img src="assets/images/icons/moon.png" alt="moon" style="height:32px; width:auto;">';
-    }
+    const isDark = document.documentElement.hasAttribute('data-theme');
+    btn.setAttribute('aria-pressed', isDark);
+    const icon = isDark ? 'sun' : 'moon';
+    const imgHtml = `<img src="assets/images/icons/${icon}.png" alt="${icon}" style="height:32px; width:auto;">`;
+    if (label) label.innerHTML = imgHtml;
+    else btn.innerHTML = imgHtml;
   }
 
+  // Initialize theme
   function initTheme() {
     try {
       const saved = localStorage.getItem('theme');
       if (saved === 'dark' || saved === 'light') {
-        setTheme(saved, true);
+        setTheme(saved);
       } else {
-        const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-        const systemPrefDark = mq ? mq.matches : false;
-        // apply system preference but do not save it as the user's explicit choice
-        setTheme(systemPrefDark ? 'dark' : 'light', false);
-
-        // listen for changes in system preference only when user hasn't saved a choice
-        const handleChange = (ev) => {
-          try {
-            const hasSaved = !!localStorage.getItem('theme');
-            if (!hasSaved) setTheme(ev.matches ? 'dark' : 'light', false);
-          } catch (e) {}
-        };
-
+        const mq = matchMedia?.('(prefers-color-scheme: dark)');
+        const systemDark = mq?.matches || false;
+        setTheme(systemDark ? 'dark' : 'light', false);
         if (mq) {
-          if (typeof mq.addEventListener === 'function') {
-            mq.addEventListener('change', handleChange);
-          } else if (typeof mq.addListener === 'function') {
-            mq.addListener(handleChange);
-          }
+          const handleChange = ev => {
+            if (!localStorage.getItem('theme')) setTheme(ev.matches ? 'dark' : 'light', false);
+          };
+          mq.addEventListener?.('change', handleChange) || mq.addListener?.(handleChange);
         }
       }
-    } catch (e) {}
+    } catch {}
 
     const toggle = document.getElementById('theme-toggle');
     if (toggle) {
-      toggle.addEventListener('click', (e) => {
+      toggle.addEventListener('click', e => {
         e.preventDefault();
         toggleTheme();
         toggle.blur();
