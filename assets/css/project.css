@@ -126,6 +126,7 @@
   font-family: var(--font-body);
   max-width: 100%;
   overflow-wrap: break-word;
+  text-align: justify;
 }
 
 .project-hero__video {
