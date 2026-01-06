@@ -127,7 +127,6 @@
   padding: 0 10px;
   font-family: var(--font-pixel);
   font-size: 18px;
-  text-transform: uppercase;
 }
 
 .nav__dropbtn {
@@ -304,6 +303,13 @@
   justify-content: center;
 }
 
+/* Nav Right */
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Mobile Extras */
 .nav__mobile-extras {
   display: none;
@@ -323,26 +329,11 @@
     width: 44px;
     height: 44px;
     background: var(--surface);
-    border: var(--border-thick);
-    box-shadow: var(--shadow-flat);
     cursor: pointer;
     padding: 6px;
     margin-right: 8px;
     position: relative;
     z-index: 10002;
-  }
-
-  .nav__toggle:focus, 
-  .nav__toggle:active, 
-  .nav__toggle:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  .nav__toggle:hover {
-    background: transparent !important;
-    transform: none !important;
-    box-shadow: none !important;
   }
 
   .nav__toggle-box {
