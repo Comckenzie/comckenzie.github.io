@@ -15,7 +15,6 @@
 
 .crt-scanlines {
   background-image: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.08) 2px 4px);
-  /* double the cycle so rounding doesn't show a seam when looping */
   background-size: 100% 8px;
   opacity: 0.6;
   animation: scan 1.6s linear infinite;

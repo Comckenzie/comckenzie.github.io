@@ -119,7 +119,7 @@
   // Initialize navigation
   function initNav() {
     const page = getCurrentPageName();
-    const links = document.querySelectorAll('.nav__links a, .nav__menu a');
+    const links = document.querySelectorAll('.nav__links a, .nav__menu a, .nav__submenu a');
     const currentParams = new URLSearchParams(window.location.search);
 
     links.forEach(a => {
@@ -146,6 +146,26 @@
         a.classList.remove('is-active');
       }
     });
+
+    // Dropdown hover
+    const dropdown = document.querySelector('.nav__dropdown');
+    const submenu = document.querySelector('.nav__submenu');
+    if (dropdown && submenu) {
+      let hideTimeout;
+      function showSubmenu() {
+        clearTimeout(hideTimeout);
+        submenu.style.display = 'block';
+      }
+      function hideSubmenu() {
+        hideTimeout = setTimeout(() => {
+          submenu.style.display = 'none';
+        }, 200);
+      }
+      dropdown.addEventListener('mouseenter', showSubmenu);
+      dropdown.addEventListener('mouseleave', hideSubmenu);
+      submenu.addEventListener('mouseenter', showSubmenu);
+      submenu.addEventListener('mouseleave', hideSubmenu);
+    }
 
     // Mobile nav toggle: open/close and accessibility updates
     const navToggle = document.getElementById('nav-toggle');
@@ -176,7 +196,7 @@
       document.addEventListener('click', (e) => {
         const target = e.target;
         if (navToggle.getAttribute('aria-expanded') === 'true') {
-          if (target.closest && (target.closest('.nav__links a') || target.closest('.nav__menu a') || target.closest('.nav__mobile-extras a'))) {
+          if (target.closest && (target.closest('.nav__links a') || target.closest('.nav__menu a') || target.closest('.nav__mobile-extras a') || target.closest('.nav__submenu a'))) {
             setNavOpen(false);
           } else if (!navRoot.contains(target) && !navToggle.contains(target)) {
             // Click outside nav closes it
@@ -187,7 +207,7 @@
 
       // Also attach explicit click handlers to all nav links so they always close the menu
       // Use a small timeout so navigation (if any) can proceed while the UI updates
-      const linkSelectors = '.nav__links a, .nav__menu a, .nav__panel a, .nav__mobile-extras a';
+      const linkSelectors = '.nav__links a, .nav__menu a, .nav__panel a, .nav__mobile-extras a, .nav__submenu a';
       const navLinks = navRoot.querySelectorAll(linkSelectors);
       navLinks.forEach(link => {
         link.addEventListener('click', () => {

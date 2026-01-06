@@ -240,66 +240,6 @@ p {
   margin: 0 auto;
   padding: 0 20px;
 }
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-transform: uppercase;
-}
-
-.nav__links a {
-  position: relative;
-  text-decoration: none;
-  color: var(--text);
-  outline: none;
-}
-
-.nav__links a.is-active {
-  color: #7ab6ff;
-}
-
-.nav__links a:hover {
-  text-decoration: none;
-  border: 0;
-}
-
-.nav-letter {
-  display: inline-block;
-  transform: translateY(0);
-  color: inherit;
-  -webkit-text-fill-color: inherit;
-}
-
-.nav__links a.is-active .nav-letter {
-  animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
-  animation-delay: calc(var(--i, 0) * 80ms), calc(var(--i, 0) * 120ms);
-  animation-fill-mode: both;
-  will-change: transform, color;
-}
-
-.nav__links a.is-active .nav-letter:nth-child(3n+1) {
-  color: #7ab6ff;
-}
-
-.nav__links a.is-active .nav-letter:nth-child(3n+2) {
-  color: #b894ff;
-}
-
-.nav__links a.is-active .nav-letter:nth-child(3n) {
-  color: #ff8ccf;
-}
-
-@keyframes nav-color-cycle {
-  0% { color: #7ab6ff; }
-  33% { color: #b894ff; }
-  66% { color: #ff8ccf; }
-  100% { color: #7ab6ff; }
-}
-
-@keyframes nav-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
 
 .section__head h2 {
   font-family: var(--font-pixel);
@@ -950,7 +890,7 @@ main {
   color: #ffffff;
 }
 
-#projects-grid .card__title {
+.card__title {
   font-size: 14px;
   background: transparent;
   display: block;
@@ -960,7 +900,7 @@ main {
   font-weight: 400;
 }
 
-#projects-grid .card__title .letter {
+.card__title .letter {
   color: inherit;
   font-weight: inherit;
 }
@@ -1008,7 +948,7 @@ main {
   .notable__copy {
     padding: 16px;
   }
-  #projects-grid .card__title { font-size: 13px; }
+  .card__title { font-size: 13px; }
 }
 
 /* About page layout */

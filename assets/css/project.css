@@ -251,53 +251,6 @@
   box-shadow: none;
 }
 
-.card {
-  position: relative;
-  display: block;
-  border: 2px solid rgba(255,255,255,0.85);
-  background: var(--surface);
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-
-/* Keyboard accessibility for cards */
-.card:focus {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
-.card:focus .card__meta,
-.card:focus-within .card__meta {
-  opacity: 1;
-  transform: translateY(0);
-}
-.card:focus .card__title .letter {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.card.placeholder {
-  background: var(--active-bg);
-  border: 2px solid rgba(255,255,255,0.85);
-  cursor: default;
-}
-
-.card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card__overlay {
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 10px;
-  transition: background 300ms ease;
-}
-
 .card__meta {
   width: 100%;
   opacity: 0;
@@ -306,7 +259,7 @@
 
 .card__title {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.2;
   overflow: hidden;

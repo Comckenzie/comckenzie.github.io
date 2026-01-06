@@ -123,6 +123,7 @@
   display: inline-flex;
   align-items: center;
   height: var(--nav-h);
+  max-height: fit-content;
   padding: 0 10px;
   font-family: var(--font-pixel);
   font-size: 18px;
@@ -210,6 +211,81 @@
   transform: translateY(0);
   pointer-events: auto;
   visibility: visible;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav__links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text);
+  outline: none;
+  white-space: nowrap;
+}
+
+.nav__links a.is-active {
+  color: #7ab6ff;
+}
+
+.nav__links a:hover {
+  text-decoration: none;
+  border: 0;
+}
+
+.nav__dropdown {
+  position: relative;
+}
+
+.nav__submenu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 20px);
+  left: 0;
+  background: var(--bg);
+  border: 1px solid var(--text);
+  padding: 4px 0;
+  width: auto;
+  z-index: 10001;
+  outline: var(--border-thick);
+  box-shadow: var(--shadow-flat);
+}
+
+.nav__submenu a {
+  display: block;
+  padding: 4px 12px;
+  color: var(--text);
+  text-decoration: none;
+  text-transform: none;
+}
+
+.nav-letter {
+  display: inline-block;
+  transform: translateY(0);
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+}
+
+.nav__links a.is-active .nav-letter {
+  animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
+  animation-delay: calc(var(--i, 0) * 80ms), calc(var(--i, 0) * 120ms);
+  animation-fill-mode: both;
+  will-change: transform, color;
+}
+
+.nav__links a.is-active .nav-letter:nth-child(3n+1) {
+  color: #7ab6ff;
+}
+
+.nav__links a.is-active .nav-letter:nth-child(3n+2) {
+  color: #b894ff;
+}
+
+.nav__links a.is-active .nav-letter:nth-child(3n) {
+  color: #ff8ccf;
 }
 
 /* Contact Button */
