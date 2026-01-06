@@ -35,6 +35,8 @@
         const img = node.querySelector('.card__img');
         img.src = `assets/projects/${source}/${p.id}/cover.png`;
         img.alt = p.name;
+        img.loading = 'lazy';
+        img.decoding = 'async';
         const title = node.querySelector('.card__title');
         title.innerHTML = wrapLetters(p.name);
         const creator = node.querySelector('.card__creator');
@@ -52,6 +54,7 @@
         img.src = `assets/projects/${source}/${p.id}/cover.png`;
         img.alt = p.name;
         img.loading = 'lazy';
+        img.decoding = 'async';
         const overlay = document.createElement('div');
         overlay.className = 'card__overlay';
         const meta = document.createElement('div');
@@ -191,8 +194,11 @@
     // Populate fields
     clone.querySelector('[data-field="name"]').textContent = project.name;
     clone.querySelector('.tracklist-card__title [data-field="name"]').textContent = project.name;
-    clone.querySelector('[data-field="image"]').src = `assets/projects/${source}/${project.id}/cover.png`;
-    clone.querySelector('[data-field="image"]').alt = project.name;
+    const imgEl = clone.querySelector('[data-field="image"]');
+    imgEl.src = `assets/projects/${source}/${project.id}/cover.png`;
+    imgEl.alt = project.name;
+    imgEl.loading = 'lazy';
+    imgEl.decoding = 'async';
     clone.querySelector('[data-field="description"]').textContent = project.description;
 
     const creatorEl = clone.querySelector('[data-field="creator"]');

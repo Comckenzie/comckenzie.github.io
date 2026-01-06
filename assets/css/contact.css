@@ -39,60 +39,6 @@
   display: inline-block;
 }
 
-.contact-info-row {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin: 32px 0 0 0;
-}
-
-.contact-info-row > div {
-  min-width: 44px;
-  min-height: 44px;
-  transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
-  color: var(--text);
-  line-height: 1.5;
-}
-
-.contact-info-row strong {
-  color: var(--muted);
-  font-size: 0.98em;
-}
-
-.contact-info-row a {
-  color: inherit;
-  text-decoration: none;
-  word-break: break-all;
-  background-image: var(--accent-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  padding-bottom: 4px;
-}
-
-.contact-info-row a:not([href^="mailto:"])::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: var(--accent-gradient);
-  pointer-events: none;
-}
-
-a[href^="mailto:"] {
-  color: inherit;
-  text-decoration: none;
-  background-image: var(--accent-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  padding-bottom: 0;
-}
-
 @media (max-width: 700px) {
   .contact-info-row {
     gap: 16px;

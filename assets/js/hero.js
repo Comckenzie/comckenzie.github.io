@@ -97,6 +97,8 @@
       const img = document.createElement('img');
       img.src = box.meta.src;
       img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
       Object.assign(img.style, {
         width: '100%',
         height: '100%',

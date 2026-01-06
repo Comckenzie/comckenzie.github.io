@@ -147,157 +147,55 @@
       }
     });
 
-    // Mobile nav toggle
+    // Mobile nav toggle: open/close and accessibility updates
     const navToggle = document.getElementById('nav-toggle');
-    const navEl = document.getElementById('nav');
-    if (navToggle && navEl) {
-      function closeMenu() {
-        navToggle.setAttribute('aria-expanded', 'false');
-        navToggle.setAttribute('aria-label', 'Open menu');
-        document.body.classList.remove('nav-open');
-        navEl.classList.remove('nav-open');
-      }
-      function openMenu() {
-        navToggle.setAttribute('aria-expanded', 'true');
-        navToggle.setAttribute('aria-label', 'Close menu');
-        document.body.classList.add('nav-open');
-        navEl.classList.add('nav-open');
-      }
-      navToggle.addEventListener('click', () => {
+    const navRoot = document.getElementById('nav');
+
+    function setNavOpen(open) {
+      if (!navToggle || !navRoot) return;
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      navRoot.classList.toggle('is-open', open);
+      document.body.classList.toggle('nav-open', open);
+    }
+
+    if (navToggle && navRoot) {
+      navToggle.addEventListener('click', (e) => {
         const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-        if (isOpen) closeMenu(); else openMenu();
+        setNavOpen(!isOpen);
       });
 
-      document.addEventListener('keydown', ev => {
-        if (ev.key === 'Escape' && document.body.classList.contains('nav-open')) {
-          closeMenu();
-          navToggle.focus();
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+          setNavOpen(false);
         }
       });
 
-      // Close menu on link click (mobile)
-      const mobileLinks = document.querySelectorAll('#primary-nav a');
-      mobileLinks.forEach(a => {
-        a.addEventListener('click', () => {
-          if (window.innerWidth <= 900) closeMenu();
-        });
-      });
-
-      // Initialize dropdowns
-      initDropdowns();
-    }
-  }
-
-  // Initialize dropdowns
-  function initDropdowns() {
-    const dropdowns = document.querySelectorAll('[data-dropdown]');
-    if (!dropdowns.length) return;
-    const supportsHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    function closeAll() {
-      dropdowns.forEach(dd => {
-        const btn = dd.querySelector('[data-dropdown-button]') || dd.querySelector('.nav__dropbtn');
-        if (btn) {
-          btn.setAttribute('aria-expanded', 'false');
-          dd.classList.remove('is-open');
-        }
-      });
-    }
-
-    dropdowns.forEach(dd => {
-      const btn = dd.querySelector('[data-dropdown-button]') || dd.querySelector('.nav__dropbtn');
-      const menu = dd.querySelector('[data-dropdown-menu]') || dd.querySelector('.nav__menu');
-      if (!btn || !menu) return;
-
-      // Open on focus
-      dd.addEventListener('focusin', () => {
-        closeAll();
-        btn.setAttribute('aria-expanded', 'true');
-        dd.classList.add('is-open');
-      });
-
-      // Hover for desktop
-      if (supportsHover) {
-        dd.addEventListener('mouseenter', () => {
-          if (window.innerWidth <= 900) return;
-          closeAll();
-          btn.setAttribute('aria-expanded', 'true');
-          dd.classList.add('is-open');
-        });
-        dd.addEventListener('mouseleave', () => {
-          btn.setAttribute('aria-expanded', 'false');
-          dd.classList.remove('is-open');
-        });
-      }
-
-      // Click for mobile
-      btn.addEventListener('click', e => {
-        if (window.innerWidth <= 900) {
-          const open = btn.getAttribute('aria-expanded') === 'true';
-          if (open) {
-            btn.setAttribute('aria-expanded', 'false');
-            dd.classList.remove('is-open');
-          } else {
-            closeAll();
-            btn.setAttribute('aria-expanded', 'true');
-            dd.classList.add('is-open');
-            const first = menu.querySelector('[role="menuitem"]');
-            if (first) first.focus();
+      // Close when clicking a nav link (use delegation) or clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (navToggle.getAttribute('aria-expanded') === 'true') {
+          if (target.closest && (target.closest('.nav__links a') || target.closest('.nav__menu a') || target.closest('.nav__mobile-extras a'))) {
+            setNavOpen(false);
+          } else if (!navRoot.contains(target) && !navToggle.contains(target)) {
+            // Click outside nav closes it
+            setNavOpen(false);
           }
-        } else {
-          e.preventDefault();
         }
       });
 
-      // Keyboard navigation
-      btn.addEventListener('keydown', e => {
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          btn.click();
-        }
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          btn.click();
-        }
-        if (e.key === 'Escape') {
-          dd.classList.remove('is-open');
-          btn.setAttribute('aria-expanded', 'false');
-          btn.focus();
-        }
+      // Also attach explicit click handlers to all nav links so they always close the menu
+      // Use a small timeout so navigation (if any) can proceed while the UI updates
+      const linkSelectors = '.nav__links a, .nav__menu a, .nav__panel a, .nav__mobile-extras a';
+      const navLinks = navRoot.querySelectorAll(linkSelectors);
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          setTimeout(() => setNavOpen(false), 0);
+        }, { passive: true });
       });
+    }
 
-      menu.addEventListener('keydown', e => {
-        const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
-        const idx = items.indexOf(document.activeElement);
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          items[(idx + 1) % items.length].focus();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          items[(idx - 1 + items.length) % items.length].focus();
-        } else if (e.key === 'Escape') {
-          btn.setAttribute('aria-expanded', 'false');
-          dd.classList.remove('is-open');
-          btn.focus();
-        }
-      });
-
-      // Close on outside click
-      document.addEventListener('click', ev => {
-        if (!dd.contains(ev.target)) {
-          btn.setAttribute('aria-expanded', 'false');
-          dd.classList.remove('is-open');
-        }
-      });
-
-      // Close on focus out
-      dd.addEventListener('focusout', ev => {
-        if (!dd.contains(ev.relatedTarget)) {
-          btn.setAttribute('aria-expanded', 'false');
-          dd.classList.remove('is-open');
-        }
-      });
-    });
   }
 
   window.initNav = initNav;
