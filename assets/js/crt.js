@@ -12,11 +12,8 @@
 
       const wipe = overlay.querySelector('.crt-wipe');
       const saved = localStorage.getItem('crt-enabled');
-
-      // Apply saved state
-      if (saved === 'false') overlay.classList.add('crt-disabled');
-
-      // Enable CRT and save state
+      
+      // Force enable CRT and save state
       overlay.classList.remove('crt-disabled');
       try { localStorage.setItem('crt-enabled', 'true'); } catch (e) {}
 

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/mobile.css" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
@@ -31,10 +32,10 @@
       <section class="project-hero__inner container no-banner">
         <div class="project-hero__title-col">
           <h1 class="project-hero__title accentuation-title"><span data-field="name"></span></h1>
-          <p class="muted creator" data-field="creator" style="display:none;"></p>
+          <p class="muted creator hidden" data-field="creator"></p>
         </div>
       </section>
-      <section class="project-media container" data-conditional="video" style="display:none;">
+      <section class="project-media container hidden" data-conditional="video">
         <div class="project-media__video" data-field="videoHtml"></div>
         <div class="project-media__desc">
           <p class="project-hero__desc" data-field="description"></p>
@@ -63,7 +64,7 @@
             <div class="project-detail-right">
               <h3 class="tracklist-card__title"><span data-field="name"></span></h3>
               <ol class="tracklist" data-field="tracksHtml"></ol>
-              <p class="muted no-tracks" style="display:none;">No tracks available.</p>
+              <p class="muted no-tracks hidden">No tracks available.</p>
             </div>
           </div>
         </div>
