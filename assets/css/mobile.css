@@ -348,28 +348,72 @@
 
 /* Mobile */
 @media (max-width: 900px) {
+  .nav__desktop-menu {
+    display: none;
+  }
+  .nav__mobile-menu {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav__main-menu,
+  .nav__projects-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .nav__main-menu {
+    transform: translateX(0);
+  }
+  .nav.show-projects-menu .nav__main-menu {
+    transform: translateX(-100%);
+  }
+  .nav__projects-menu {
+    transform: translateX(100%);
+  }
+  .nav.show-projects-menu .nav__projects-menu {
+    transform: translateX(0);
+  }
+  .nav__main-menu a,
+  .nav__projects-menu a {
+    font-size: 24px;
+    padding: 8px 0;
+    font-family: var(--font-pixel);
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+  }
+  .nav__projects-toggle {
+    cursor: pointer;
+  }
   .nav__toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: var(--surface);
+    background: transparent;
     cursor: pointer;
     padding: 6px;
     margin-right: 8px;
     position: relative;
     z-index: 10002;
     border: none;
-    outline: none;
+    box-shadow: none;
   }
 
-  .nav__links {
-    display: none;
-  }
-
-  .nav__right .nav__social-row {
-    display: none;
+  .nav__right {
+    display: none !important;
   }
 
   .nav__toggle-box {
@@ -414,80 +458,20 @@
     background: var(--bg);
     z-index: 10001;
     padding: 24px;
-    overflow: hidden;
   }
 
   .nav.is-open .nav__panel {
     display: block;
   }
-  
-  .nav__panel-content {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
 
-  .nav__main-menu,
-  .nav__submenu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 24px;
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .nav__main-menu {
-    transform: translateX(0);
-  }
-
-  .nav.show-projects-menu .nav__main-menu {
-    transform: translateX(-100%);
-  }
-
-  .nav__submenu {
-    transform: translateX(100%);
-    position: absolute;
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    background: transparent;
-  }
-  
-  .nav.show-projects-menu .nav__submenu {
-    transform: translateX(0);
-  }
-
-  .nav.is-open .nav__links {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .nav.is-open .nav__links a,
-  .nav__submenu a {
-    font-size: 24px;
-    padding: 8px 0;
-    font-family: var(--font-pixel);
-    text-transform: uppercase;
-  }
-
-  .nav__dropdown > a {
-    cursor: pointer;
-  }
-  
-  .nav.is-open .nav__mobile-extras {
-    display: block;
-  }
-  
-  .nav__mobile-extras .nav__social-row {
+  .nav__social-row {
     display: flex;
     gap: 16px;
+    margin-top: 24px;
+  }
+
+  .nav__social-row a {
+      border: var(--border-thick);
+      box-shadow: var(--shadow-flat);
   }
 }

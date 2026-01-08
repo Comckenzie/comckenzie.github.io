@@ -119,14 +119,22 @@
   // Initialize navigation
   function initNav() {
     const page = getCurrentPageName();
-    const links = document.querySelectorAll('.nav__links a, .nav__submenu a');
+    const links = document.querySelectorAll('.nav__desktop-menu a, .nav__mobile-menu a, .nav__submenu a');
     const currentParams = new URLSearchParams(window.location.search);
 
     links.forEach(a => {
       const href = a.getAttribute('href');
-      if (a.closest('.nav__links') && !a.closest('.nav__dropdown > a')) {
+      if (a.closest('.nav__desktop-menu') && !a.closest('.nav__dropdown')) {
         wrapNavLetters(a);
         addRollHover(a);
+      }
+      // scramble effect for dropdown links
+      if (a.closest('.nav__submenu')) {
+        wrapNavLetters(a);
+        addRollHover(a);
+      }
+       if (a.closest('.nav__mobile-menu')) {
+        wrapNavLetters(a);
       }
       if (!href) return;
       const linkUrl = new URL(href, window.location.href);
@@ -139,7 +147,7 @@
           const linkSource = linkUrl.searchParams.get('source');
           const currentSource = currentParams.get('source') || 'personal';
           a.classList.toggle('is-active', linkSource === currentSource);
-        } else if (!a.closest('.nav__dropdown')) {
+        } else if (!a.closest('.nav__dropdown') && !a.classList.contains('nav__projects-toggle')) {
           a.classList.add('is-active');
         }
       } else {
@@ -147,33 +155,35 @@
       }
     });
 
-    const navRoot = document.getElementById('nav');
-    const navToggle = document.getElementById('nav-toggle');
+    // Dropdown hover
     const dropdown = document.querySelector('.nav__dropdown');
-    
-    // Desktop dropdown
-    if (dropdown) {
-        const submenu = dropdown.querySelector('.nav__submenu');
-        if (submenu) {
-            let hideTimeout;
-            const show = () => {
-                if (window.innerWidth > 900) {
-                    clearTimeout(hideTimeout);
-                    submenu.style.display = 'block';
-                }
-            };
-            const hide = () => {
-                if (window.innerWidth > 900) {
-                    hideTimeout = setTimeout(() => submenu.style.display = 'none', 200);
-                }
-            };
-            dropdown.addEventListener('mouseenter', show);
-            dropdown.addEventListener('mouseleave', hide);
+    const submenu = document.querySelector('.nav__submenu');
+    if (dropdown && submenu) {
+      let hideTimeout;
+      function showSubmenu() {
+        if (window.innerWidth > 900) {
+            clearTimeout(hideTimeout);
+            submenu.style.display = 'block';
         }
+      }
+      function hideSubmenu() {
+        if (window.innerWidth > 900) {
+            hideTimeout = setTimeout(() => {
+            submenu.style.display = 'none';
+            }, 200);
+        }
+      }
+      dropdown.addEventListener('mouseenter', showSubmenu);
+      dropdown.addEventListener('mouseleave', hideSubmenu);
+      submenu.addEventListener('mouseenter', showSubmenu);
+      submenu.addEventListener('mouseleave', hideSubmenu);
     }
 
+    // Mobile nav toggle: open/close and accessibility updates
+    const navToggle = document.getElementById('nav-toggle');
+    const navRoot = document.getElementById('nav');
+    const projectsToggle = document.querySelector('.nav__projects-toggle');
 
-    // --- Mobile Menu Logic ---
     function setNavOpen(open) {
       if (!navToggle || !navRoot) return;
       navToggle.setAttribute('aria-expanded', String(open));
@@ -185,7 +195,7 @@
     }
 
     if (navToggle && navRoot) {
-      navToggle.addEventListener('click', () => {
+      navToggle.addEventListener('click', (e) => {
         if (navRoot.classList.contains('show-projects-menu')) {
           navRoot.classList.remove('show-projects-menu');
         } else {
@@ -194,16 +204,14 @@
         }
       });
 
-      const projectsLink = dropdown.querySelector('a');
-      if (projectsLink) {
-        projectsLink.addEventListener('click', (e) => {
-          if (window.innerWidth <= 900) {
+      if(projectsToggle) {
+        projectsToggle.addEventListener('click', (e) => {
             e.preventDefault();
             navRoot.classList.add('show-projects-menu');
-          }
         });
       }
 
+      // Close on Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navRoot.classList.contains('is-open')) {
           if (navRoot.classList.contains('show-projects-menu')) {
@@ -214,11 +222,12 @@
         }
       });
 
+      // Close when clicking a link (but not projects dropdown)
       document.addEventListener('click', (e) => {
         if (!navRoot.classList.contains('is-open')) return;
         const target = e.target;
         
-        if (window.innerWidth <= 900 && target.closest('.nav__dropdown > a')) {
+        if (window.innerWidth <= 900 && target.closest('.nav__projects-toggle')) {
             return;
         }
 
@@ -229,6 +238,7 @@
         }
       });
     }
+
   }
 
   window.initNav = initNav;

@@ -3,46 +3,44 @@
 <div class="nav" id="nav">
   <div class="nav__inner">
     <button class="nav__toggle" id="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu" type="button">
-      <span class="nav__toggle-box">
-        <span class="nav__toggle-line"></span>
-        <span class="nav__toggle-line"></span>
-        <span class="nav__toggle-line"></span>
-      </span>
     </button>
 
     <!-- Primary navigation panel (used for desktop and mobile panel) -->
     <nav id="primary-nav" class="nav__panel" role="navigation" aria-label="Primary navigation">
-      <div class="nav__panel-content">
-        <div class="nav__main-menu">
-          <div class="nav__links">
-            <a href="index.html">Home</a>
-            <div class="nav__dropdown">
-              <a>Projects</a>
-              <div class="nav__submenu nav__projects-menu">
+        <div class="nav__mobile-menu">
+            <div class="nav__main-menu">
+                <a href="index.html">Home</a>
+                <a href="#" class="nav__projects-toggle">Projects</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                 <div class="nav__social-row">
+                    <a class="iconbtn" href="https://x.com/solargress" aria-label="X" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="nav__projects-menu">
                 <a href="projects.html?source=commissions">Commissions</a>
                 <a href="projects.html?source=personal">Personal Projects</a>
-              </div>
             </div>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-          </div>
-
-          <div class="nav__mobile-extras" aria-hidden="true">
-            <div class="nav__social-row">
-              <a class="iconbtn" href="#" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-              <a class="iconbtn" href="#" aria-label="X" title="X"><i class="fa-brands fa-x-twitter"></i></a>
-              <a class="iconbtn" href="#" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-          </div>
         </div>
-      </div>
+        <div class="nav__desktop-menu">
+             <div class="nav__links">
+                <a href="index.html">Home</a>
+                <div class="nav__dropdown">
+                <a class="nav__projects-label">Projects</a>
+                <div class="nav__submenu">
+                  <a href="projects.html?source=commissions">Commissions</a>
+                  <a href="projects.html?source=personal">Personal Projects</a>
+                </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
     </nav>
 
     <div class="nav__right">
       <div class="nav__social-row">
-        <a class="iconbtn" href="#" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="iconbtn" href="#" aria-label="X" title="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a class="iconbtn" href="#" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="iconbtn" href="https://x.com/solargress" aria-label="X" title="X"><i class="fa-brands fa-x-twitter"></i></a>
       </div>
       <a class="btn btn--primary" href="contact.html">Hire me!</a>
     </div>
