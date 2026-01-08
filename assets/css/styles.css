@@ -1,6 +1,3 @@
-.nav__projects-label {
-  text-transform: capitalize;
-}
 :root {
   --bg: #f5f5f5;
   --text: #0a0a0a;
@@ -17,12 +14,14 @@
   --border-thick: 4px solid var(--text);
   --shadow-flat: 4px 4px 0 var(--text);
   --active-bg: #80808020;
-  --cta-bg: #0a0a0a;
-  --cta-text: #ffffff;
+  --cta-bg: var(--text);
+  --cta-text: var(--white);
   --cta-accent: var(--accent-gradient);
   --cta-btn-text: transparent;
-  --cta-btn-bg: #ffffff;
+  --cta-btn-bg: var(--white);
   --cta-btn-border-image: var(--accent-gradient);
+  --white: #ffffff;
+  --black: #000000;
 }
 
 :root[data-theme="dark"] {
@@ -33,10 +32,10 @@
   --surface: #0b0c0d;
   --focus: #9bd9ff;
   --accent-gradient: linear-gradient(90deg, #4f8efb 0%, #9c79f6 45%, #ff6ba8 100%);
-  --cta-bg: #ffffff;
-  --cta-text: #000000;
-  --cta-btn-bg: #000000;
-  --cta-btn-text: #ffffff;
+  --cta-bg: var(--white);
+  --cta-text: var(--black);
+  --cta-btn-bg: var(--black);
+  --cta-btn-text: var(--white);
 }
 
 .hidden {
@@ -74,8 +73,6 @@ body {
   padding-top: 0; 
   overflow-wrap: break-word;
 }
-
-
 
 .nav__links a:hover {
   text-decoration: none;
@@ -325,21 +322,6 @@ main {
   margin: 0 auto;
 }
 
-@media (min-width: 900px) {
-  .notable {
-    flex-direction: row;
-    align-items: center;
-  }
-  .notable__copy {
-    max-width: 380px;
-    flex: 0 0 380px;
-  }
-  .notable__trailer {
-    flex: 1;
-    max-width: 900px;
-  }
-}
-
 .strengths {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -524,28 +506,6 @@ main {
 
 .about-layout__description p:last-child {
   margin-bottom: 0;
-}
-
-@media (min-width: 768px) {
-  .about-layout {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .about-layout__text {
-    flex: 1;
-  }
-
-  .about-layout__aside {
-    flex: 0 0 250px;
-    margin-left: 32px;
-  }
-
-  .about-layout__img {
-    width: 100%;
-    height: auto;
-    border-radius: 0;
-  }
 }
 
 .hero {
@@ -798,42 +758,7 @@ main {
   align-items: start;
 }
 
-/* Medium screens: 3 columns (tablet/intermediate) */
-@media (min-width: 720px) and (max-width: 1099px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(140px, 1fr));
-    gap: 14px;
-  }
-}
-
-/* Slightly larger cards on wide screens (4 columns) */
-@media (min-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(180px, 1fr));
-    gap: 16px;
-  }
-}
-
 /* Ensure cards fill their grid cells and remain square */
-.card {
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
-}
-.card .card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Expand to 4 columns on wide screens */
-@media (min-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(220px, 1fr));
-  }
-}
-
 #personal-grid, #commissions-grid, #projects-grid {
   gap: 6px;
 }
@@ -844,12 +769,20 @@ main {
 }
 
 .card {
-  position: relative;
   display: block;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
   border: 2px solid rgba(255,255,255,0.85);
   background: var(--surface);
-  aspect-ratio: 1 / 1;
   overflow: hidden;
+}
+.card .card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Keyboard accessibility for cards */
@@ -1017,7 +950,7 @@ main {
   position: fixed;
   right: 10px;
   bottom: 10px;
-  z-index: 10050;
+  z-index: 12050;
   padding: 6px;
   font-size: 10px;
   font-family: var(--font-pixel);
@@ -1034,14 +967,14 @@ main {
 }
 
 .theme-toggle i {
-  font-size: 32px; /* scaled down to ~2/3 */
+  font-size: 32px;
   line-height: 1;
   display: inline-block;
 }
 
 .theme-toggle img,
 .theme-toggle svg {
-  height: 32px;
+  height: 24px;
   display: block;
   object-fit: contain;
   max-width: 100%;
@@ -1155,39 +1088,36 @@ html[data-theme="dark"] .cta-banner h2 {
 }
 
 .contact-info-row a {
-  color: inherit;
+  color: var(--text);
   text-decoration: none;
   word-break: break-all;
-  background-image: var(--accent-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  padding-bottom: 4px;
   font-size: inherit;
 }
 
-.contact-info-row a:not([href^="mailto:"])::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: var(--accent-gradient);
-  pointer-events: none;
+.contact-info-row a:hover {
+  text-decoration: underline;
 }
 
-a[href^="mailto:"] {
-  color: inherit;
-  text-decoration: none;
+.contact-email {
   background-image: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
   padding-bottom: 0;
-} 
+}
+
+a[href^="tel:"] {
+  color: var(--text);
+  text-decoration: none;
+  background-image: none;
+  -webkit-text-fill-color: var(--text);
+  padding-bottom: 0;
+}
+
+a[href^="tel:"]:hover {
+  text-decoration: underline;
+}
 
 .contact-main {
   max-width: 700px;
@@ -1363,12 +1293,6 @@ a[href^="mailto:"] {
   10% { opacity: 0.85; }
   100% { transform: translateY(100vh); opacity: 0; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .crt-wipe {
-    display: none !important;
-  }
-} 
 
 .crt-overlay--reduced {
   opacity: 0.6;
@@ -1549,14 +1473,6 @@ a[href^="mailto:"] {
 .section.is-active .section__head h2 .section-letter:nth-child(3n) { color: #ff8ccf; }
 
 /* Nav Links */
-.nav__desktop-menu {
-  display: none;
-}
-
-.nav__mobile-menu {
-  display: none;
-}
-
 .nav__links {
   display: flex;
   align-items: center;
@@ -1574,10 +1490,15 @@ a[href^="mailto:"] {
   font-family: var(--font-pixel);
   font-size: 18px;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
-.nav__links a {
+.nav__projects-label {
   text-transform: capitalize;
+}
+
+.nav__links a:hover {
+  text-decoration: none;
 }
 
 .nav__dropbtn {
@@ -1628,18 +1549,6 @@ a[href^="mailto:"] {
   box-shadow: var(--shadow-flat);
 }
 
-@media (min-width: 901px) {
-  .nav__desktop-menu {
-    display: block;
-  }
-  .nav__mobile-menu {
-    display: none;
-  }
-  .nav__dropdown:hover .nav__submenu {
-    display: block;
-  }
-}
-
 .nav__submenu a {
   display: block;
   padding: 4px 12px;
@@ -1674,10 +1583,5 @@ a[href^="mailto:"] {
 
 /* Mobile Extras */
 .nav__mobile-extras {
-  display: none;
-}
-
-/* Nav Toggle */
-.nav__toggle {
   display: none;
 }
