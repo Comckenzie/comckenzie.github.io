@@ -35,7 +35,6 @@
   --cta-bg: var(--white);
   --cta-text: var(--black);
   --cta-btn-bg: var(--black);
-  /* text color as RGB for derived translucent backgrounds */
   --text-rgb: 246, 249, 251;
   --cta-btn-text: var(--white);
   --active-bg: rgba(var(--text-rgb), 0.125);
@@ -752,7 +751,6 @@ main {
   width: 100%;
 }
 
-/* Player layout tweaks: center controls, place track title above timeline */
 .player__controls {
   display: flex;
   justify-content: center;
@@ -763,7 +761,7 @@ main {
 .player__track {
   text-align: center;
   margin: 6px 0 8px 0;
-  font-weight: 400; /* normal */
+  font-weight: 400;
 }
 .player__timeline {
   height: 20px;

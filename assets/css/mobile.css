@@ -413,8 +413,6 @@
     gap: 8px;
   }
 
-  /* Hide the primary CTA and duplicate social row on small screens */
-  /* Show the primary CTA on small screens and keep it right-aligned */
   .nav__right .btn--primary {
     display: inline-flex !important;
     align-items: center;
