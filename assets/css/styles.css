@@ -118,6 +118,10 @@ img {
   display: block;
 }
 
+h1 {
+  margin-bottom: 32px;
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -488,10 +492,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.about-layout__title h1 {
-  margin-bottom: 0;
 }
 
 .about-layout__img {
