@@ -37,14 +37,14 @@
           CYRILLIC_UPPER[Math.floor(Math.random() * CYRILLIC_UPPER.length)],
           CYRILLIC_LOWER[Math.floor(Math.random() * CYRILLIC_LOWER.length)],
           CYRILLIC_UPPER[Math.floor(Math.random() * CYRILLIC_UPPER.length)],
+          CYRILLIC_LOWER[Math.floor(Math.random() * CYRILLIC_LOWER.length)],
           orig,
         ];
         return {
           span,
           index,
           orig,
-          next: now0 + index * 40,
-          interval: 50,
+          next: now0 + index * 30,
           randChars,
           charIndex: 0,
         };
@@ -72,7 +72,8 @@
             else if (st.charIndex === 2) st.span.textContent = st.randChars[st.charIndex].toUpperCase();
             st.charIndex++;
           }
-          st.next += st.interval;
+          // Linear easing for interval
+          st.next += 20 + (st.charIndex * 20);
         }
       });
 
