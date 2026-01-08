@@ -11,11 +11,18 @@
       if (!overlay) return;
 
       const wipe = overlay.querySelector('.crt-wipe');
-      const saved = localStorage.getItem('crt-enabled');
-      
-      // Force enable CRT and save state
-      overlay.classList.remove('crt-disabled');
-      try { localStorage.setItem('crt-enabled', 'true'); } catch (e) {}
+      const saved = (() => {
+        try { return localStorage.getItem('crt-enabled'); } catch (e) { return null; }
+      })();
+
+      // Respect explicit disabling: if element already has `crt-disabled`
+      // or localStorage explicitly set to 'false', keep CRT disabled.
+      const explicitlyDisabled = overlay.classList.contains('crt-disabled') || saved === 'false';
+      if (explicitlyDisabled) {
+        overlay.classList.add('crt-disabled');
+      } else if (saved === 'true') {
+        overlay.classList.remove('crt-disabled');
+      }
 
       // Wipe animation handler
       const startWipe = () => {
