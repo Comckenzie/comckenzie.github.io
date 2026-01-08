@@ -632,7 +632,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-left: 3px solid var(--text);
+  border-left: var(--border-thick);
   padding: 15px;
   height: 100%;
 }
@@ -777,6 +777,30 @@ main {
   width: 0%;
   transition: width 100ms linear;
 }
+
+/* Player times below timeline */
+.player__track {
+  text-align: left;
+  margin: 6px 0 8px 0;
+  font-weight: 400;
+  padding-left: 12px;
+}
+
+/* Player times below timeline */
+.player__times {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+  padding-left: 12px;
+}
+.player__time {
+  font-size: 14px;
+  color: var(--muted);
+  font-family: var(--font-body);
+}
+.player__time-sep { color: var(--muted); }
 
 .grid {
   display: grid;

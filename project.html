@@ -50,14 +50,14 @@
             <div class="project-detail-left">
               <img class="project-detail-image" data-field="image" data-alt="name" />
               <div class="project__player project__player--full" id="project-player" aria-label="Audio player">
-                <div class="player__controls">
-                  <button class="iconbtn" id="prev" aria-label="Previous"><i class="fa-solid fa-backward"></i></button>
-                  <button class="iconbtn btn--play" id="play" aria-label="Play/Pause"><i class="fa-solid fa-play"></i></button>
-                  <button class="iconbtn" id="next" aria-label="Next"><i class="fa-solid fa-forward"></i></button>
-                </div>
                 <div class="player__track" aria-live="polite">—</div>
                 <div class="player__timeline" role="progressbar" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                   <div class="player__elapsed" style="width:0%"></div>
+                </div>
+                <div class="player__times" aria-hidden="true">
+                  <span class="player__time player__time-elapsed">0:00</span>
+                  <span class="player__time-sep"> / </span>
+                  <span class="player__time player__time-total">0:00</span>
                 </div>
               </div>
             </div>

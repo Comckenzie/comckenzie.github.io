@@ -268,6 +268,8 @@
     const trackTitle = playerEl?.querySelector('.player__track');
     const timeline = playerEl?.querySelector('.player__timeline');
     const elapsedEl = playerEl?.querySelector('.player__elapsed');
+    const timeElapsedText = playerEl?.querySelector('.player__time-elapsed');
+    const timeTotalText = playerEl?.querySelector('.player__time-total');
 
     const audio = new Audio();
     audio.preload = 'metadata';
@@ -356,14 +358,21 @@
     });
 
     const updateTimeline = () => {
-      if (!audio.duration || !elapsedEl || !timeline) return;
-      const pct = (audio.currentTime / audio.duration) * 100;
+      if (!elapsedEl || !timeline) return;
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
       elapsedEl.style.width = `${pct}%`;
       timeline.setAttribute('aria-valuenow', Math.floor(pct));
+      if (timeElapsedText) timeElapsedText.textContent = formatDuration(audio.currentTime || 0);
+      if (timeTotalText) timeTotalText.textContent = audio.duration ? formatDuration(audio.duration) : '—';
       // background of active track is uniform (no per-time fill)
     };
 
     audio.addEventListener('timeupdate', updateTimeline);
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (timeTotalText) timeTotalText.textContent = formatDuration(audio.duration);
+      updateTimeline();
+    });
 
     if (timeline) timeline.addEventListener('click', e => {
       if (!audio.duration) return;
