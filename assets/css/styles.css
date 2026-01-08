@@ -233,10 +233,30 @@ p {
   box-shadow: none;
 }
 
+/* Section styles */
+.section {
+  min-height: 100vh;
+  border-bottom: var(--border-thick);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section[aria-labelledby="commissions"],
+.section[aria-labelledby="personal"] {
+  height: auto;
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Ensure non-hero sections sit below the fixed header */
 .section:not(.hero) {
   padding-top: calc(56px + var(--nav-h));
-}
+} 
 
 .section:last-of-type {
   border-bottom: none;
@@ -808,6 +828,14 @@ main {
   grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 12px;
   align-items: start;
+}
+
+/* Medium screens: 3 columns (tablet/intermediate) */
+@media (min-width: 720px) and (max-width: 1099px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+    gap: 14px;
+  }
 }
 
 /* Slightly larger cards on wide screens (4 columns) */
@@ -1409,6 +1437,16 @@ a[href^="mailto:"] {
   font-size: 16px;
 }
 
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer a[href^="mailto:"]:hover,
+.footer a[href^="mailto:"]:focus {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
 .footer__bottom {
   margin-top: 24px;
   padding-top: 20px;
@@ -1421,27 +1459,34 @@ a[href^="mailto:"] {
 
 .footer__author {
   font-family: inherit;
-  font-size: 16px;
+  font-size: 16px !important;
   font-weight: 400;
   color: var(--text);
   text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .footer__made {
-  font-size: 16px;
+  font-size: 16px !important;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .footer__author:hover {
   text-decoration: underline;
+}  
+
+.footer * {
+  font-size: 24px !important;
 }
 
-/* Phone text styling (plain, non-clickable) */
-.footer__phone {
-  display: block;
-  font-weight: 400; /* use normal weight */
-  color: inherit;
-  text-decoration: none;
-  margin-top: 6px;
+.footer__brand {
+  font-size: 40px !important;
 }
 
 /* Header */
@@ -1665,6 +1710,13 @@ a[href^="mailto:"] {
   outline: var(--border-thick);
   box-shadow: var(--shadow-flat);
 }
+
+@media (min-width: 901px) {
+  .nav__dropdown:hover .nav__submenu {
+    display: block;
+  }
+}
+
 
 .nav__submenu a {
   display: block;

@@ -79,18 +79,32 @@
     container.innerHTML = '';
     container.appendChild(frag);
 
-    // Calculate columns
+    // Calculate columns (robustly parse CSS and fallback to measurements)
     let columns = 1;
     try {
       const style = getComputedStyle(container);
       const colsProp = style.getPropertyValue('grid-template-columns');
-      const cssColumns = colsProp ? colsProp.trim().split(/\s+/).length : 0;
+      let cssColumns = 0;
+      if (colsProp) {
+        const repeatMatch = colsProp.match(/repeat\(\s*(\d+)\s*,/);
+        if (repeatMatch) cssColumns = Number(repeatMatch[1]);
+        else cssColumns = colsProp.trim().split(/\s+/).length;
+      }
+
       const children = Array.from(container.children).filter(el => el.classList?.contains('card'));
       let measuredColumns = 0;
       if (children.length) {
         const firstTop = children[0].offsetTop;
         measuredColumns = children.filter(c => c.offsetTop === firstTop).length;
+
+        // If layout hasn't stabilized yet, estimate columns using widths
+        if (!measuredColumns) {
+          const cw = container.clientWidth || 1;
+          const childWidth = children[0].offsetWidth || Math.max(1, Math.floor(cw / (cssColumns || 2)));
+          measuredColumns = Math.max(1, Math.floor(cw / childWidth));
+        }
       }
+
       columns = cssColumns > 0 ? cssColumns : measuredColumns > 0 ? measuredColumns : 1;
     } catch {
       columns = 4;
@@ -369,7 +383,13 @@
 
     if (!source || !id) {
       const root = document.getElementById('project-root');
-      if (root) root.innerHTML = '<p class="muted">Project not found. <a href="projects.html">Browse projects</a>.</p>';
+      if (root) {
+        const p = document.createElement('p');
+        p.className = 'muted';
+        p.textContent = id ? `Project ${id} not found.` : 'Project not found.';
+        root.innerHTML = '';
+        root.appendChild(p);
+      }
       return;
     }
 
@@ -378,7 +398,13 @@
       const project = projects.find(p => p.id === id);
       if (!project) {
         const root = document.getElementById('project-root');
-        if (root) root.innerHTML = '<p class="muted">Project not found. <a href="projects.html">Browse projects</a>.</p>';
+        if (root) {
+          const p = document.createElement('p');
+          p.className = 'muted';
+          p.textContent = `Project ${id} not found.`;
+          root.innerHTML = '';
+          root.appendChild(p);
+        }
         return;
       }
       renderProjectDetail(project, source);

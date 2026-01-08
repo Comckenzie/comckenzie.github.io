@@ -119,12 +119,12 @@
   // Initialize navigation
   function initNav() {
     const page = getCurrentPageName();
-    const links = document.querySelectorAll('.nav__links a, .nav__menu a, .nav__submenu a');
+    const links = document.querySelectorAll('.nav__links a, .nav__submenu a');
     const currentParams = new URLSearchParams(window.location.search);
 
     links.forEach(a => {
       const href = a.getAttribute('href');
-      if (a.closest('.nav__links')) {
+      if (a.closest('.nav__links') && !a.closest('.nav__dropdown > a')) {
         wrapNavLetters(a);
         addRollHover(a);
       }
@@ -139,7 +139,7 @@
           const linkSource = linkUrl.searchParams.get('source');
           const currentSource = currentParams.get('source') || 'personal';
           a.classList.toggle('is-active', linkSource === currentSource);
-        } else {
+        } else if (!a.closest('.nav__dropdown')) {
           a.classList.add('is-active');
         }
       } else {
@@ -147,75 +147,88 @@
       }
     });
 
-    // Dropdown hover
+    const navRoot = document.getElementById('nav');
+    const navToggle = document.getElementById('nav-toggle');
     const dropdown = document.querySelector('.nav__dropdown');
-    const submenu = document.querySelector('.nav__submenu');
-    if (dropdown && submenu) {
-      let hideTimeout;
-      function showSubmenu() {
-        clearTimeout(hideTimeout);
-        submenu.style.display = 'block';
-      }
-      function hideSubmenu() {
-        hideTimeout = setTimeout(() => {
-          submenu.style.display = 'none';
-        }, 200);
-      }
-      dropdown.addEventListener('mouseenter', showSubmenu);
-      dropdown.addEventListener('mouseleave', hideSubmenu);
-      submenu.addEventListener('mouseenter', showSubmenu);
-      submenu.addEventListener('mouseleave', hideSubmenu);
+    
+    // Desktop dropdown
+    if (dropdown) {
+        const submenu = dropdown.querySelector('.nav__submenu');
+        if (submenu) {
+            let hideTimeout;
+            const show = () => {
+                if (window.innerWidth > 900) {
+                    clearTimeout(hideTimeout);
+                    submenu.style.display = 'block';
+                }
+            };
+            const hide = () => {
+                if (window.innerWidth > 900) {
+                    hideTimeout = setTimeout(() => submenu.style.display = 'none', 200);
+                }
+            };
+            dropdown.addEventListener('mouseenter', show);
+            dropdown.addEventListener('mouseleave', hide);
+        }
     }
 
-    // Mobile nav toggle: open/close and accessibility updates
-    const navToggle = document.getElementById('nav-toggle');
-    const navRoot = document.getElementById('nav');
 
+    // --- Mobile Menu Logic ---
     function setNavOpen(open) {
       if (!navToggle || !navRoot) return;
       navToggle.setAttribute('aria-expanded', String(open));
-      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       navRoot.classList.toggle('is-open', open);
       document.body.classList.toggle('nav-open', open);
+      if (!open) {
+        navRoot.classList.remove('show-projects-menu');
+      }
     }
 
     if (navToggle && navRoot) {
-      navToggle.addEventListener('click', (e) => {
-        const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-        setNavOpen(!isOpen);
-      });
-
-      // Close on Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
-          setNavOpen(false);
+      navToggle.addEventListener('click', () => {
+        if (navRoot.classList.contains('show-projects-menu')) {
+          navRoot.classList.remove('show-projects-menu');
+        } else {
+          const isOpen = navRoot.classList.contains('is-open');
+          setNavOpen(!isOpen);
         }
       });
 
-      // Close when clicking a nav link (use delegation) or clicking outside
-      document.addEventListener('click', (e) => {
-        const target = e.target;
-        if (navToggle.getAttribute('aria-expanded') === 'true') {
-          if (target.closest && (target.closest('.nav__links a') || target.closest('.nav__menu a') || target.closest('.nav__mobile-extras a') || target.closest('.nav__submenu a'))) {
-            setNavOpen(false);
-          } else if (!navRoot.contains(target) && !navToggle.contains(target)) {
-            // Click outside nav closes it
+      const projectsLink = dropdown.querySelector('a');
+      if (projectsLink) {
+        projectsLink.addEventListener('click', (e) => {
+          if (window.innerWidth <= 900) {
+            e.preventDefault();
+            navRoot.classList.add('show-projects-menu');
+          }
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navRoot.classList.contains('is-open')) {
+          if (navRoot.classList.contains('show-projects-menu')) {
+            navRoot.classList.remove('show-projects-menu');
+          } else {
             setNavOpen(false);
           }
         }
       });
 
-      // Also attach explicit click handlers to all nav links so they always close the menu
-      // Use a small timeout so navigation (if any) can proceed while the UI updates
-      const linkSelectors = '.nav__links a, .nav__menu a, .nav__panel a, .nav__mobile-extras a, .nav__submenu a';
-      const navLinks = navRoot.querySelectorAll(linkSelectors);
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          setTimeout(() => setNavOpen(false), 0);
-        }, { passive: true });
+      document.addEventListener('click', (e) => {
+        if (!navRoot.classList.contains('is-open')) return;
+        const target = e.target;
+        
+        if (window.innerWidth <= 900 && target.closest('.nav__dropdown > a')) {
+            return;
+        }
+
+        if (target.closest('.nav__panel a')) {
+           setNavOpen(false);
+        } else if (!navRoot.contains(target) && !navToggle.contains(target)) {
+           setNavOpen(false);
+        }
       });
     }
-
   }
 
   window.initNav = initNav;

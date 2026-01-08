@@ -40,8 +40,9 @@ function initSectionTitles() {
 
 // Set footer year
 function initFooterYear() {
-  const el = document.getElementById('year');
-  if (el) el.textContent = String(new Date().getFullYear());
+  const el = document.querySelector('.footer__made');
+  const year = String(new Date().getFullYear());
+  if (el) el.textContent = `© ${year} — Website made by`;
 }
 
 // Initialize main shell
