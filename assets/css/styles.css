@@ -1526,6 +1526,23 @@ a[href^="tel:"]:hover {
   text-transform: uppercase;
 }
 
+.nav__links a .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.nav__main-menu a .word,
+.nav__projects-menu a .word,
+.nav__submenu a .word,
+.nav__mobile-menu a .word,
+.nav__links a .nav-word,
+.nav__main-menu a .nav-word,
+.nav__projects-menu a .nav-word,
+.nav__submenu a .nav-word,
+.nav__mobile-menu a .nav-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .nav__projects-label {
   text-transform: capitalize;
 }

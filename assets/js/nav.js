@@ -6,14 +6,26 @@
     const text = (el.textContent || '').trim();
     if (!text) return;
     el.textContent = '';
-    for (let i = 0; i < text.length; i++) {
-      const ch = text[i];
-      const span = document.createElement('span');
-      span.className = 'nav-letter';
-      span.style.setProperty('--i', String(i));
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
-      el.appendChild(span);
-    }
+    // Split into words so we can keep words as non-breaking blocks
+    // while still wrapping individual letters for the animation.
+    const words = text.split(/\s+/);
+    let globalIndex = 0;
+    words.forEach((word, wIdx) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'nav-word';
+      for (let i = 0; i < word.length; i++) {
+        const ch = word[i];
+        const span = document.createElement('span');
+        span.className = 'nav-letter';
+        span.style.setProperty('--i', String(globalIndex));
+        span.textContent = ch;
+        wordSpan.appendChild(span);
+        globalIndex++;
+      }
+      el.appendChild(wordSpan);
+      // add a normal space between words so line breaks are allowed here
+      if (wIdx < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
   }
 
   // Constants for rolling animation
