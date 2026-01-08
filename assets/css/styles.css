@@ -13,7 +13,7 @@
   --font-body: 'VT323', monospace;
   --border-thick: 4px solid var(--text);
   --shadow-flat: 4px 4px 0 var(--text);
-  --active-bg: #80808020;
+  --active-bg: #00000020;
   --cta-bg: var(--text);
   --cta-text: var(--white);
   --cta-accent: var(--accent-gradient);
@@ -35,7 +35,10 @@
   --cta-bg: var(--white);
   --cta-text: var(--black);
   --cta-btn-bg: var(--black);
+  /* text color as RGB for derived translucent backgrounds */
+  --text-rgb: 246, 249, 251;
   --cta-btn-text: var(--white);
+  --active-bg: rgba(var(--text-rgb), 0.125);
 }
 
 .hidden {
@@ -749,10 +752,36 @@ main {
   width: 100%;
 }
 
+/* Player layout tweaks: center controls, place track title above timeline */
+.player__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.player__track {
+  text-align: center;
+  margin: 6px 0 8px 0;
+  font-weight: 400; /* normal */
+}
+.player__timeline {
+  height: 20px;
+  background: var(--active-bg);
+  border: var(--border-thick);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+.player__elapsed {
+  height: 100%;
+  background-image: var(--accent-gradient);
+  width: 0%;
+  transition: width 100ms linear;
+}
+
 .grid {
   display: grid;
-  /* Default to 2 columns (2x2) for cleaner listing */
-  /* reduce the min width so two columns comfortably fit on narrower viewports */
   grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 12px;
   align-items: start;
@@ -919,6 +948,12 @@ main {
   align-items: center;
   padding: 8px;
   box-shadow: none;
+  position: relative;
+}
+
+.track.active {
+  background: var(--active-bg);
+  transition: background 160ms ease;
 }
 
 .iconbtn {

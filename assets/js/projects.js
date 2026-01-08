@@ -360,6 +360,7 @@
       const pct = (audio.currentTime / audio.duration) * 100;
       elapsedEl.style.width = `${pct}%`;
       timeline.setAttribute('aria-valuenow', Math.floor(pct));
+      // background of active track is uniform (no per-time fill)
     };
 
     audio.addEventListener('timeupdate', updateTimeline);

@@ -405,7 +405,25 @@
     box-shadow: none;
   }
 
+  /* Show the right-side controls on mobile, but hide duplicated items
+     from the desktop header to avoid layout issues. Keep theme toggle visible. */
   .nav__right {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Hide the primary CTA and duplicate social row on small screens */
+  /* Show the primary CTA on small screens and keep it right-aligned */
+  .nav__right .btn--primary {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+  .nav__right .nav__social-row {
     display: none !important;
   }
 
