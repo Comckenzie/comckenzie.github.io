@@ -1308,7 +1308,7 @@ a[href^="tel:"]:hover {
 }
 
 .crt-vignette {
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 100%);
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%);
   opacity: 0.35;
   position: absolute;
   inset: 0;
