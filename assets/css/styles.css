@@ -995,13 +995,21 @@ main {
   background: var(--surface);
   min-width: 44px;
   min-height: 44px;
-  padding: 0 12px;
+  padding: 8px 12px;
 }
 
-.iconbtn:not(.contact-social-btn) {
-  width: 44px;
-  height: 44px;
-  padding: 0;
+.iconbtn > img,
+.iconbtn > svg,
+.iconbtn > i {
+  display: inline-block;
+  height: 1.2em;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  line-height: 1;
+}
+.iconbtn > img {
+  display: inline-block;
 }
 
 .iconbtn:hover {
@@ -1233,7 +1241,7 @@ a[href^="tel:"]:hover {
   font-size: 16px;
   color: var(--text);
   letter-spacing: 0.01em;
-  margin-left: 2px;
+  margin-left: 8px;
   display: inline-block;
 }
 
@@ -1701,20 +1709,4 @@ a[href^="tel:"]:hover {
 }
 .legal-card p { margin: 0 0 12px 0; }
 
-/* Ko-fi button: prevent logo stretching and preserve aspect ratio */
-.iconbtn.kofibtn {
-  width: auto;
-  height: auto;
-  padding: 6px 8px;
-  min-width: 0;
-}
-.iconbtn.kofibtn img {
-  height: 24px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-  max-width: none;
-}
-.contact-social .iconbtn.kofibtn {
-  padding: 4px 6px;
-}
+/* Button-specific rules removed: rely on .iconbtn base styles for all buttons */
