@@ -1387,7 +1387,7 @@ a[href^="tel:"]:hover {
 
 .footer {
   border-top: var(--border-thick);
-  padding: 96px 0 48px;
+  padding: 80px 0;
   min-height: 260px;
   background: var(--bg);
   font-size: 24px;

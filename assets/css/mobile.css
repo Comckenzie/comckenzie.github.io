@@ -337,7 +337,7 @@
   }
   .footer__col:first-child { grid-column: span 2; }
   .footer { 
-    padding: 48px 0 32px; 
+    padding: 80px 0; 
     font-size: 16px; 
   }
   .footer__col { 
