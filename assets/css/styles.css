@@ -998,6 +998,11 @@ main {
   padding: 8px 12px;
 }
 
+#theme-toggle {
+  width: 44px;
+  height: 44px;
+}
+
 .iconbtn > img,
 .iconbtn > svg,
 .iconbtn > i {
