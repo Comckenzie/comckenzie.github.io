@@ -213,7 +213,10 @@
     imgEl.alt = project.name;
     imgEl.loading = 'lazy';
     imgEl.decoding = 'async';
-    clone.querySelector('[data-field="description"]').textContent = project.description;
+    // Populate all description fields (there may be multiple places for description)
+    clone.querySelectorAll('[data-field="description"]').forEach(el => {
+      el.textContent = project.description || '';
+    });
 
     const creatorEl = clone.querySelector('[data-field="creator"]');
     if (project.creator) {
