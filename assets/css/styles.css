@@ -31,7 +31,7 @@
   --line: #98a1a6;
   --surface: #0b0c0d;
   --focus: #9bd9ff;
-  --accent-gradient: linear-gradient(90deg, #4f8efb 0%, #9c79f6 45%, #ff6ba8 100%);
+  --accent-gradient: linear-gradient(90deg, #2a5fd6 0%, #9c79f6 45%, #ff6ba8 100%);
   --cta-bg: var(--white);
   --cta-text: var(--black);
   --cta-btn-bg: var(--black);
@@ -966,6 +966,19 @@ main {
   padding: 8px;
   box-shadow: none;
   position: relative;
+}
+
+/* Ensure the track title fills available space and the duration sticks to the right */
+.track-title {
+  flex: 1 1 auto;
+  min-width: 0; /* allow truncation */
+}
+
+.track-duration {
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 .track.active {

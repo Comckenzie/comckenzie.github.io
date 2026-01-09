@@ -16,6 +16,19 @@
 </head>
 <body>
   <header id="site-header"></header>
+  <noscript>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="noscript-nav">
+      <nav role="navigation" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html?source=personal">Personal Projects</a>
+        <a href="projects.html?source=commissions">Commissions</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="legal.html">Legal</a>
+      </nav>
+    </div>
+  </noscript>
 
   <main id="main" role="main">
     <section class="section" aria-labelledby="project-heading">
@@ -48,7 +61,7 @@
         <div class="content-full">
           <div class="tracklist-card tracklist-card--full project-detail-split">
             <div class="project-detail-left">
-              <img class="project-detail-image" data-field="image" data-alt="name" />
+              <img class="project-detail-image" data-field="image" data-alt="name" alt="Project cover" />
               <div class="project__player project__player--full" id="project-player" aria-label="Audio player">
                 <div class="player__track" aria-live="polite">—</div>
                 <div class="player__timeline" role="progressbar" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
