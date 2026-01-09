@@ -224,7 +224,6 @@ p {
   justify-content: center;
 }
 
-/* Ensure non-hero sections sit below the fixed header */
 .section:not(.hero) {
   padding-top: calc(56px + var(--nav-h));
 } 
@@ -522,7 +521,6 @@ main {
   background: var(--bg);
 }
 
-/* Ensure decorative hero background behaves well */
 .hero__bgimg {
   position: absolute;
   left: 50%;
@@ -560,8 +558,6 @@ main {
   0% { transform: translateY(0); }
   100% { transform: translateY(-28px); }
 }
-
-/* keep hero squares visible on phones; will be adjusted further in the 420px breakpoint */
 
 .hero__image {
   position: absolute;
@@ -853,7 +849,6 @@ main {
 
 .card.placeholder {
   background: var(--active-bg);
-  border: 2px solid rgba(255,255,255,0.85);
   cursor: default;
 }
 
@@ -1020,7 +1015,13 @@ main {
   box-shadow: none;
   background: var(--bg);
   color: var(--text);
-  transition: background 120ms ease;
+  transition: background 120ms ease, transform 160ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  transform-origin: center;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  transform: translateY(-5px) scale(1.15);
 }
 
 .theme-toggle i {
@@ -1247,7 +1248,6 @@ a[href^="tel:"]:hover {
 
 .crt-scanlines {
   background-image: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.08) 2px 4px);
-  /* double the cycle so rounding doesn't show a seam when looping */
   background-size: 100% 8px;
   opacity: 0.6;
   animation: scan 1.6s linear infinite;

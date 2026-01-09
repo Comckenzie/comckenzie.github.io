@@ -68,7 +68,14 @@
       toggle.addEventListener('click', e => {
         e.preventDefault();
         toggleTheme();
+        try { window.playUISound && window.playUISound('theme'); } catch (e) {}
         toggle.blur();
+      });
+      // also play sound on keyboard activation
+      toggle.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          try { window.playUISound && window.playUISound('theme'); } catch (e) {}
+        }
       });
       updateThemeToggleIcon();
     }

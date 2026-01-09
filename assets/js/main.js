@@ -7,6 +7,42 @@ async function loadPartial(targetId, url) {
   target.innerHTML = await res.text();
 }
 
+// UI sound helper: only play the theme audio file (assets/sounds/theme.mp3). No synth.
+;(function () {
+  const audioCache = new Map();
+
+  function playAudioFile(name) {
+    try {
+      const path = `assets/sounds/${name}.mp3`;
+      let a = audioCache.get(path);
+      if (!a) {
+        a = new Audio(path);
+        a.preload = 'auto';
+        a.volume = 0.6;
+        audioCache.set(path, a);
+      }
+      if (!a.paused) {
+        const clone = a.cloneNode();
+        clone.volume = a.volume;
+        clone.play().catch(() => {});
+      } else {
+        a.currentTime = 0;
+        a.play().catch(() => {});
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  window.playUISound = function (name) {
+    if (name === 'theme') {
+      playAudioFile('theme');
+    }
+    // otherwise do nothing (no hover sounds)
+  };
+})();
+
 // Wrap letters in section titles
 function wrapSectionLetters(el) {
   const text = (el.textContent || '').trim();
@@ -36,6 +72,32 @@ function wrapSectionLetters(el) {
 function initSectionTitles() {
   const heads = document.querySelectorAll('.section__head h2, .accentuation-title');
   heads.forEach(h => wrapSectionLetters(h));
+}
+
+// Attach hover/focus sounds to interactive buttons
+function initUIButtonSounds() {
+  const seen = new WeakMap();
+  function handlePlay(e) {
+    const el = e.currentTarget;
+    const last = seen.get(el) || 0;
+    const now = Date.now();
+    if (now - last < 120) return; // throttle rapid triggers
+    seen.set(el, now);
+    window.playUISound && window.playUISound('hover');
+  }
+
+  // Only play hover sound when hovering project cards (projects, personal, commissions grids)
+  const selector = [
+    '#projects-grid .card',
+    '#personal-grid .card',
+    '#commissions-grid .card'
+  ].join(', ');
+  document.querySelectorAll(selector).forEach(el => {
+    // skip the theme toggle so hover.mp3 is not played on it
+    if (el.id === 'theme-toggle' || el.classList.contains('theme-toggle')) return;
+    el.addEventListener('mouseenter', handlePlay);
+    el.addEventListener('focus', handlePlay);
+  });
 }
 
 // Set footer year
@@ -88,6 +150,7 @@ function initScrollEffects() {
 initShell()
   .then(() => {
     initSectionTitles();
+    initUIButtonSounds();
     if (window.initGrids) window.initGrids();
     if (window.initProjectPage) window.initProjectPage();
     initScrollEffects();
