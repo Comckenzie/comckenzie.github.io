@@ -1700,3 +1700,21 @@ a[href^="tel:"]:hover {
   font-weight: 600;
 }
 .legal-card p { margin: 0 0 12px 0; }
+
+/* Ko-fi button: prevent logo stretching and preserve aspect ratio */
+.iconbtn.kofibtn {
+  width: auto;
+  height: auto;
+  padding: 6px 8px;
+  min-width: 0;
+}
+.iconbtn.kofibtn img {
+  height: 24px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  max-width: none;
+}
+.contact-social .iconbtn.kofibtn {
+  padding: 4px 6px;
+}
