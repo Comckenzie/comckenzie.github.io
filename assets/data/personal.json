@@ -40,7 +40,7 @@
   {
     "id": "tabula-rasa",
     "name": "Tabula Rasa",
-    "description": "A concept album exploring themes of rebirth and transformation.",
+    "description": "This is the first Pokémon fan-game I composed music for. It gave me a fair amount of experience in making various battle and area themes in a retro style.",
     "creator": null,
     "tracks": [
       { "title": "Battle Essentia", "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3" },
