@@ -26,7 +26,10 @@
     const frag = document.createDocumentFragment();
     const source = container.dataset.source;
 
+    let appended = 0;
     for (const p of slice) {
+      // Skip projects that have no tracks/musiques
+      if (!p.tracks || !p.tracks.length) continue;
       if (tpl) {
         const node = tpl.content.cloneNode(true);
         const a = node.querySelector('.card');
@@ -43,6 +46,7 @@
         if (creator) creator.style.display = p.creator ? '' : 'none';
         if (p.creator) creator.textContent = p.creator;
         frag.appendChild(node);
+        appended++;
       } else {
         // Fallback card creation
         const a = document.createElement('a');
@@ -73,6 +77,7 @@
         a.appendChild(img);
         a.appendChild(overlay);
         frag.appendChild(a);
+        appended++;
       }
     }
 
@@ -111,7 +116,7 @@
     }
 
     // Add placeholders
-    const total = slice.length;
+    const total = appended;
     const needed = (columns - (total % columns)) % columns;
     for (let i = 0; i < needed; i++) {
       if (placeholderTpl) container.appendChild(placeholderTpl.content.cloneNode(true));
