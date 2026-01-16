@@ -600,6 +600,20 @@ main {
 .hero__title .section-letter:nth-child(3n+2) { color: #b894ff; }
 .hero__title .section-letter:nth-child(3n) { color: #ff8ccf; }
 
+/* Generic accentuation effect: apply to any element by adding the class
+   `accentuation-effect` to it (letters will be wrapped by JS). */
+.accentuation-effect .section-letter {
+  display: inline-block;
+  color: inherit;
+  animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
+  animation-delay: calc(var(--i, 0) * 80ms), calc(var(--i, 0) * 120ms);
+  animation-fill-mode: both;
+  will-change: transform, color;
+}
+.accentuation-effect .section-letter:nth-child(3n+1) { color: #7ab6ff; }
+.accentuation-effect .section-letter:nth-child(3n+2) { color: #b894ff; }
+.accentuation-effect .section-letter:nth-child(3n) { color: #ff8ccf; }
+
 .project-detail-split {
   display: grid;
   grid-template-columns: minmax(220px, 320px) 1fr;
@@ -660,7 +674,7 @@ main {
   hyphens: none;
 }
 
-.accentuation-title .section-letter {
+.accentuation-effect .section-letter {
   display: inline-block;
   animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
   animation-delay: calc(var(--i, 0) * 40ms), calc(var(--i, 0) * 60ms);
@@ -668,19 +682,19 @@ main {
   will-change: transform, color;
 }
 
-.accentuation-title .section-letter:nth-child(3n+1) {
+.accentuation-effect .section-letter:nth-child(3n+1) {
   color: #7ab6ff;
 }
 
-.accentuation-title .section-letter:nth-child(3n+2) {
+.accentuation-effect .section-letter:nth-child(3n+2) {
   color: #b894ff;
 }
 
-.accentuation-title .section-letter:nth-child(3n) {
+.accentuation-effect .section-letter:nth-child(3n) {
   color: #ff8ccf;
 }
 
-.accentuation-title .section-word {
+.accentuation-effect .section-word {
   white-space: nowrap;
 }
 
@@ -1544,16 +1558,16 @@ a[href^="tel:"]:hover {
   color: inherit;
 }
 
-.section.is-active .section__head h2 .section-letter {
+.section.is-active .accentuation-effect .section-letter {
   animation: nav-float 2.4s ease-in-out infinite, nav-color-cycle 2s linear infinite;
   animation-delay: calc(var(--i, 0) * 80ms), calc(var(--i, 0) * 120ms);
   animation-fill-mode: both;
   will-change: transform, color;
 }
 
-.section.is-active .section__head h2 .section-letter:nth-child(3n+1) { color: #7ab6ff; }
-.section.is-active .section__head h2 .section-letter:nth-child(3n+2) { color: #b894ff; }
-.section.is-active .section__head h2 .section-letter:nth-child(3n) { color: #ff8ccf; }
+.section.is-active .accentuation-effect .section-letter:nth-child(3n+1) { color: #7ab6ff; }
+.section.is-active .accentuation-effect .section-letter:nth-child(3n+2) { color: #b894ff; }
+.section.is-active .accentuation-effect .section-letter:nth-child(3n) { color: #ff8ccf; }
 
 /* Nav Links */
 .nav__links {

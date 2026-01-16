@@ -1,14 +1,12 @@
 (function () {
   'use strict';
 
-  // Load project data
   async function loadProjects(source) {
     const res = await fetch(`assets/data/${source}.json`);
     if (!res.ok) throw new Error(`Failed to load ${source}.json`);
     return res.json();
   }
 
-  // Wrap text letters for animation
   function wrapLetters(text) {
     let globalIndex = 0;
     return text
@@ -18,7 +16,6 @@
       .join(' ');
   }
 
-  // Render project grid
   function renderGrid(container, projects, limit) {
     const slice = limit ? projects.slice(0, limit) : projects;
     const tpl = document.getElementById('card-template');
@@ -28,7 +25,6 @@
 
     let appended = 0;
     for (const p of slice) {
-      // Skip projects that have no tracks/musiques
       if (!p.tracks || !p.tracks.length) continue;
       if (tpl) {
         const node = tpl.content.cloneNode(true);
@@ -48,7 +44,6 @@
         frag.appendChild(node);
         appended++;
       } else {
-        // Fallback card creation
         const a = document.createElement('a');
         a.className = 'card';
         a.href = `project.html?source=${source}&id=${p.id}`;
@@ -84,7 +79,6 @@
     container.innerHTML = '';
     container.appendChild(frag);
 
-    // Calculate columns (robustly parse CSS and fallback to measurements)
     let columns = 1;
     try {
       const style = getComputedStyle(container);
@@ -101,8 +95,6 @@
       if (children.length) {
         const firstTop = children[0].offsetTop;
         measuredColumns = children.filter(c => c.offsetTop === firstTop).length;
-
-        // If layout hasn't stabilized yet, estimate columns using widths
         if (!measuredColumns) {
           const cw = container.clientWidth || 1;
           const childWidth = children[0].offsetWidth || Math.max(1, Math.floor(cw / (cssColumns || 2)));
@@ -115,7 +107,6 @@
       columns = 4;
     }
 
-    // Add placeholders
     const total = appended;
     const needed = (columns - (total % columns)) % columns;
     for (let i = 0; i < needed; i++) {
@@ -128,7 +119,6 @@
     }
   }
 
-  // Initialize grids
   async function initGrids() {
     const grids = document.querySelectorAll('.grid[data-source]');
     for (const grid of grids) {
@@ -144,7 +134,6 @@
       try {
         const projects = await loadProjects(source);
         renderGrid(grid, projects, limit);
-        // Debounced resize handler
         const debounced = (fn, wait = 120) => {
           let t;
           return (...args) => {
@@ -161,7 +150,6 @@
     }
   }
 
-  // Format duration
   function formatDuration(d) {
     if (!d && d !== 0) return '';
     if (typeof d === 'string') return d;
@@ -171,7 +159,6 @@
     return `${m}:${ss}`;
   }
 
-  // Load track duration
   function loadTrackDuration(track, durationEl) {
     const tempAudio = new Audio();
     tempAudio.preload = 'metadata';
@@ -184,7 +171,6 @@
     });
   }
 
-  // Render project detail
   function renderProjectDetail(project, source) {
     const root = document.getElementById('project-root');
     if (!root) return;
@@ -210,7 +196,6 @@
     const template = document.getElementById('project-template');
     const clone = template.content.cloneNode(true);
 
-    // Populate fields
     clone.querySelector('[data-field="name"]').textContent = project.name;
     clone.querySelector('.tracklist-card__title [data-field="name"]').textContent = project.name;
     const imgEl = clone.querySelector('[data-field="image"]');
@@ -218,7 +203,6 @@
     imgEl.alt = project.name;
     imgEl.loading = 'lazy';
     imgEl.decoding = 'async';
-    // Populate all description fields (there may be multiple places for description)
     clone.querySelectorAll('[data-field="description"]').forEach(el => {
       el.textContent = project.description || '';
     });
@@ -256,11 +240,9 @@
     root.innerHTML = '';
     root.appendChild(clone);
 
-    // Accentuate title
-    const titleEl = document.querySelector('.project-hero__title.accentuation-title');
+    const titleEl = document.querySelector('.project-hero__title.accentuation-effect');
     if (titleEl && typeof wrapSectionLetters === 'function') wrapSectionLetters(titleEl);
 
-    // Load durations
     const trackItems = document.querySelectorAll('.track');
     trackItems.forEach((item, i) => {
       const durationEl = item.querySelector('.track-duration');
@@ -269,7 +251,6 @@
 
     if (!tracksHtml) return;
 
-    // Player setup
     const playBtn = playerEl?.querySelector('#play');
     const prevBtn = playerEl?.querySelector('#prev');
     const nextBtn = playerEl?.querySelector('#next');
@@ -286,7 +267,6 @@
     let current = 0;
     let isPlaying = false;
 
-    // Update functions
     const updateActive = () => {
       trackItems.forEach(el => el.classList.remove('active'));
       const cur = document.querySelector(`.track[data-index="${current}"]`);
@@ -327,20 +307,9 @@
 
     const toggle = () => isPlaying ? pause() : play();
 
-    // Event listeners
     if (playBtn) playBtn.addEventListener('click', toggle);
-    if (prevBtn) prevBtn.addEventListener('click', () => {
-      if (current > 0) {
-        loadTrack(current - 1);
-        play();
-      }
-    });
-    if (nextBtn) nextBtn.addEventListener('click', () => {
-      if (current < project.tracks.length - 1) {
-        loadTrack(current + 1);
-        play();
-      }
-    });
+    if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) { loadTrack(current - 1); play(); } });
+    if (nextBtn) nextBtn.addEventListener('click', () => { if (current < project.tracks.length - 1) { loadTrack(current + 1); play(); } });
 
     trackItems.forEach(item => {
       const btn = item.querySelector('.play-track');
@@ -348,21 +317,13 @@
       btn.addEventListener('click', () => {
         const idx = parseInt(item.dataset.index, 10);
         if (idx === current && isPlaying) pause();
-        else {
-          loadTrack(idx);
-          play();
-        }
+        else { loadTrack(idx); play(); }
       });
     });
 
     audio.addEventListener('ended', () => {
-      if (current < project.tracks.length - 1) {
-        loadTrack(current + 1);
-        play();
-      } else {
-        pause();
-        audio.currentTime = 0;
-      }
+      if (current < project.tracks.length - 1) { loadTrack(current + 1); play(); }
+      else { pause(); audio.currentTime = 0; }
     });
 
     const updateTimeline = () => {
@@ -372,28 +333,21 @@
       timeline.setAttribute('aria-valuenow', Math.floor(pct));
       if (timeElapsedText) timeElapsedText.textContent = formatDuration(audio.currentTime || 0);
       if (timeTotalText) timeTotalText.textContent = audio.duration ? formatDuration(audio.duration) : '—';
-      // background of active track is uniform (no per-time fill)
     };
 
     audio.addEventListener('timeupdate', updateTimeline);
-
-    audio.addEventListener('loadedmetadata', () => {
-      if (timeTotalText) timeTotalText.textContent = formatDuration(audio.duration);
-      updateTimeline();
-    });
+    audio.addEventListener('loadedmetadata', () => { if (timeTotalText) timeTotalText.textContent = formatDuration(audio.duration); updateTimeline(); });
 
     if (timeline) timeline.addEventListener('click', e => {
       if (!audio.duration) return;
       const rect = timeline.getBoundingClientRect();
       const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      audio.currentTime = pct * audio.duration;
-      updateTimeline();
+      audio.currentTime = pct * audio.duration; updateTimeline();
     });
 
     if (project.tracks.length) loadTrack(0);
   }
 
-  // Initialize project page
   async function initProjectPage() {
     const params = new URLSearchParams(location.search);
     const source = params.get('source');
@@ -402,11 +356,7 @@
     if (!source || !id) {
       const root = document.getElementById('project-root');
       if (root) {
-        const p = document.createElement('p');
-        p.className = 'muted';
-        p.textContent = id ? `Project ${id} not found.` : 'Project not found.';
-        root.innerHTML = '';
-        root.appendChild(p);
+        const p = document.createElement('p'); p.className = 'muted'; p.textContent = id ? `Project ${id} not found.` : 'Project not found.'; root.innerHTML = ''; root.appendChild(p);
       }
       return;
     }
@@ -416,20 +366,13 @@
       const project = projects.find(p => p.id === id);
       if (!project) {
         const root = document.getElementById('project-root');
-        if (root) {
-          const p = document.createElement('p');
-          p.className = 'muted';
-          p.textContent = `Project ${id} not found.`;
-          root.innerHTML = '';
-          root.appendChild(p);
-        }
+        if (root) { const p = document.createElement('p'); p.className = 'muted'; p.textContent = `Project ${id} not found.`; root.innerHTML = ''; root.appendChild(p); }
         return;
       }
       renderProjectDetail(project, source);
     } catch (err) {
       console.error('Failed to load project:', err);
-      const root = document.getElementById('project-root');
-      if (root) root.innerHTML = '<p class="muted">Failed to load project.</p>';
+      const root = document.getElementById('project-root'); if (root) root.innerHTML = '<p class="muted">Failed to load project.</p>';
     }
   }
 

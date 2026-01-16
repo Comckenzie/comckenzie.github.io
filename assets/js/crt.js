@@ -1,49 +1,41 @@
 (function () {
   'use strict';
+(function () {
+  'use strict';
 
-  // Initialize CRT effect
-  function initCRT() {
-    try {
-      // Skip if reduced motion preferred
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const canvas = document.getElementById('crt-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width = 0;
+  let height = 0;
+  let raf = null;
 
-      const overlay = document.querySelector('.crt-overlay');
-      if (!overlay) return;
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    width = canvas.clientWidth * dpr;
+    height = canvas.clientHeight * dpr;
+    canvas.width = width;
+    canvas.height = height;
+  }
 
-      const wipe = overlay.querySelector('.crt-wipe');
-      const saved = (() => {
-        try { return localStorage.getItem('crt-enabled'); } catch (e) { return null; }
-      })();
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = 'rgba(0,0,0,0.08)';
+    for (let y = 0; y < height; y += 2) ctx.fillRect(0, y, width, 1);
 
-      // Respect explicit disabling: if element already has `crt-disabled`
-      // or localStorage explicitly set to 'false', keep CRT disabled.
-      const explicitlyDisabled = overlay.classList.contains('crt-disabled') || saved === 'false';
-      if (explicitlyDisabled) {
-        overlay.classList.add('crt-disabled');
-      } else if (saved === 'true') {
-        overlay.classList.remove('crt-disabled');
-      }
+    const grad = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height) / 1.2);
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.25)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, width, height);
 
-      // Wipe animation handler
-      const startWipe = () => {
-        if (!wipe || overlay.classList.contains('crt-disabled') || wipe.classList.contains('active')) return;
-        wipe.classList.add('active');
-        wipe.addEventListener('animationend', () => wipe.classList.remove('active'), { once: true });
-      };
+    raf = requestAnimationFrame(draw);
+  }
 
-      // Start periodic wipe
-      if (wipe) {
-        const startInterval = () => {
-          startWipe();
-          overlay.__crtWipeInterval = setInterval(startWipe, 30000);
-        };
-        setTimeout(startInterval, 30000);
-      }
+  function initCrt() { resize(); window.addEventListener('resize', resize); draw(); }
 
-      // Toggle handler
-      document.addEventListener('keydown', (e) => {
-        if (e.key?.toLowerCase() !== 'c' || e.metaKey || e.ctrlKey || e.altKey) return;
-        const disabled = overlay.classList.toggle('crt-disabled');
+  window.initCrt = initCrt;
+})();
         localStorage.setItem('crt-enabled', disabled ? 'false' : 'true');
 
         if (disabled) {

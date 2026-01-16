@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  // Set theme; optionally persist when the user toggles
   function setTheme(theme, save = true) {
     try {
       if (theme === 'dark') {
@@ -17,13 +16,11 @@
     updateThemeToggleIcon();
   }
 
-  // Toggle theme
   function toggleTheme() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     setTheme(isDark ? 'light' : 'dark');
   }
 
-  // Update toggle icon
   function updateThemeToggleIcon() {
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
@@ -46,17 +43,14 @@
     }
   }
 
-  // Initialize theme: use stored choice if present, otherwise follow system preference
   function initTheme() {
     try {
       let saved = null;
       try { saved = localStorage.getItem('theme'); } catch {}
 
       if (saved === 'dark' || saved === 'light') {
-        // Use persisted choice
         setTheme(saved, false);
       } else {
-        // No stored choice: follow system preference at startup
         const mq = matchMedia?.('(prefers-color-scheme: dark)');
         const systemDark = mq?.matches || false;
         setTheme(systemDark ? 'dark' : 'light', false);
@@ -71,7 +65,6 @@
         try { window.playUISound && window.playUISound('theme'); } catch (e) {}
         toggle.blur();
       });
-      // also play sound on keyboard activation
       toggle.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           try { window.playUISound && window.playUISound('theme'); } catch (e) {}

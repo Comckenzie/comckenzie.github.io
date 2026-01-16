@@ -1,13 +1,10 @@
 (function () {
   'use strict';
 
-  // Wrap navigation letters
   function wrapNavLetters(el) {
     const text = (el.textContent || '').trim();
     if (!text) return;
     el.textContent = '';
-    // Split into words so we can keep words as non-breaking blocks
-    // while still wrapping individual letters for the animation.
     const words = text.split(/\s+/);
     let globalIndex = 0;
     words.forEach((word, wIdx) => {
@@ -23,23 +20,18 @@
         globalIndex++;
       }
       el.appendChild(wordSpan);
-      // add a normal space between words so line breaks are allowed here
       if (wIdx < words.length - 1) el.appendChild(document.createTextNode(' '));
     });
   }
 
-  // Constants for rolling animation
   const CYRILLIC_LOWER = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
   const CYRILLIC_UPPER = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
 
-  // Start rolling animation
   function startRoll(element, durationMs = 1000) {
     const letters = Array.from(element.querySelectorAll('.nav-letter'));
     const originals = letters.map(l => l.textContent);
-
     const now0 = performance.now();
     const end = now0 + durationMs;
-
     const states = letters
       .map((span, index) => {
         const orig = originals[index];
@@ -52,14 +44,7 @@
           CYRILLIC_LOWER[Math.floor(Math.random() * CYRILLIC_LOWER.length)],
           orig,
         ];
-        return {
-          span,
-          index,
-          orig,
-          next: now0 + index * 30,
-          randChars,
-          charIndex: 0,
-        };
+        return { span, index, orig, next: now0 + index * 30, randChars, charIndex: 0 };
       })
       .filter(Boolean);
 
@@ -67,10 +52,7 @@
     let cancelled = false;
 
     function restore() {
-      letters.forEach((l, i) => {
-        l.textContent = originals[i];
-        l.style.opacity = '';
-      });
+      letters.forEach((l, i) => { l.textContent = originals[i]; l.style.opacity = ''; });
     }
 
     function tick(now) {
@@ -84,32 +66,20 @@
             else if (st.charIndex === 2) st.span.textContent = st.randChars[st.charIndex].toUpperCase();
             st.charIndex++;
           }
-          // Linear easing for interval
           st.next += 20 + (st.charIndex * 20);
         }
       });
 
-      if (now < end) {
-        rafId = requestAnimationFrame(tick);
-        return;
-      }
-
+      if (now < end) { rafId = requestAnimationFrame(tick); return; }
       restore();
       element.__navRollState = null;
     }
 
     rafId = requestAnimationFrame(tick);
 
-    return {
-      cancel() {
-        cancelled = true;
-        if (rafId) cancelAnimationFrame(rafId);
-        restore();
-      },
-    };
+    return { cancel() { cancelled = true; if (rafId) cancelAnimationFrame(rafId); restore(); } };
   }
 
-  // Add hover rolling effect
   function addRollHover(element) {
     element.addEventListener('mouseenter', () => {
       if (element.__navRollState) element.__navRollState.cancel();
@@ -123,13 +93,11 @@
     });
   }
 
-  // Get current page name
   function getCurrentPageName() {
     const name = window.location.pathname.split('/').pop();
     return name && name.length ? name : 'index.html';
   }
 
-  // Initialize navigation
   function initNav() {
     const page = getCurrentPageName();
     const links = document.querySelectorAll('.nav__desktop-menu a, .nav__mobile-menu a, .nav__submenu a');
@@ -137,18 +105,9 @@
 
     links.forEach(a => {
       const href = a.getAttribute('href');
-      if (a.closest('.nav__desktop-menu') && !a.closest('.nav__dropdown')) {
-        wrapNavLetters(a);
-        addRollHover(a);
-      }
-      // scramble effect for dropdown links
-      if (a.closest('.nav__submenu')) {
-        wrapNavLetters(a);
-        addRollHover(a);
-      }
-       if (a.closest('.nav__mobile-menu')) {
-        wrapNavLetters(a);
-      }
+      if (a.closest('.nav__desktop-menu') && !a.closest('.nav__dropdown')) { wrapNavLetters(a); addRollHover(a); }
+      if (a.closest('.nav__submenu')) { wrapNavLetters(a); addRollHover(a); }
+      if (a.closest('.nav__mobile-menu')) { wrapNavLetters(a); }
       if (!href) return;
       const linkUrl = new URL(href, window.location.href);
       const target = linkUrl.pathname.split('/').pop() || 'index.html';
@@ -163,36 +122,21 @@
         } else if (!a.closest('.nav__dropdown') && !a.classList.contains('nav__projects-toggle')) {
           a.classList.add('is-active');
         }
-      } else {
-        a.classList.remove('is-active');
-      }
+      } else a.classList.remove('is-active');
     });
 
-    // Dropdown hover
     const dropdown = document.querySelector('.nav__dropdown');
     const submenu = document.querySelector('.nav__submenu');
     if (dropdown && submenu) {
       let hideTimeout;
-      function showSubmenu() {
-        if (window.innerWidth > 900) {
-            clearTimeout(hideTimeout);
-            submenu.style.display = 'block';
-        }
-      }
-      function hideSubmenu() {
-        if (window.innerWidth > 900) {
-            hideTimeout = setTimeout(() => {
-            submenu.style.display = 'none';
-            }, 200);
-        }
-      }
+      function showSubmenu() { if (window.innerWidth > 900) { clearTimeout(hideTimeout); submenu.style.display = 'block'; } }
+      function hideSubmenu() { if (window.innerWidth > 900) { hideTimeout = setTimeout(() => { submenu.style.display = 'none'; }, 200); } }
       dropdown.addEventListener('mouseenter', showSubmenu);
       dropdown.addEventListener('mouseleave', hideSubmenu);
       submenu.addEventListener('mouseenter', showSubmenu);
       submenu.addEventListener('mouseleave', hideSubmenu);
     }
 
-    // Mobile nav toggle: open/close and accessibility updates
     const navToggle = document.getElementById('nav-toggle');
     const navRoot = document.getElementById('nav');
     const projectsToggle = document.querySelector('.nav__projects-toggle');
@@ -202,56 +146,32 @@
       navToggle.setAttribute('aria-expanded', String(open));
       navRoot.classList.toggle('is-open', open);
       document.body.classList.toggle('nav-open', open);
-      if (!open) {
-        navRoot.classList.remove('show-projects-menu');
-      }
+      if (!open) navRoot.classList.remove('show-projects-menu');
     }
 
     if (navToggle && navRoot) {
       navToggle.addEventListener('click', (e) => {
-        if (navRoot.classList.contains('show-projects-menu')) {
-          navRoot.classList.remove('show-projects-menu');
-        } else {
-          const isOpen = navRoot.classList.contains('is-open');
-          setNavOpen(!isOpen);
-        }
+        if (navRoot.classList.contains('show-projects-menu')) navRoot.classList.remove('show-projects-menu');
+        else { const isOpen = navRoot.classList.contains('is-open'); setNavOpen(!isOpen); }
       });
 
-      if(projectsToggle) {
-        projectsToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            navRoot.classList.add('show-projects-menu');
-        });
-      }
+      if(projectsToggle) projectsToggle.addEventListener('click', (e) => { e.preventDefault(); navRoot.classList.add('show-projects-menu'); });
 
-      // Close on Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navRoot.classList.contains('is-open')) {
-          if (navRoot.classList.contains('show-projects-menu')) {
-            navRoot.classList.remove('show-projects-menu');
-          } else {
-            setNavOpen(false);
-          }
+          if (navRoot.classList.contains('show-projects-menu')) navRoot.classList.remove('show-projects-menu');
+          else setNavOpen(false);
         }
       });
 
-      // Close when clicking a link (but not projects dropdown)
       document.addEventListener('click', (e) => {
         if (!navRoot.classList.contains('is-open')) return;
         const target = e.target;
-        
-        if (window.innerWidth <= 900 && target.closest('.nav__projects-toggle')) {
-            return;
-        }
-
-        if (target.closest('.nav__panel a')) {
-           setNavOpen(false);
-        } else if (!navRoot.contains(target) && !navToggle.contains(target)) {
-           setNavOpen(false);
-        }
+        if (window.innerWidth <= 900 && target.closest('.nav__projects-toggle')) return;
+        if (target.closest('.nav__panel a')) setNavOpen(false);
+        else if (!navRoot.contains(target) && !navToggle.contains(target)) setNavOpen(false);
       });
     }
-
   }
 
   window.initNav = initNav;
