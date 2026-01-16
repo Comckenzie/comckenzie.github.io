@@ -1,7 +1,5 @@
 (function () {
   'use strict';
-(function () {
-  'use strict';
 
   const canvas = document.getElementById('crt-canvas');
   if (!canvas) return;
@@ -35,26 +33,4 @@
   function initCrt() { resize(); window.addEventListener('resize', resize); draw(); }
 
   window.initCrt = initCrt;
-})();
-        localStorage.setItem('crt-enabled', disabled ? 'false' : 'true');
-
-        if (disabled) {
-          if (overlay.__crtWipeInterval) {
-            clearInterval(overlay.__crtWipeInterval);
-            overlay.__crtWipeInterval = null;
-          }
-        } else if (!overlay.__crtWipeInterval && wipe) {
-          const startInterval = () => {
-            startWipe();
-            overlay.__crtWipeInterval = setInterval(startWipe, 30000);
-          };
-          setTimeout(startInterval, 30000);
-        }
-      });
-    } catch (err) {
-      console.error('CRT init failed', err);
-    }
-  }
-
-  window.initCRT = initCRT;
 })();
