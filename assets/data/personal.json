@@ -2,7 +2,7 @@
   {
     "id": "super-mario-gravity",
     "name": "Super Mario Gravity",
-    "description": "Super Mario Gravity is a Super Mario Galaxy 2 mod by Louis Miles. First released as a demo in 2016, then a second demo in 2022, and still being worked on. It's a complete game with multiple levels and galaxies.",
+    "description": "Super Mario Gravity is a Super Mario Galaxy 2 mod created by Louis Miles; first released as a demo in 2016, then a second demo in 2022. It is still currently being worked on. The soundtrack aims to recreate the same musical and electronic style used in the original Super Mario Galaxy games.",
     "creator": "Louis Miles",
     "video": "https://www.youtube.com/embed/_eBBxY5oniE",
     "tracks": [
@@ -28,7 +28,7 @@
   {
     "id": "sin-prince",
     "name": "The Sin Prince",
-    "description": "Dark orchestral score for a fantasy narrative.",
+    "description": "The Sin Prince is an unreleased passion project. It's a dark and moody platformer game with rpg elements. The soundtrack uses a mix of orchestral and electronic sounds.",
     "creator": null,
     "tracks": [
       { "title": "A Story", "path": "assets/projects/personal/sin-prince/AStory.mp3" },
@@ -40,7 +40,7 @@
   {
     "id": "tabula-rasa",
     "name": "Tabula Rasa",
-    "description": "This is the first Pokémon fan-game I composed music for. It gave me a fair amount of experience in making various battle and area themes in a retro style.",
+    "description": "This is the first Pokémon fan-game I composed music for, well before I had more professional experience. It gave me a fair amount of experience in making various battle and area themes in a retro style.",
     "creator": null,
     "tracks": [
       { "title": "Battle Essentia", "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3" },
