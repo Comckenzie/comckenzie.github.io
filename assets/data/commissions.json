@@ -1,12 +1,12 @@
 ﻿[
   {
     "id": "others",
-    "name": "Other Commissions",
+    "name": "Commissioned work",
     "description": "Miscellaneous commissioned works and soundtracks.",
     "creator": null,
     "tracks": [
-      { "title": "Battle! Paradox Pokemon Remix", "path": "assets/projects/commissions/others/Battle!ParadoxPokemonRemix.mp3" },
-      { "title": "NIGHT", "path": "assets/projects/commissions/others/NIGHT.wav" },
+      { "title": "RPG Battle Theme", "path": "assets/projects/commissions/others/Battle_Gonwind_East.mp3" },
+      { "title": "Night Theme", "path": "assets/projects/commissions/others/NIGHT.wav" },
       { "title": "Town Theme", "path": "assets/projects/commissions/others/TownTheme.mp3" },
       { "title": "The Soul Distorted", "path": "assets/projects/commissions/others/TheSoulDistorted.wav" }
     ]
