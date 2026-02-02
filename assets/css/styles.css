@@ -1727,5 +1727,3 @@ a[href^="tel:"]:hover {
   font-weight: 600;
 }
 .legal-card p { margin: 0 0 12px 0; }
-
-/* Button-specific rules removed: rely on .iconbtn base styles for all buttons */
