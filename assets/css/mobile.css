@@ -388,32 +388,47 @@
 /* Icon Buttons */
 @media (max-width: 700px) {
   .iconbtn { 
-    min-width: 36px; 
-    min-height: 36px; 
-    padding: 6px; 
+    width: 36px; 
+    height: 36px;
+    padding: 0; 
+  }
+  .socialbtn {
+    min-height: 36px;
+    padding: 4px 12px;
   }
   .iconbtn > img, 
   .iconbtn > svg, 
-  .iconbtn > i { 
+  .iconbtn > i,
+  .socialbtn > img,
+  .socialbtn > svg,
+  .socialbtn > i { 
     height: 20px; 
     width: auto; 
+    font-size: 20px;
   }
   .nav__right .iconbtn, 
   .theme-toggle { 
+    width: 36px; 
     height: 36px; 
-    min-width: 36px; 
   }
 }
 
 @media (max-width: 420px) {
   .iconbtn { 
-    min-width: 32px; 
-    min-height: 32px; 
-    padding: 4px; 
+    width: 32px; 
+    height: 32px; 
+    padding: 0; 
+  }
+  .socialbtn {
+    min-height: 32px;
+    padding: 4px 10px;
   }
   .iconbtn > img, 
   .iconbtn > svg, 
-  .iconbtn > i { height: 18px; }
+  .iconbtn > i,
+  .socialbtn > img,
+  .socialbtn > svg,
+  .socialbtn > i { height: 18px; font-size: 18px; }
 }
 
 /* Theme Toggle */
