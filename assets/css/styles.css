@@ -1253,38 +1253,12 @@ a[href^="tel:"]:hover {
   margin-top: 32px;
 }
 
-.contact-social-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 16px;
-  padding: 4px 8px;
-  min-width: 32px;
-  min-height: 32px;
-  white-space: nowrap;
-  background: var(--bg);
-  border: var(--border-thick);
-  box-shadow: var(--shadow-flat);
-  outline: none;
-}
-
-.contact-social-btn:focus,
-.contact-social-btn:active {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--accent);
-}
-
-.contact-social-btn i {
-  font-size: 18px;
-  display: inline-block;
-}
-
 .contact-social-label {
   font-family: var(--font-body);
   font-size: 16px;
+  line-height: 1;
   color: var(--text);
   letter-spacing: 0.01em;
-  display: inline-block;
 }
 
 .strength__desc {
