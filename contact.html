@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact</title>
+  <title>Contact — Charlie McKenzie</title>
+  <meta name="description" content="Get in touch with Charlie McKenzie to commission custom music and sound design for your video game or media project." />
+  <link rel="canonical" href="https://www.charliemckenziemusic.com/contact.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -64,6 +66,51 @@
               <span class="contact-social-label">Terms of Service</span>
             </a>
           </div>
+
+<!-- 
+          <div class="separator">
+            <hr>
+            <span>OR</span>
+            <hr>
+          </div>
+
+          <div id="contact-form" class="contact-form-container">
+            <h2>Send a message</h2>
+            <form id="fs-form" action="https://formspree.io/f/mqkenrdz" method="POST" class="contact-form">
+              <div class="form-group">
+                <label for="name">Name / Studio</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="project-type">Project Type</label>
+                <select id="project-type" name="project_type">
+                  <option value="Commission">Commission</option>
+                  <option value="Collaboration">Collaboration</option>
+                  <option value="Full OST">Full OST</option>
+                  <option value="Sound Design">Sound Design</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Project Description</label>
+                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, the vibe you're looking for, and any specific requirements." required></textarea>
+              </div>
+              
+              <input type="text" name="_gotcha" style="display:none">
+              
+              <div id="form-status" class="form-status"></div>
+              
+              <button type="submit" id="form-submit" class="btn btn--primary">
+                <span class="btn-text">Submit Message</span>
+                <span class="btn-loader" style="display:none"><i class="fa-solid fa-circle-notch fa-spin"></i> Sending...</span>
+              </button>
+            </form>
+          </div>
+          -->
         </div>
       </div>
     </section>
@@ -76,6 +123,8 @@
   <script src="assets/js/projects.js" defer></script>
   <script src="assets/js/crt.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script> <script> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
+  <!-- <script src="assets/js/form.js" defer></script> -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' defer></script>
+  <script defer> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
 </body>
 </html>
