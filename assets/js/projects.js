@@ -129,6 +129,19 @@
         grid.dataset.source = source;
         const heading = document.getElementById('projects-heading');
         if (heading) heading.textContent = source === 'commissions' ? 'Commissions' : 'Personal Projects';
+        if (source === 'commissions') {
+          document.title = 'Commissions — Charlie McKenzie | Game Music Composer for Hire';
+          const descEl = document.querySelector('meta[name="description"]');
+          if (descEl) descEl.setAttribute('content', 'Commission custom music and sound design from Charlie McKenzie — RPG themes, retro soundtracks, atmospheric tracks, and full OSTs for indie games, fan games, and ROM hacks.');
+          const canonicalEl = document.querySelector('link[rel="canonical"]');
+          if (canonicalEl) canonicalEl.setAttribute('href', 'https://www.charliemckenziemusic.com/projects.html?source=commissions');
+        } else {
+          document.title = 'Personal Projects — Charlie McKenzie | Indie & Fan Game Soundtracks';
+          const descEl = document.querySelector('meta[name="description"]');
+          if (descEl) descEl.setAttribute('content', 'Original soundtracks and personal compositions by Charlie McKenzie — including Super Mario Galaxy 2 mods, RPG fan games, and passion projects. Retro, orchestral, and electronic styles.');
+          const canonicalEl = document.querySelector('link[rel="canonical"]');
+          if (canonicalEl) canonicalEl.setAttribute('href', 'https://www.charliemckenziemusic.com/projects.html?source=personal');
+        }
       }
       const limit = grid.dataset.limit ? parseInt(grid.dataset.limit, 10) : null;
       try {
@@ -369,6 +382,11 @@
         if (root) { const p = document.createElement('p'); p.className = 'muted'; p.textContent = `Project ${id} not found.`; root.innerHTML = ''; root.appendChild(p); }
         return;
       }
+      document.title = `${project.name} — Charlie McKenzie`;
+      const descEl = document.querySelector('meta[name="description"]');
+      if (descEl) descEl.setAttribute('content', project.description ? project.description.slice(0, 160) : `${project.name} — music and sound design by Charlie McKenzie.`);
+      const canonicalEl = document.querySelector('link[rel="canonical"]');
+      if (canonicalEl) canonicalEl.setAttribute('href', `https://www.charliemckenziemusic.com/project.html?source=${source}&id=${project.id}`);
       renderProjectDetail(project, source);
     } catch (err) {
       console.error('Failed to load project:', err);

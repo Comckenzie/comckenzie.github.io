@@ -8,25 +8,27 @@
 
   <!-- Meta descriptions enrichies avec mots-clés -->
   <meta name="description"
-    content="Charlie McKenzie - Professional retro video game composer specializing in chiptune music, and nostalgic game soundtracks. Composer for indie games, ROM hacks, and retro-style projects." />
+    content="Charlie McKenzie is a composer and sound designer for indie video games, ROM hacks, and fan games — creating retro, RPG, orchestral, and electronic soundtracks tailored to your project's mood and identity. Open for commissions worldwide." />
   <meta name="keywords"
-    content="Charlie McKenzie, retro game composer, video game composer, chiptune composer, 8-bit music, 16-bit music, retro game music, indie game composer, game sound design, ROM hack music, Super Mario music, nostalgic game music, pixel art games composer, retro gaming soundtrack" />
+    content="Charlie McKenzie, indie game composer for hire, ROM hack music composer, fan game soundtrack, RPG music composer, retro game music commission, chiptune composer, video game sound designer, Super Mario mod music, orchestral game music, electronic game soundtrack" />
   <meta name="author" content="Charlie McKenzie" />
 
   <!-- Open Graph optimisé -->
-  <meta property="og:title" content="Charlie McKenzie - Retro Video Game Composer" />
+  <meta property="og:title" content="Charlie McKenzie — Composer for Indie Games & ROM Hacks" />
   <meta property="og:description"
-    content="Professional composer specializing in retro game music, chiptune, and nostalgic video game soundtracks for indie games and ROM hacks." />
+    content="Composer and sound designer creating retro, RPG, orchestral, and electronic music for indie games, fan games, and ROM hacks. Open for commissions." />
   <meta property="og:image" content="https://www.charliemckenziemusic.com/assets/images/pfp.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.charliemckenziemusic.com/" />
   <meta property="og:site_name" content="Charlie McKenzie Music" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Charlie McKenzie - Retro Game Composer" />
+  <meta name="twitter:title" content="Charlie McKenzie — Composer for Indie Games & ROM Hacks" />
   <meta name="twitter:description"
-    content="Composer for retro games, chiptune music, and nostalgic video game soundtracks." />
+    content="Composer and sound designer for indie games, fan games, and ROM hacks. Retro, RPG, orchestral, and electronic styles. Open for commissions." />
   <meta name="twitter:image" content="https://www.charliemckenziemusic.com/assets/images/pfp.png" />
 
   <!-- Schema.org JSON-LD -->
@@ -36,7 +38,7 @@
     "@type": "Person",
     "name": "Charlie McKenzie",
     "jobTitle": "Composer, Producer, Sound Designer",
-    "description": "Composer for video games and visual media. Creating interactive, atmospheric music and sound design for indie games and film.",
+    "description": "Composer and sound designer for indie video games, ROM hacks, and fan games. Specializing in retro, RPG, orchestral, and electronic soundtracks. Has composed for Super Mario Galaxy 2 mods, indie game projects, and Pokémon fan games since 2016.",
     "url": "https://www.charliemckenziemusic.com/",
     "image": "https://www.charliemckenziemusic.com/assets/images/pfp.png",
     "sameAs": [
@@ -139,6 +141,22 @@
   }
   </script>
 
+  <!-- Review schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Service",
+      "name": "Music Composition & Sound Design",
+      "provider": { "@type": "Person", "name": "Charlie McKenzie" }
+    },
+    "reviewBody": "Charlie's music brought our entire mod to life. The attention and understanding of the project, and attention to detail, shows off in the music, which perfectly fit the project's vibe.",
+    "author": { "@type": "Person", "name": "Léo Tosku (L-DEV31)" },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+  }
+  </script>
+
   <!-- Breadcrumb schema -->
   <script type="application/ld+json">
   {
@@ -163,7 +181,8 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/mobile.css" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
 </head>
 
 <body>
@@ -300,9 +319,8 @@
   <script src="assets/js/projects.js" defer></script>
   <script src="assets/js/crt.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' defer></script>
-  <script
-    defer> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
 </body>
 
 </html>
