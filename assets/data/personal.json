@@ -1,5 +1,17 @@
 [
   {
+    "id": "snowfall",
+    "name": "Snowfall on the bayou",
+    "description": "An itch.io game I did all the sound design for. You are a lone survivor trying to live in a nuclear winter post war in the deep south arctic forest. The player must venture out and collect plants and crops to grow their farm back at base. Survive a Nuclear winter by using the radioactive plants and crops to find a way to farm and survive in a snowy hellscape filled with hazards and monsters moving just beyond your sight.",
+    "creator": null,
+    "tracks": [
+      { "title": "Main Menu", "path": "assets/projects/personal/snowfall/main_menu.wav" },
+      { "title": "Before The Descent (Ambient Theme 1)", "path": "assets/projects/personal/snowfall/Before_The_Descent_(Ambient_Theme_1).wav" },
+      { "title": "Snowfall Below (Ambient Theme 2)", "path": "assets/projects/personal/snowfall/Snowfall_Below_(Ambient_theme_2).wav" },
+      { "title": "White Harvest", "path": "assets/projects/personal/snowfall/White_Harvest.wav" }
+    ]
+  },
+  {
     "id": "super-mario-gravity",
     "name": "Super Mario Gravity",
     "description": "Super Mario Gravity is a Super Mario Galaxy 2 mod created by Louis Miles; first released as a demo in 2016, then a second demo in 2022. It is still currently being worked on. The soundtrack aims to recreate the same musical and electronic style used in the original Super Mario Galaxy games.",

@@ -969,6 +969,7 @@ main {
   margin: 0 auto;
   aspect-ratio: auto;
   height: auto;
+  outline: var(--border-thick);
 }
 
 .testimonials {
