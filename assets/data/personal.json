@@ -2,13 +2,26 @@
   {
     "id": "snowfall",
     "name": "Snowfall on the bayou",
-    "description": "An itch.io game I did all the sound design for. You are a lone survivor trying to live in a nuclear winter post war in the deep south arctic forest. The player must venture out and collect plants and crops to grow their farm back at base. Survive a Nuclear winter by using the radioactive plants and crops to find a way to farm and survive in a snowy hellscape filled with hazards and monsters moving just beyond your sight.",
+    "description": "This was an original soundtrack created for a semester-long collaborative game production class. The overall mood of the soundtrack was designed to replicate the lonely but strangely peaceful atmosphere of a post apocalyptic winter.",
     "creator": null,
+    "video": "https://www.youtube.com/embed/orZqihwLt5I",
     "tracks": [
-      { "title": "Main Menu", "path": "assets/projects/personal/snowfall/main_menu.wav" },
-      { "title": "Before The Descent (Ambient Theme 1)", "path": "assets/projects/personal/snowfall/Before_The_Descent_(Ambient_Theme_1).wav" },
-      { "title": "Snowfall Below (Ambient Theme 2)", "path": "assets/projects/personal/snowfall/Snowfall_Below_(Ambient_theme_2).wav" },
-      { "title": "White Harvest", "path": "assets/projects/personal/snowfall/White_Harvest.wav" }
+      {
+        "title": "Main Menu",
+        "path": "assets/projects/personal/snowfall/main_menu.wav"
+      },
+      {
+        "title": "Before The Descent (Ambient Theme 1)",
+        "path": "assets/projects/personal/snowfall/Before_The_Descent_(Ambient_Theme_1).wav"
+      },
+      {
+        "title": "Snowfall Below (Ambient Theme 2)",
+        "path": "assets/projects/personal/snowfall/Snowfall_Below_(Ambient_theme_2).wav"
+      },
+      {
+        "title": "White Harvest",
+        "path": "assets/projects/personal/snowfall/White_Harvest.wav"
+      }
     ]
   },
   {
@@ -18,10 +31,22 @@
     "creator": "Louis Miles",
     "video": "https://www.youtube.com/embed/_eBBxY5oniE",
     "tracks": [
-      { "title": "Beat Street Galaxy", "path": "assets/projects/personal/super-mario-gravity/BeatStreetGalaxy.mp3" },
-      { "title": "Clam Noodle Beach Galaxy", "path": "assets/projects/personal/super-mario-gravity/ClamNoodleBeachGalaxy.mp3" },
-      { "title": "World 3", "path": "assets/projects/personal/super-mario-gravity/World3.mp3" },
-      { "title": "World 4", "path": "assets/projects/personal/super-mario-gravity/World4.wav" }
+      {
+        "title": "Beat Street Galaxy",
+        "path": "assets/projects/personal/super-mario-gravity/BeatStreetGalaxy.mp3"
+      },
+      {
+        "title": "Clam Noodle Beach Galaxy",
+        "path": "assets/projects/personal/super-mario-gravity/ClamNoodleBeachGalaxy.mp3"
+      },
+      {
+        "title": "World 3",
+        "path": "assets/projects/personal/super-mario-gravity/World3.mp3"
+      },
+      {
+        "title": "World 4",
+        "path": "assets/projects/personal/super-mario-gravity/World4.wav"
+      }
     ]
   },
   {
@@ -31,10 +56,22 @@
     "creator": "SMAG Team",
     "video": "https://www.youtube.com/embed/MMpBh_gVShs",
     "tracks": [
-      { "title": "Pollen Highlands Galaxy (Night)", "path": "assets/projects/personal/super-mario-another-galaxy/PollenHighlandsGalaxy_night.mp3" },
-      { "title": "Pumpkin Town Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/PumpkinTownGalaxy.mp3" },
-      { "title": "Space Port Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/SpacePortGalaxy.mp3" },
-      { "title": "Up Down Ruin Galaxy", "path": "assets/projects/personal/super-mario-another-galaxy/UpDownRuinGalaxy.mp3" }
+      {
+        "title": "Pollen Highlands Galaxy (Night)",
+        "path": "assets/projects/personal/super-mario-another-galaxy/PollenHighlandsGalaxy_night.mp3"
+      },
+      {
+        "title": "Pumpkin Town Galaxy",
+        "path": "assets/projects/personal/super-mario-another-galaxy/PumpkinTownGalaxy.mp3"
+      },
+      {
+        "title": "Space Port Galaxy",
+        "path": "assets/projects/personal/super-mario-another-galaxy/SpacePortGalaxy.mp3"
+      },
+      {
+        "title": "Up Down Ruin Galaxy",
+        "path": "assets/projects/personal/super-mario-another-galaxy/UpDownRuinGalaxy.mp3"
+      }
     ]
   },
   {
@@ -43,10 +80,22 @@
     "description": "The Sin Prince is an unreleased passion project. It's a dark and moody platformer game with rpg elements. The soundtrack uses a mix of orchestral and electronic sounds.",
     "creator": null,
     "tracks": [
-      { "title": "A Story", "path": "assets/projects/personal/sin-prince/AStory.mp3" },
-      { "title": "Blooming Death", "path": "assets/projects/personal/sin-prince/BloomingDeath.mp3" },
-      { "title": "For Science", "path": "assets/projects/personal/sin-prince/ForScience.mp3" },
-      { "title": "Into The Dweller's Hollow", "path": "assets/projects/personal/sin-prince/IntoTheDwellersHollow.mp3" }
+      {
+        "title": "A Story",
+        "path": "assets/projects/personal/sin-prince/AStory.mp3"
+      },
+      {
+        "title": "Blooming Death",
+        "path": "assets/projects/personal/sin-prince/BloomingDeath.mp3"
+      },
+      {
+        "title": "For Science",
+        "path": "assets/projects/personal/sin-prince/ForScience.mp3"
+      },
+      {
+        "title": "Into The Dweller's Hollow",
+        "path": "assets/projects/personal/sin-prince/IntoTheDwellersHollow.mp3"
+      }
     ]
   },
   {
@@ -55,9 +104,18 @@
     "description": "This is the first Pokémon fan-game I composed music for, well before I had more professional experience. It gave me a fair amount of experience in making various battle and area themes in a retro style.",
     "creator": null,
     "tracks": [
-      { "title": "Battle Essentia", "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3" },
-      { "title": "Battle Novus Syndicate", "path": "assets/projects/personal/tabula-rasa/BattleNovusSyndicate.mp3" },
-      { "title": "Mt. Throne", "path": "assets/projects/personal/tabula-rasa/MtThrone.mp3" }
+      {
+        "title": "Battle Essentia",
+        "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3"
+      },
+      {
+        "title": "Battle Novus Syndicate",
+        "path": "assets/projects/personal/tabula-rasa/BattleNovusSyndicate.mp3"
+      },
+      {
+        "title": "Mt. Throne",
+        "path": "assets/projects/personal/tabula-rasa/MtThrone.mp3"
+      }
     ]
   },
   {
