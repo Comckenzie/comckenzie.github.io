@@ -3,7 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project — Charlie McKenzie</title>
+  
+  <script>
+    try {
+      const target = sessionStorage.getItem('page-transition-target');
+      const current = new URL(location.href);
+      current.hash = '';
+      if (target === current.href && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('page-transition-pending');
+        window.__pageTransitionSafetyTimer = setTimeout(() => document.documentElement.classList.remove('page-transition-pending'), 3000);
+      }
+    } catch {}
+  </script>
+<title>Project — Charlie McKenzie</title>
   <meta name="description" content="View details, listen to tracks, and explore sound design work for this project by Charlie McKenzie." />
   <link rel="canonical" href="https://www.charliemckenziemusic.com/project.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -56,7 +68,7 @@
           <p class="project-hero__desc" data-field="description"></p>
         </div>
       </section>
-      <section class="project-desc container" data-conditional="no-video">
+      <section class="project-desc container hidden" data-conditional="no-video">
         <p class="project-hero__desc" data-field="description"></p>
       </section>
       <section class="project-content container">
@@ -88,15 +100,13 @@
   </template>
 
   <footer id="site-footer"></footer>
+  <script src="assets/js/sound.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/theme.js" defer></script>
   <script src="assets/js/projects.js" defer></script>
-  <script src="assets/js/crt.js" defer></script>
+  <script src="assets/js/transition.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script>
-    if (window.initProjectPage) window.initProjectPage();
-  </script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' defer></script>
-  <script> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
+  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js" defer></script>
+  <script src="assets/js/kofi.js" defer></script>
 </body>
 </html>

@@ -1,5 +1,57 @@
 [
   {
+    "id": "b.a.m",
+    "name": "B.A.M",
+    "description": "",
+    "creator": null,
+    "tracks": [
+      {
+        "title": "Main Menu",
+        "file": "main-menu.wav"
+      },
+      {
+        "title": "Upgrade Menu Theme",
+        "file": "upgrade-menu-theme.wav"
+      }
+    ]
+  },
+  {
+    "id": "spear-head",
+    "name": "Spear Head",
+    "description": "",
+    "creator": null,
+    "tracks": [
+      {
+        "title": "Main Menu",
+        "file": "main-menu.wav"
+      },
+      {
+        "title": "Ambient Track",
+        "file": "ambient-track.wav"
+      },
+      {
+        "title": "Mini Boss",
+        "file": "mini-boss.wav"
+      }
+    ]
+  },
+  {
+    "id": "full-tilt",
+    "name": "Full Tilt",
+    "description": "Full Tilt is a pinball game created for a collaborative game production class. The soundtrack has a signature jazzy sound that aimed to capture an old fashioned, unique pub pinball vibe.",
+    "creator": null,
+    "tracks": [
+      {
+        "title": "Background Track 1",
+        "file": "background-track-1.wav"
+      },
+      {
+        "title": "Background Track 2",
+        "file": "background-track-2.wav"
+      }
+    ]
+  },
+  {
     "id": "snowfall",
     "name": "Snowfall on the bayou",
     "description": "This original soundtrack was created for a semester-long collaborative game production class. The music was designed to capture the lonely yet strangely peaceful atmosphere of a post-apocalyptic winter. The soundtrack received Honorable Mention (Second Place) in Music at the 2026 G.A.N.G. Student Competition.",
@@ -8,19 +60,19 @@
     "tracks": [
       {
         "title": "Main Menu",
-        "path": "assets/projects/personal/snowfall/main_menu.wav"
+        "file": "main-menu.wav"
       },
       {
         "title": "Before The Descent (Ambient Theme 1)",
-        "path": "assets/projects/personal/snowfall/Before_The_Descent_(Ambient_Theme_1).wav"
+        "file": "before-the-descent-ambient-theme-1.wav"
       },
       {
         "title": "Snowfall Below (Ambient Theme 2)",
-        "path": "assets/projects/personal/snowfall/Snowfall_Below_(Ambient_theme_2).wav"
+        "file": "snowfall-below-ambient-theme-2.wav"
       },
       {
         "title": "White Harvest",
-        "path": "assets/projects/personal/snowfall/White_Harvest.wav"
+        "file": "white-harvest.wav"
       }
     ]
   },
@@ -33,19 +85,19 @@
     "tracks": [
       {
         "title": "Beat Street Galaxy",
-        "path": "assets/projects/personal/super-mario-gravity/BeatStreetGalaxy.mp3"
+        "file": "beat-street-galaxy.mp3"
       },
       {
         "title": "Clam Noodle Beach Galaxy",
-        "path": "assets/projects/personal/super-mario-gravity/ClamNoodleBeachGalaxy.mp3"
+        "file": "clam-noodle-beach-galaxy.mp3"
       },
       {
         "title": "World 3",
-        "path": "assets/projects/personal/super-mario-gravity/World3.mp3"
+        "file": "world-3.mp3"
       },
       {
         "title": "World 4",
-        "path": "assets/projects/personal/super-mario-gravity/World4.wav"
+        "file": "world-4.wav"
       }
     ]
   },
@@ -58,19 +110,19 @@
     "tracks": [
       {
         "title": "Pollen Highlands Galaxy (Night)",
-        "path": "assets/projects/personal/super-mario-another-galaxy/PollenHighlandsGalaxy_night.mp3"
+        "file": "pollen-highlands-galaxy-night.mp3"
       },
       {
         "title": "Pumpkin Town Galaxy",
-        "path": "assets/projects/personal/super-mario-another-galaxy/PumpkinTownGalaxy.mp3"
+        "file": "pumpkin-town-galaxy.mp3"
       },
       {
         "title": "Space Port Galaxy",
-        "path": "assets/projects/personal/super-mario-another-galaxy/SpacePortGalaxy.mp3"
+        "file": "space-port-galaxy.mp3"
       },
       {
         "title": "Up Down Ruin Galaxy",
-        "path": "assets/projects/personal/super-mario-another-galaxy/UpDownRuinGalaxy.mp3"
+        "file": "up-down-ruin-galaxy.mp3"
       }
     ]
   },
@@ -82,19 +134,19 @@
     "tracks": [
       {
         "title": "A Story",
-        "path": "assets/projects/personal/sin-prince/AStory.mp3"
+        "file": "a-story.mp3"
       },
       {
         "title": "Blooming Death",
-        "path": "assets/projects/personal/sin-prince/BloomingDeath.mp3"
+        "file": "blooming-death.mp3"
       },
       {
         "title": "For Science",
-        "path": "assets/projects/personal/sin-prince/ForScience.mp3"
+        "file": "for-science.mp3"
       },
       {
         "title": "Into The Dweller's Hollow",
-        "path": "assets/projects/personal/sin-prince/IntoTheDwellersHollow.mp3"
+        "file": "into-the-dwellers-hollow.mp3"
       }
     ]
   },
@@ -106,15 +158,15 @@
     "tracks": [
       {
         "title": "Battle Essentia",
-        "path": "assets/projects/personal/tabula-rasa/BattleEssentia.mp3"
+        "file": "battle-essentia.mp3"
       },
       {
         "title": "Battle Novus Syndicate",
-        "path": "assets/projects/personal/tabula-rasa/BattleNovusSyndicate.mp3"
+        "file": "battle-novus-syndicate.mp3"
       },
       {
         "title": "Mt. Throne",
-        "path": "assets/projects/personal/tabula-rasa/MtThrone.mp3"
+        "file": "mt-throne.mp3"
       }
     ]
   },

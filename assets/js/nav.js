@@ -2,26 +2,26 @@
   'use strict';
 
   function wrapNavLetters(el) {
-    const text = (el.textContent || '').trim();
+    const text = el.textContent.trim();
     if (!text) return;
-    el.textContent = '';
+
+    const fragment = document.createDocumentFragment();
     const words = text.split(/\s+/);
     let globalIndex = 0;
-    words.forEach((word, wIdx) => {
+    words.forEach((word, wordIndex) => {
       const wordSpan = document.createElement('span');
       wordSpan.className = 'nav-word';
-      for (let i = 0; i < word.length; i++) {
-        const ch = word[i];
+      for (const character of word) {
         const span = document.createElement('span');
         span.className = 'nav-letter';
-        span.style.setProperty('--i', String(globalIndex));
-        span.textContent = ch;
+        span.style.setProperty('--i', String(globalIndex++));
+        span.textContent = character;
         wordSpan.appendChild(span);
-        globalIndex++;
       }
-      el.appendChild(wordSpan);
-      if (wIdx < words.length - 1) el.appendChild(document.createTextNode(' '));
+      fragment.appendChild(wordSpan);
+      if (wordIndex < words.length - 1) fragment.appendChild(document.createTextNode(' '));
     });
+    el.replaceChildren(fragment);
   }
 
   const CYRILLIC_LOWER = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
@@ -30,54 +30,62 @@
   function startRoll(element, durationMs = 1000) {
     const letters = Array.from(element.querySelectorAll('.nav-letter'));
     const originals = letters.map(l => l.textContent);
-    const now0 = performance.now();
-    const end = now0 + durationMs;
-    const states = letters
-      .map((span, index) => {
-        const orig = originals[index];
-        const isSpace = orig === '\u00A0' || orig === ' ';
-        if (isSpace) return null;
-        const randChars = [
-          CYRILLIC_UPPER[Math.floor(Math.random() * CYRILLIC_UPPER.length)],
-          CYRILLIC_LOWER[Math.floor(Math.random() * CYRILLIC_LOWER.length)],
-          CYRILLIC_UPPER[Math.floor(Math.random() * CYRILLIC_UPPER.length)],
-          CYRILLIC_LOWER[Math.floor(Math.random() * CYRILLIC_LOWER.length)],
-          orig,
-        ];
-        return { span, index, orig, next: now0 + index * 30, randChars, charIndex: 0 };
-      })
-      .filter(Boolean);
+    const start = performance.now();
+    const end = start + durationMs;
+    const randomCharacter = characters => characters[Math.floor(Math.random() * characters.length)];
+    const states = letters.map((span, index) => ({
+      span,
+      next: start + index * 30,
+      characters: [
+        randomCharacter(CYRILLIC_UPPER),
+        randomCharacter(CYRILLIC_LOWER),
+        randomCharacter(CYRILLIC_UPPER),
+        randomCharacter(CYRILLIC_LOWER),
+        originals[index]
+      ],
+      characterIndex: 0
+    }));
 
     let rafId = 0;
     let cancelled = false;
 
     function restore() {
-      letters.forEach((l, i) => { l.textContent = originals[i]; l.style.opacity = ''; });
+      letters.forEach((letter, index) => {
+        letter.textContent = originals[index];
+        letter.style.opacity = '';
+      });
     }
 
     function tick(now) {
       if (cancelled) return;
-      states.forEach(st => {
-        while (now >= st.next && now < end) {
-          if (st.charIndex < st.randChars.length) {
-            st.span.textContent = st.randChars[st.charIndex];
-            st.span.style.opacity = st.charIndex === 0 ? '0' : '1';
-            if (st.charIndex === 1) st.span.textContent = st.randChars[st.charIndex].toLowerCase();
-            else if (st.charIndex === 2) st.span.textContent = st.randChars[st.charIndex].toUpperCase();
-            st.charIndex++;
+      states.forEach(state => {
+        while (now >= state.next && now < end) {
+          if (state.characterIndex < state.characters.length) {
+            state.span.textContent = state.characters[state.characterIndex];
+            state.span.style.opacity = state.characterIndex === 0 ? '0' : '1';
+            state.characterIndex++;
           }
-          st.next += 20 + (st.charIndex * 20);
+          state.next += 20 + state.characterIndex * 20;
         }
       });
 
-      if (now < end) { rafId = requestAnimationFrame(tick); return; }
+      if (now < end) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
       restore();
       element.__navRollState = null;
     }
 
     rafId = requestAnimationFrame(tick);
 
-    return { cancel() { cancelled = true; if (rafId) cancelAnimationFrame(rafId); restore(); } };
+    return {
+      cancel() {
+        cancelled = true;
+        if (rafId) cancelAnimationFrame(rafId);
+        restore();
+      }
+    };
   }
 
   function addRollHover(element) {
@@ -94,8 +102,7 @@
   }
 
   function getCurrentPageName() {
-    const name = window.location.pathname.split('/').pop();
-    return name && name.length ? name : 'index.html';
+    return window.location.pathname.split('/').pop() || 'index.html';
   }
 
   function initNav() {
@@ -105,9 +112,12 @@
 
     links.forEach(a => {
       const href = a.getAttribute('href');
-      if (a.closest('.nav__desktop-menu') && !a.closest('.nav__dropdown')) { wrapNavLetters(a); addRollHover(a); }
-      if (a.closest('.nav__submenu')) { wrapNavLetters(a); addRollHover(a); }
-      if (a.closest('.nav__mobile-menu')) { wrapNavLetters(a); }
+      const isTopLevelDesktopLink = a.closest('.nav__desktop-menu') && !a.closest('.nav__dropdown');
+      const isSubmenuLink = a.closest('.nav__submenu');
+      const isMobileLink = a.closest('.nav__mobile-menu');
+
+      if (isTopLevelDesktopLink || isSubmenuLink || isMobileLink) wrapNavLetters(a);
+      if (isTopLevelDesktopLink || isSubmenuLink) addRollHover(a);
       if (!href) return;
       const linkUrl = new URL(href, window.location.href);
       const target = linkUrl.pathname.split('/').pop() || 'index.html';
@@ -129,8 +139,15 @@
     const submenu = document.querySelector('.nav__submenu');
     if (dropdown && submenu) {
       let hideTimeout;
-      function showSubmenu() { if (window.innerWidth > 900) { clearTimeout(hideTimeout); submenu.style.display = 'block'; } }
-      function hideSubmenu() { if (window.innerWidth > 900) { hideTimeout = setTimeout(() => { submenu.style.display = 'none'; }, 200); } }
+      function showSubmenu() {
+        if (window.innerWidth <= 900) return;
+        clearTimeout(hideTimeout);
+        submenu.style.display = 'block';
+      }
+      function hideSubmenu() {
+        if (window.innerWidth <= 900) return;
+        hideTimeout = setTimeout(() => { submenu.style.display = 'none'; }, 200);
+      }
       dropdown.addEventListener('mouseenter', showSubmenu);
       dropdown.addEventListener('mouseleave', hideSubmenu);
       submenu.addEventListener('mouseenter', showSubmenu);
@@ -150,12 +167,17 @@
     }
 
     if (navToggle && navRoot) {
-      navToggle.addEventListener('click', (e) => {
+      navToggle.addEventListener('click', () => {
         if (navRoot.classList.contains('show-projects-menu')) navRoot.classList.remove('show-projects-menu');
-        else { const isOpen = navRoot.classList.contains('is-open'); setNavOpen(!isOpen); }
+        else setNavOpen(!navRoot.classList.contains('is-open'));
       });
 
-      if(projectsToggle) projectsToggle.addEventListener('click', (e) => { e.preventDefault(); navRoot.classList.add('show-projects-menu'); });
+      if (projectsToggle) {
+        projectsToggle.addEventListener('click', event => {
+          event.preventDefault();
+          navRoot.classList.add('show-projects-menu');
+        });
+      }
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navRoot.classList.contains('is-open')) {

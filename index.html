@@ -4,13 +4,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Charlie McKenzie — Game And Film Composer for Hire</title>
+  
+  <script>
+    try {
+      const target = sessionStorage.getItem('page-transition-target');
+      const current = new URL(location.href);
+      current.hash = '';
+      if (target === current.href && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('page-transition-pending');
+        window.__pageTransitionSafetyTimer = setTimeout(() => document.documentElement.classList.remove('page-transition-pending'), 3000);
+      }
+    } catch {}
+  </script>
+<title>Charlie McKenzie — Game And Film Composer for Hire</title>
 
-  <!-- Meta descriptions enrichies avec mots-clés -->
   <meta name="description"
     content="Charlie McKenzie composes retro, RPG, orchestral and electronic soundtracks for visual media. Open for commissions worldwide." />
-  <meta name="keywords"
-    content="Charlie McKenzie, indie game composer for hire, ROM hack music composer, fan game soundtrack, RPG music composer, retro game music commission, chiptune composer, video game sound designer, Super Mario mod music, orchestral game music, electronic game soundtrack" />
   <meta name="author" content="Charlie McKenzie" />
 
   <!-- Open Graph optimisé -->
@@ -222,7 +231,7 @@
     <section class="section section--bio" aria-label="About Charlie McKenzie">
       <div class="container">
         <p class="bio-intro">
-          Charlie is an award-winning composer whose work received Honorable Mention (Second Place) in Music at the 2026 G.A.N.G. Student Competition. He started creating music with GarageBand back when he was a child, later becaming self-taught with Logic Pro. Since then, he's created hundreds of tracks, either through clients or simply for his own personal enjoyment. Because all his projects/requests are so different, He's learned how to create a wide variety of different styles. 
+          Charlie is an award-winning composer whose work received Honorable Mention (Second Place) in Music at the 2026 G.A.N.G. Student Competition. He started creating music with GarageBand as a child and later taught himself Logic Pro. Since then, he's created hundreds of tracks, either through clients or simply for his own personal enjoyment. Because all his projects/requests are so different, He's learned how to create a wide variety of different styles. 
         </p>
         <p class="bio-intro">
           He's most skilled with chiptune, orchestral, electronic, and RPG-style arrangements, but can adapt to whatever a client requests. He's open for smaller commissions as well. If you're creating a game, movie, or passion project that needs a composer, <a href="contact.html">get in touch</a>!
@@ -238,11 +247,11 @@
         <div class="notable">
           <div class="notable__trailer">
             <div class="trailer">
-              <iframe class="trailer__frame" title="Trailer" src="https://www.youtube.com/embed/y367C4EAX60"
+              <iframe class="trailer__frame" title="Featured game trailer" src="https://www.youtube.com/embed/y367C4EAX60"
                 loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <div class="section__more">
-              <a class="btn" href="project.html?source=personal&id=sin-prince">See more</a>
+              <a class="btn" href="project.html?source=personal&amp;id=snowfall">View the Snowfall on the Bayou soundtrack</a>
             </div>
           </div>
         </div>
@@ -301,7 +310,7 @@
         <div class="grid" id="personal-grid" data-source="personal" data-limit="8" aria-label="Personal projects"></div>
 
         <div class="section__more">
-          <a class="btn" href="projects.html?source=personal">See more</a>
+          <a class="btn" href="projects.html?source=personal">Browse personal soundtracks</a>
         </div>
       </div>
     </section>
@@ -314,8 +323,23 @@
 
         <div class="grid" id="commissions-grid" data-source="commissions" data-limit="8" aria-label="Commissions"></div>
 
+        <template id="card-template">
+          <a class="card" href="#" aria-label="Project card">
+            <img class="card__img" src="" alt="" loading="lazy" />
+            <div class="card__overlay">
+              <div class="card__meta">
+                <h3 class="card__title"><span data-field="name"></span></h3>
+                <p class="card__creator hidden" data-field="creator"></p>
+              </div>
+            </div>
+          </a>
+        </template>
+        <template id="card-placeholder">
+          <div class="card placeholder" data-tooltip="This could be you" role="img" aria-label="This could be you"></div>
+        </template>
+
         <div class="section__more">
-          <a class="btn" href="projects.html?source=commissions">See more</a>
+          <a class="btn" href="projects.html?source=commissions">Browse commissioned soundtracks</a>
         </div>
       </div>
     </section>
@@ -331,13 +355,14 @@
   <footer id="site-footer"></footer>
 
   <script src="assets/js/hero.js" defer></script>
+  <script src="assets/js/sound.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/theme.js" defer></script>
   <script src="assets/js/projects.js" defer></script>
-  <script src="assets/js/crt.js" defer></script>
+  <script src="assets/js/transition.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' defer></script>
-  <script> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
+  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js" defer></script>
+  <script src="assets/js/kofi.js" defer></script>
 </body>
 
 </html>

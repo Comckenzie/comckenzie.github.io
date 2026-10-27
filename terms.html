@@ -3,7 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms of Service — Charlie McKenzie</title>
+  
+  <script>
+    try {
+      const target = sessionStorage.getItem('page-transition-target');
+      const current = new URL(location.href);
+      current.hash = '';
+      if (target === current.href && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('page-transition-pending');
+        window.__pageTransitionSafetyTimer = setTimeout(() => document.documentElement.classList.remove('page-transition-pending'), 3000);
+      }
+    } catch {}
+  </script>
+<title>Terms of Service — Charlie McKenzie</title>
   <meta name="description" content="Terms of Service for Charlie McKenzie Music commissions and services." />
   <link rel="canonical" href="https://www.charliemckenziemusic.com/terms.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -44,11 +56,12 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/sound.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/crt.js"></script>
-  <script src="assets/js/hero.js"></script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script> <script> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
+  <script src="assets/js/theme.js" defer></script>
+  <script src="assets/js/transition.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js" defer></script>
+  <script src="assets/js/kofi.js" defer></script>
 </body>
 </html>

@@ -3,8 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Charlie McKenzie — Composer For Visual Media</title>
-  <meta name="description" content="I'm Charlie, a freelance composer for film and games. I started creating music with GarageBand back when I was a child, later becaming self-taught with Logic Pro. Since then, I've created hundreds of tracks, either through clients or simply for my own personal enjoyment. Because all my work is so varied, I've learned how to create a wide variety of different styles. />
+  
+  <script>
+    try {
+      const target = sessionStorage.getItem('page-transition-target');
+      const current = new URL(location.href);
+      current.hash = '';
+      if (target === current.href && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('page-transition-pending');
+        window.__pageTransitionSafetyTimer = setTimeout(() => document.documentElement.classList.remove('page-transition-pending'), 3000);
+      }
+    } catch {}
+  </script>
+<title>About Charlie McKenzie — Composer For Visual Media</title>
+  <meta name="description" content="Charlie McKenzie composes music for games and film in chiptune, orchestral, electronic, and RPG styles. He studied music theory, sound design, and recording arts at Chico State." />
   <link rel="canonical" href="https://www.charliemckenziemusic.com/about.html" />
   <script type="application/ld+json">
   {
@@ -61,7 +73,7 @@
             </div>
             <div class="about-layout__description">
               <p>
-                I'm Charlie, a freelance composer for film and games. I started creating music with GarageBand back when I was a child, later becaming self-taught with Logic Pro. Since then, I've created hundreds of tracks, either through clients or simply for my own personal enjoyment. Because all my work is so varied, I've learned how to create a wide variety of different styles. 
+                I'm Charlie, a freelance composer for film and games. I started creating music with GarageBand as a child and later taught myself Logic Pro. Since then, I've created hundreds of tracks for clients and personal projects, building experience across a wide variety of styles.
               </p>
               <p>
                 I moved to Chico State University to pursue a music degree studying music theory, sound design, and recording arts while also performing as a pianist in various bands. My goal is to compose for indie games and film projects that care about atmosphere and having a unique identity. 
@@ -77,12 +89,12 @@
   </main>
 
   <footer id="site-footer"></footer>
+  <script src="assets/js/sound.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/theme.js" defer></script>
-  <script src="assets/js/projects.js" defer></script>
-  <script src="assets/js/crt.js" defer></script>
+  <script src="assets/js/transition.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' defer></script>
-  <script> kofiWidgetOverlay.draw('solargress', { 'type': 'floating-chat', 'floating-chat.donateButton.text': 'Support me', 'floating-chat.donateButton.background-color': '#323842', 'floating-chat.donateButton.text-color': '#fff' }); </script>
+  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js" defer></script>
+  <script src="assets/js/kofi.js" defer></script>
 </body>
 </html>
